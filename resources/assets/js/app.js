@@ -1,0 +1,4 @@
+/**
+ * Bootstrap stuff
+ **/
+require('./bootstrap');
