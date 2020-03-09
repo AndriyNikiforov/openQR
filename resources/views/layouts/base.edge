@@ -7,6 +7,9 @@
         <link href="{{ assetsUrl('css/app.css') }}" rel="stylesheet">
       </head>
     <body>
-      <script src="{{ assetsUrl('js/app.js') }}" defer></script>
+        @include('layouts.components.header')
+        @!section('content')
+        @include('layouts.components.footer')
+      <script src="{{ assetsUrl('js/app.js') }}" ></script>
     </body>
 </html>

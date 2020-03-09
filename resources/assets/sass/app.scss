@@ -2,4 +2,18 @@
 @import 'base';
 
 // Bootstrap
-@import '~bootstrap/scss/bootstrap';
+@import '~bulma/css/bulma.css';
+
+.footer-fixed-bottom {
+  bottom: 0;
+  left: 0;
+  position: fixed;
+  right: 0;
+  z-index: 30;
+  padding-bottom: 1.5em;
+}
+
+.section-centered {
+  padding-top: 20rem;
+  padding-bottom: 20rem;
+}
