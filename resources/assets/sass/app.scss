@@ -4,6 +4,13 @@
 // Bootstrap
 @import '~bulma/css/bulma.css';
 
+// Fontawesome
+@import '~@fortawesome/fontawesome-free/scss/fontawesome.scss';
+
+body {
+  overflow: hidden;
+}
+
 .footer-fixed-bottom {
   bottom: 0;
   left: 0;
@@ -20,4 +27,12 @@
 
 .article-wrapper {
   margin-top: 1.5rem;
+}
+
+.select, .select select{
+  width: 100%;
+}
+
+.group-links-wrapper {
+  padding-right: 5rem;
 }

@@ -10,7 +10,7 @@ class RoleSchema extends Schema {
       table.string('title')
       table.string('slug')
       table.timestamps()
-      table.timestamp('deleted_at', 0)
+      table.timestamp('deleted_at', 0).nullable()
     })
   }
 

@@ -29,6 +29,7 @@
     "@adonisjs/session": "^1.0.27",
     "@adonisjs/shield": "^1.0.8",
     "@adonisjs/validator": "^5.0.6",
+    "@fortawesome/fontawesome-free": "^5.12.1",
     "bootstrap-material-design": "^4.1.1",
     "bulma": "^0.8.0",
     "pg": "^7.18.2",

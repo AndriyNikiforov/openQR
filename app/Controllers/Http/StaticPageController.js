@@ -8,6 +8,14 @@ class StaticPageController {
   async about({ view }) {
     return view.render('main.about');
   }
+
+  async contact({ view }) {
+    return view.render('main.contact');
+  }
+
+  async sendMessage({ request, response }) {
+    return response.json({});
+  }
 }
 
 module.exports = StaticPageController

@@ -4,6 +4,9 @@
 const Model = use('Model')
 
 class Role extends Model {
+  async users() {
+    return this.belongsTo('App/Models/User');
+  }
 }
 
 module.exports = Role

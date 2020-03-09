@@ -10,9 +10,9 @@ class UserSchema extends Schema {
       table.string('full_name', 80).notNullable()
       table.string('email', 254).notNullable().unique()
       table.string('password', 60).notNullable()
-      table.integer('role_id')
+      table.integer('role_id').notNullable()
       table.timestamps()
-      table.timestamp('deleted_at', 0)
+      table.timestamp('deleted_at', 0).nullable()
     })
   }
 
