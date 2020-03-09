@@ -1,0 +1,44 @@
+@layout('layouts.base')
+
+@section('content')
+  <section class="section">
+    <div class="container has-text-centered">
+    <div class="column is-5 is-offset-3">
+      <h3 class="title has-text-black">
+        Sign Up
+      </h3>
+      <form action="{{ route('signin') }}" method="POST">
+        <div class="field">
+            <label class="label">Email</label>
+            <div class="control has-icons-left">
+              <input class="input" type="email" placeholder="Email" name="e.g simple@gmail.com">
+              <span class="icon is-small is-left">
+                <i class="fas fa-envelope"></i>
+              </span>
+            </div>
+          </div>
+          <div class="field">
+            <label class="label">Password</label>
+            <div class="control has-icons-left">
+              <input class="input" type="password" placeholder="Password" name="password">
+              <span class="icon is-small is-left">
+                <i class="fas fa-key"></i>
+              </span>
+            </div>
+          </div>
+          <div class="field">
+            <div class="control">
+              <button class="button is-link has-text-centered" style="width:100%" type="submit">
+                Submit
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <p class="group-links-wrapper has-text-grey">
+        <a href="{{ route('signUpPage') }}">Sign Up</a> &nbsp;·&nbsp;
+        <a>Forgot password</a>
+      </p>
+    </div>
+  </section>
+@endsection
