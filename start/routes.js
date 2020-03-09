@@ -16,4 +16,8 @@
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
 
-Route.get('/', 'StaticPageController.index');
+Route.get('/', 'StaticPageController.index')
+  .as('main');
+
+Route.get('/about', 'StaticPageController.about')
+  .as('about');
