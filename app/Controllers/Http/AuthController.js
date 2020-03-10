@@ -19,12 +19,17 @@ class AuthController {
     });
   }
 
+  async forgotPasswordPage({ view }) {
+    return view.render('auth.forgot_password');
+  }
+
   async signUp({ request, response, auth }) {
     const data = request.only([
       'email',
       'password',
       'full_name',
-      'role_id'
+      'role_id',
+      'secret_word'
     ]);
 
     data.password = await Hash.make(data.password);
@@ -53,6 +58,30 @@ class AuthController {
     await auth.login(user);
 
     return response.route('dashboard')
+  }
+
+  async forgotPassword({ response, request, auth, session }) {
+    const data = request.only([
+      'email',
+      'password',
+      'secret_word'
+    ]);
+
+    data.password = await Hash.make(data.password);
+    const checkUser = await Database.table('users')
+      .where('email', data.email)
+      .first();
+
+    if (checkUser === null) {
+      session.flash({ notification: 'Not found your account' });
+
+      return response.redirect('back');
+    }
+
+    const user = await User.find(checkUser.id);
+    await auth.login(user);
+
+    return response.route('dashboard');
   }
 
   async logout({ response, auth }) {

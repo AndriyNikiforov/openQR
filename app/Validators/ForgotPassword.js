@@ -1,12 +1,10 @@
 'use strict'
 
-class SignUp {
+class ForgotPassword {
   get rules () {
     return {
-      email: 'required|email|unique:users,email',
+      email: 'required|email',
       password: 'required|string|max:16',
-      full_name: 'required|string|min:2',
-      role_id: 'required|integer',
       secret_word: 'required|string'
     }
   }
@@ -19,11 +17,8 @@ class SignUp {
     return {
       'email.required': 'You must provide a email address',
       'email.email': 'You must provide a valid email address',
-      'email.unique': 'You must provide a unique email address',
       'password.required': 'You must provide a password',
       'password.max': 'You must provide a valid size password',
-      'full_name.required': 'You must provide a full name',
-      'full_name.min': 'You must provide a valid size full name',
       'secret_word.required': 'You must provide a secret word'
     };
   }
@@ -36,4 +31,4 @@ class SignUp {
   }
 }
 
-module.exports = SignUp
+module.exports = ForgotPassword

@@ -22,27 +22,31 @@
             </div>
           </div>
           <div class="column is-one-third has-text-left">
-            <div class="field">
-              <label class="label">Name</label>
-              <div class="control">
-                <input class="input is-medium" type="text">
+            <form action="{{ route('send-message') }}" method="POST">
+              {{ csrfField() }}
+              <div class="field">
+                <label class="label">Email</label>
+                <div class="control has-icons-left">
+                <input value="{{ old('email', '') }}" name="email" class="input is-medium" type="text">
+                  <span class="icon is-small is-left">
+                    <i class="fas fa-envelope"></i>
+                  </span>
+                  {{ elIf('<p class="help is-danger">$self</p>', getErrorFor('email'), hasErrorFor('email')) }}
+                </div>
               </div>
-            </div>
-            <div class="field">
-              <label class="label">Email</label>
-              <div class="control">
-                <input class="input is-medium" type="text">
+              <div class="field">
+                <label class="label">Message</label>
+                <div class="control">
+                  <textarea name="message" class="textarea is-medium">
+                    {{ old('message', '') }}
+                  </textarea>
+                  {{ elIf('<p class="help is-danger">$self</p>', getErrorFor('message'), hasErrorFor('message')) }}
+                </div>
               </div>
-            </div>
-            <div class="field">
-              <label class="label">Message</label>
               <div class="control">
-                <textarea class="textarea is-medium"></textarea>
+                <button type="submit" class="button is-link is-fullwidth has-text-weight-medium is-medium">Send Message</button>
               </div>
-            </div>
-            <div class="control">
-              <button type="submit" class="button is-link is-fullwidth has-text-weight-medium is-medium">Send Message</button>
-            </div>
+            </form>
           </div>
         </div>
       </div>

@@ -25,6 +25,10 @@ Route.group(() => {
 
   Route.get('/contact', 'StaticPageController.contact')
     .as('contact');
+
+  Route.post('send', 'StaticPageController.sendMessage')
+    .validator(['ContactMessage'])
+    .as('send-message');
 }).prefix('static');
 
 Route.group(() => {
@@ -44,6 +48,13 @@ Route.group(() => {
     .validator(['SignUp'])
     .as('signup');
 }).prefix('auth/sign');
+
+Route.get('/forgot/password', 'AuthController.forgotPasswordPage')
+  .as('forgot-password-page');
+
+Route.post('forgot-password', 'AuthController.forgotPassword')
+  .validator(['ForgotPassword'])
+  .as('forgot-password')
 
 Route.get('/logout', 'AuthController.logout')
   .as('logout');
