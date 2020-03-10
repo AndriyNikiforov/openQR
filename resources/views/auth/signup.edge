@@ -57,6 +57,13 @@
             </div>
           </div>
           <div class="field">
+            <label class="label">Secret word</label>
+            <div class="control">
+              <input class="input" value="{{ old('secret_word', '') }}" type="password" placeholder="Secret word" name="secret_word" />
+              {{ elIf('<p class="help is-danger">$self</p>', getErrorFor('secret_word'), hasErrorFor('secret_word')) }}
+            </div>
+          </div>
+          <div class="field">
             <div class="control">
               <button class="button is-link has-text-centered" style="width:100%" type="submit">
                 Submit
@@ -67,7 +74,7 @@
       </div>
       <p class="group-links-wrapper has-text-grey">
         <a href="{{ route('signInPage') }}">Sign In</a> &nbsp;·&nbsp;
-        <a>Forgot password</a>
+        <a href="{{ route('forgot-password-page') }}">Forgot password</a>
       </p>
     </div>
   </section>

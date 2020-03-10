@@ -20,6 +20,13 @@ class ContactMessage {
       'message.max': 'You must provide a valid size message'
     };
   }
+
+  async fails (errorMessages) {
+    this.ctx.session.withErrors(errorMessages)
+      .flashAll()
+
+    return this.ctx.response.redirect('back');
+  }
 }
 
 module.exports = ContactMessage
