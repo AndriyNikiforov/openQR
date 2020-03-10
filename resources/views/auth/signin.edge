@@ -12,19 +12,21 @@
         <div class="field">
             <label class="label">Email</label>
             <div class="control has-icons-left">
-              <input class="input" type="email" placeholder="e.g simple@gmail.com" name="email">
+            <input class="input" value="{{ old('email', '') }}" type="email" placeholder="e.g simple@gmail.com" name="email">
               <span class="icon is-small is-left">
                 <i class="fas fa-envelope"></i>
               </span>
+              {{ elIf('<p class="help is-danger">$self</p>', getErrorFor('email'), hasErrorFor('email')) }}
             </div>
           </div>
           <div class="field">
             <label class="label">Password</label>
             <div class="control has-icons-left">
-              <input class="input" type="password" placeholder="Password" name="password">
+            <input class="input" value="{{ old('password', '') }}" type="password" placeholder="Password" name="password">
               <span class="icon is-small is-left">
                 <i class="fas fa-key"></i>
               </span>
+             {{ elIf('<p class="help is-danger">$self</p>', getErrorFor('password'), hasErrorFor('password')) }}
             </div>
           </div>
           <div class="field">

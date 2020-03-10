@@ -16,6 +16,7 @@
               <span class="icon is-small is-left">
                 <i class="fas fa-user"></i>
               </span>
+              {{ elIf('<p class="help is-danger">$self</p>', getErrorFor('full_name'), hasErrorFor('full_name')) }}
             </div>
           </div>
           <div class="field">
@@ -25,6 +26,7 @@
               <span class="icon is-small is-left">
                 <i class="fas fa-envelope"></i>
               </span>
+              {{ elIf('<p class="help is-danger">$self</p>', getErrorFor('email'), hasErrorFor('email')) }}
             </div>
           </div>
           <div class="field">
@@ -51,6 +53,7 @@
               <span class="icon is-small is-left">
                 <i class="fas fa-key"></i>
               </span>
+              {{ elIf('<p class="help is-danger">$self</p>', getErrorFor('password'), hasErrorFor('password')) }}
             </div>
           </div>
           <div class="field">

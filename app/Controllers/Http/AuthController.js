@@ -35,16 +35,19 @@ class AuthController {
     return response.route('dashboard');
   }
 
-  async signIn({ request, response, auth }) {
+  async signIn({ request, response, auth, session }) {
     const data = request.only([
       'email', 'password'
     ]);
 
     const user = await User.findBy('email', data.email);
-    const res = await Hash.verify(data.password, user.password);
+    const valid = await Hash.verify(data.password, user.password);
 
-    if (!res) {
-      return response.route('signInPage');
+    if (!valid) {
+      session.withErrors([{ password: data.password, message: 'Wrong password' }])
+        .flashAll();
+
+      return response.redirect('back');
     }
 
     await auth.login(user);
