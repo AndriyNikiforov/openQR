@@ -1,0 +1,15 @@
+@layout('layouts.admin')
+
+@section('content')
+<div class="columns">
+  <div class="column is-3">
+    @include('layouts.components.admin_menu')
+  </div>
+  <div class="column is-9">
+    @include('layouts.components.admin_breadcrumbers')
+    <section class="container">
+      Text
+    </section>
+  </div>
+</div>
+@endsection

@@ -7,9 +7,10 @@
         <link href="{{ assetsUrl('css/app.css') }}" rel="stylesheet">
       </head>
     <body>
-        @include('layouts.components.header')
-        @!section('content')
-        @include('layouts.components.footer')
+        @include('layouts.components.admin_header')
+        <section class="container">
+          @!section('content')
+        </section>
       <script src="{{ assetsUrl('js/app.js') }}" ></script>
     </body>
 </html>

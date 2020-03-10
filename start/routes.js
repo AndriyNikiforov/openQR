@@ -16,4 +16,39 @@
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
 
-Route.on('/').render('main.index')
+Route.get('/', 'StaticPageController.index')
+  .as('main');
+
+Route.group(() => {
+  Route.get('/about', 'StaticPageController.about')
+    .as('about');
+
+  Route.get('/contact', 'StaticPageController.contact')
+    .as('contact');
+}).prefix('static');
+
+Route.group(() => {
+  Route.get('in', 'AuthController.signInPage')
+    .as('signInPage');
+
+  Route.get('up', 'AuthController.signUpPage')
+    .as('signUpPage');
+}).prefix('sign/');
+
+Route.group(() => {
+  Route.post('in', 'AuthController.signIn')
+    .validator(['SignIn'])
+    .as('signin');
+
+  Route.post('up', 'AuthController.signUp')
+    .validator(['SignUp'])
+    .as('signup');
+}).prefix('auth/sign');
+
+Route.get('/logout', 'AuthController.logout')
+  .as('logout');
+
+Route.group(() => {
+  Route.get('/', 'DashboardController.index')
+    .as('dashboard')
+}).prefix('dashboard');
