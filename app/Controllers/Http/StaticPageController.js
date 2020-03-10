@@ -1,5 +1,7 @@
 'use strict'
 
+const ContactMessage = use('App/Models/ContactMessage');
+
 class StaticPageController {
   async index({ view }) {
     return view.render('main.index');
@@ -14,7 +16,10 @@ class StaticPageController {
   }
 
   async sendMessage({ request, response }) {
-    return response.json({});
+    const data = request.only(['email', 'message']);
+
+    await ContactMessage.create(data);
+    return response.route('back');
   }
 }
 
