@@ -25,6 +25,11 @@ Route.group(() => {
 
   Route.get('/contact', 'StaticPageController.contact')
     .as('contact');
+
+  Route.post('send', 'StaticPageController.sendMessage')
+    .validator(['ContactMessage'])
+    .as('send-message');
+
 }).prefix('static');
 
 Route.group(() => {
