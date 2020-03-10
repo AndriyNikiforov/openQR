@@ -3,7 +3,10 @@
 class SignUp {
   get rules () {
     return {
-      // validation rules
+      email: 'required|email|unique:users,email',
+      password: 'required|string|max:16',
+      full_name: 'required|string',
+      role_id: 'required|integer'
     }
   }
 }

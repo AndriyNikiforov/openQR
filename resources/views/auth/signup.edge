@@ -8,6 +8,7 @@
         Sign Up
       </h3>
       <form action="{{ route('signup') }}" method="POST">
+          {{ csrfField() }}
           <div class="field">
             <label class="label">Full name</label>
             <div class="control has-icons-left">
@@ -20,7 +21,7 @@
           <div class="field">
             <label class="label">Email</label>
             <div class="control has-icons-left">
-              <input class="input" type="email" placeholder="Email" name="e.g simple@gmail.com">
+              <input class="input" type="email" placeholder="e.g simple@gmail.com" name="email">
               <span class="icon is-small is-left">
                 <i class="fas fa-envelope"></i>
               </span>
@@ -30,7 +31,7 @@
             <label class="label">Role</label>
             <div class="control has-icons-left">
               <div class="select is-info">
-                <select>
+                <select name="role_id">
                   @each(role in roles)
                     <option value="{{ role.id }}">
                       {{ role.title }}

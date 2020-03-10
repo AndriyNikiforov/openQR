@@ -3,7 +3,8 @@
 class SignIn {
   get rules () {
     return {
-      // validation rules
+      email: 'required|email',
+      password: 'required|string|max:16'
     }
   }
 }

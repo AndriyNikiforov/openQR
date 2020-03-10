@@ -37,8 +37,18 @@ Route.group(() => {
 
 Route.group(() => {
   Route.post('in', 'AuthController.signIn')
+    .validator('SignIn')
     .as('signin');
 
   Route.post('up', 'AuthController.signUp')
+    .validator('SignUp')
     .as('signup');
-}).prefix('auth/sign')
+}).prefix('auth/sign');
+
+Route.get('/logout', 'AuthController.logout')
+  .as('logout');
+
+Route.group(() => {
+  Route.get('/', 'DashboardController.index')
+    .as('dashboard')
+}).prefix('dashboard');

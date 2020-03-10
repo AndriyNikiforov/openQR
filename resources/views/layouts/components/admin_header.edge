@@ -1,0 +1,30 @@
+<header class="container">
+  <nav class="navbar" role="navigation">
+    <div class="navbar-brand">
+    <a class="navbar-item" href="{{ route('main') }}">
+        <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
+      </a>
+
+      <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasic">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div id="navbarBasic" class="navbar-menu">
+      <div class="navbar-start">
+      <span class="navbar-item">{{ auth.user.full_name }}</span>
+      </div>
+      <div class="navbar-end">
+        <div class="navbar-item">
+          <div class="buttons">
+          <a href="{{ route('logout') }}" class="button is-light">
+              <strong>Log out</strong>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
