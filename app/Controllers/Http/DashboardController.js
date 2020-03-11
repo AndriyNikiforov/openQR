@@ -13,11 +13,10 @@ class DashboardController {
         'projects.description',
         'users.full_name as name',
         'users.email',
-        'projects.updated_at'
       )
       .from('projects')
       .leftJoin('users', 'projects.user_id', 'users.id')
-      .paginate(page, 8);
+      .paginate(page, 12);
 
     return view.render('dashboard.index', {
       projects: projectsData
