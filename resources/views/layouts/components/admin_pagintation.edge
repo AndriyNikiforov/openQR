@@ -1,0 +1,41 @@
+<nav class="pagination is-centered" role="navigation" aria-label="pagination">
+  <ul class="pagination-list">
+    <li>
+      <a href="{{ route('dashboard', { page: 1 }) }}" class="pagination-link">
+        First page
+      </a>
+    </li>
+    <li>
+      <span class="pagination-ellipsis">&hellip;</span>
+    </li>
+    <li>
+      @if(projects.page - 1 > 0)
+      <a href="{{ route('dashboard', { page: projects.page - 1 }) }}" class="pagination-link">
+        {{ projects.page - 1 }}
+      </a>
+      @else
+      <a></a>
+      @endif
+    </li>
+    <li>
+      <a href="{{ route('dashboard', { page: projects.page }) }}" class="pagination-link is-current">
+        {{ projects.page }}
+      </a>
+    </li>
+    <li>
+      @if(projects.page + 1 <= projects.lastPage)
+        <a href="{{ route('dashboard', { page: projects.page + 1 }) }}" class="pagination-link">
+          {{ projects.page + 1 }}
+        @endif
+      </a>
+    </li>
+    <li>
+      <span class="pagination-ellipsis">&hellip;</span>
+    </li>
+    <li>
+      <a href="{{ route('dashboard', { page: projects.lastPage }) }}" class="pagination-link">
+        Last page
+      </a>
+    </li>
+  </ul>
+</nav>
