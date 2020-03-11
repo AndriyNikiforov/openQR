@@ -3,10 +3,9 @@
 const Database = use('Database');
 
 class DashboardController {
-  async index({ view, response, request }) {
-    let { page } = request.all();
-
-    page = page ? page : 1;
+  async index({ view, params }) {
+    let { page } = params;
+    page = page || 1;
 
     const projectsData = await Database
       .select(
@@ -18,9 +17,8 @@ class DashboardController {
       )
       .from('projects')
       .leftJoin('users', 'projects.user_id', 'users.id')
-      .paginate(page, 10);
+      .paginate(page, 8);
 
-    return response.json(projectsData);
     return view.render('dashboard.index', {
       projects: projectsData
     });

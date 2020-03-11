@@ -61,6 +61,6 @@ Route.get('/logout', 'AuthController.logout')
   .as('logout');
 
 Route.group(() => {
-  Route.get('/', 'DashboardController.index')
+  Route.get('/:page?', 'DashboardController.index')
     .as('dashboard');
 }).prefix('dashboard');

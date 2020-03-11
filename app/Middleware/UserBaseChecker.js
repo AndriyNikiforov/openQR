@@ -13,7 +13,7 @@ class UserBaseChecker {
     const user = await auth.getUser();
 
     if (user.full_name != '') {
-      return response.route('dashboard');
+      return response.route('dashboard', { page: 1 });
     }
 
     await next();
