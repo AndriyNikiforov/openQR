@@ -17,7 +17,8 @@
 const Route = use('Route')
 
 Route.get('/', 'StaticPageController.index')
-  .as('main');
+  .as('main')
+  .middleware(['admin']);
 
 Route.group(() => {
   Route.get('/about', 'StaticPageController.about')
@@ -61,5 +62,5 @@ Route.get('/logout', 'AuthController.logout')
 
 Route.group(() => {
   Route.get('/', 'DashboardController.index')
-    .as('dashboard')
+    .as('dashboard');
 }).prefix('dashboard');
