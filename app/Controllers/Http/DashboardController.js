@@ -17,6 +17,7 @@ class DashboardController {
       )
       .from('projects')
       .leftJoin('users', 'projects.user_id', 'users.id')
+      .orderBy('projects.updated_at', 'desc')
       .paginate(page, 8);
 
     return view.render('dashboard.index', {

@@ -69,6 +69,12 @@ Route.group(() => {
   Route.get('/:id?/:page?', 'ProjectController.index')
     .as('project');
 
+  Route.get('/page/create', 'ProjectController.createPage')
+    .as('project-create-page');
+
+  Route.get('/page/edit/:id?', 'ProjectController.editPage')
+    .as('project-edit-page');
+
   Route.get('/create', 'ProjectController.createPage')
     .validator(['ProjectStore'])
     .as('project-create');

@@ -1,0 +1,16 @@
+@layout('layouts.admin')
+
+@section('content')
+<div class="columns">
+  <div class="column is-2">
+    @include('layouts.components.admin_menu')
+  </div>
+  <div class="column is-9">
+    <nav class="breadcrumb" aria-label="breadcrumbs">
+      <ul>
+        <li><a href="#">Project: {{ project.title }}</a></li>
+        <li><a href="#">Created at: {{ project.created_at }}</a></li>
+      </ul>
+    </nav>
+  </div>
+</div>

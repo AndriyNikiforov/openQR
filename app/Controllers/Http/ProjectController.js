@@ -12,6 +12,7 @@ class ProjectController {
     const projectData = await Project.find(id);
     projectData.created_at = dayjs(projectData.created_at)
       .format('YYYY-DD-MM');
+
     const testCasesData = await Database
       .select(
         'users.full_name',
@@ -36,45 +37,54 @@ class ProjectController {
     return view.render('project.create', { user: userData });
   }
 
-  async editPage({ params, view }) {
+  async editPage({ params, view, response }) {
     const { id } = params;
-    const projectData = Project.find(id);
+    const projectData = await Project.find(id);
+    projectData.created_at = dayjs(projectData.created_at)
+    .format('YYYY-DD-MM');
 
     return view.render('project.edit', {
       project: projectData
     });
   }
 
-  async store({ request, response }) {
+  async store({ request, response, auth }) {
     const data = request.only([
       'title',
-      'user_id',
       'description',
       'technical_info',
     ]);
+
+    data.user_id = auth.getUser().id;
     const project = await Project.create(data);
 
     return response.route('project', { id: project.id });
   }
 
-  async update({ request, response }) {
+  async update({ request, response, auth }) {
     const data = request.only([
       'id',
-      'user_id',
+      'title',
       'description',
       'technical_info'
     ]);
-    const project = await Project.find(data.id);
 
-    await project.update(data);
+    data.user_id = auth.getUser().id;
+    await Project.query()
+      .where('id', data.id)
+      .update(data);
+
     return response.route('project', { id: data.id });
   }
 
   async delete({ params, response }) {
     const { id } = params;
-    const project = await Project.find(id);
 
-    await project.delete();
+    await Project
+      .query()
+      .where('id', id)
+      .delete();
+
     return response.route('dashboard');
   }
 }
