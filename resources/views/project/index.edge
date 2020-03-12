@@ -9,8 +9,22 @@
     <nav class="breadcrumb" aria-label="breadcrumbs">
       <ul>
         <li><a href="#">Project: {{ project.title }}</a></li>
-        <li><label>Created at: {{ project.created_at }}</label></li>
+        <li><a href="#">Created at: {{ project.created_at }}</a></li>
       </ul>
+    </nav>
+    <nav class="panel">
+      <p class="panel-heading">
+        Actions
+      </p>
+      <div class="panel-block">
+        <a style="width: 100%" class="button is-primary">Create</a>
+      </div>
+      <div class="panel-block">
+        <a style="width: 100%" class="button is-link">Update</a>
+      </div>
+      <div class="panel-block">
+        <a style="width: 100%" class="button is-danger">Remove</a>
+      </div>
     </nav>
     <div class="columns is-multiline">
       @if(testCases.data)

@@ -8,6 +8,7 @@ class ProjectController {
   async index({ params, view, response }) {
     let { id, page } = params;
     page = page || 1;
+
     const projectData = await Project.find(id);
     projectData.created_at = dayjs(projectData.created_at)
       .format('YYYY-DD-MM');
@@ -21,7 +22,7 @@ class ProjectController {
       .where('test_cases.project_id', id)
       .leftJoin('users', 'test_cases.user_id', 'users.id')
       .leftJoin('statuses', 'test_cases.status_id', 'statuses.id')
-      .paginate(page, 9)
+      .paginate(page, 8)
 
     return view.render('project.index', {
       project: projectData,
