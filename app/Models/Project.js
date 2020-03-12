@@ -7,6 +7,10 @@ class Project extends Model {
   async users() {
     return this.hasOne('App/Models/User');
   }
+
+  async testCases() {
+    return this.belongsTo('App/Models/TestCase');
+  }
 }
 
 module.exports = Project

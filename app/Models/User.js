@@ -10,6 +10,10 @@ class User extends Model {
   async projects() {
     return this.belongsTo('App/Models/Project');
   }
+
+  async priorities() {
+    return this.belongsTo('App/Models/Priority');
+  }
 }
 
 module.exports = User

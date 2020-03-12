@@ -10,11 +10,16 @@ class UserBaseChecker {
    * @param {Function} next
    */
   async handle ({ request, auth, response }, next) {
-    const user = await auth.getUser();
+    try {
+      const user = await auth.getUser();
 
-    if (user.full_name != '') {
-      return response.route('dashboard', { page: 1 });
+      if (user.full_name != '') {
+        return response.route('dashboard', { page: 1 });
+      }
+    } catch(error) {
+      return response.route('signInPage');
     }
+
 
     await next();
   }

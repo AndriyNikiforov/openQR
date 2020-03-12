@@ -9,6 +9,7 @@ class DashboardController {
 
     const projectsData = await Database
       .select(
+        'projects.id',
         'projects.title',
         'projects.description',
         'users.full_name as name',
@@ -16,7 +17,7 @@ class DashboardController {
       )
       .from('projects')
       .leftJoin('users', 'projects.user_id', 'users.id')
-      .paginate(page, 12);
+      .paginate(page, 8);
 
     return view.render('dashboard.index', {
       projects: projectsData
