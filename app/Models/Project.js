@@ -4,6 +4,11 @@
 const Model = use('Model')
 
 class Project extends Model {
+  static boot() {
+    super.boot();
+    this.addHook('afterUpdate', 'ProjectHook.changeStatusTestCase');
+  }
+
   async users() {
     return this.hasOne('App/Models/User');
   }

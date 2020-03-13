@@ -11,11 +11,13 @@ class DashboardController {
       .select(
         'projects.id',
         'projects.title',
+        'projects.deleted',
         'projects.description',
-        'users.full_name as name',
         'users.email',
+        'users.full_name as name',
       )
       .from('projects')
+      .whereNot('projects.deleted', 'y')
       .leftJoin('users', 'projects.user_id', 'users.id')
       .orderBy('projects.updated_at', 'desc')
       .paginate(page, 8);

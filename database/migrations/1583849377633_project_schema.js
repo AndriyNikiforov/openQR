@@ -12,6 +12,7 @@ class ProjectSchema extends Schema {
       table.text('technical_info')
       table.integer('user_id')
       table.timestamps()
+      table.string('deleted').defaultTo('n')
     })
   }
 

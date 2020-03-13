@@ -77,11 +77,10 @@ class ProjectController {
 
   async delete({ params, response }) {
     const { id } = params;
+    const project = await Project.find(id);
 
-    await Project
-      .query()
-      .where('id', id)
-      .delete();
+    project.deleted = 'y';
+    await project.save();
 
     return response.route('dashboard');
   }
