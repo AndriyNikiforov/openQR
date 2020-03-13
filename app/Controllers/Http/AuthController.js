@@ -46,6 +46,11 @@ class AuthController {
     ]);
 
     const user = await User.findBy('email', data.email);
+
+    if (!user) {
+      return response.route('signUpPage')
+    }
+
     const valid = await Hash.verify(data.password, user.password);
 
     if (!valid) {

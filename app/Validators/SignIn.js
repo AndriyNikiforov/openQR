@@ -23,7 +23,7 @@ class SignIn {
 
   async fails (errorMessages) {
     this.ctx.session.withErrors(errorMessages)
-      .flashAll()
+      .flashAll();
 
     return this.ctx.response.redirect('back');
   }

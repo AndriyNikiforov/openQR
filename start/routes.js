@@ -64,3 +64,28 @@ Route.group(() => {
   Route.get('/:page?', 'DashboardController.index')
     .as('dashboard');
 }).prefix('dashboard');
+
+Route.group(() => {
+  Route.get('/dashboard/:id?/:page?', 'ProjectController.index')
+    .as('project');
+
+  Route.get('/page/create', 'ProjectController.createPage')
+    .as('project-create-page');
+
+  Route.get('/page/edit/:id?', 'ProjectController.editPage')
+    .as('project-edit-page');
+
+  Route.get('/edit/:id?', 'ProjectController.editPage')
+    .as('project-edit');
+
+  Route.post('store', 'ProjectController.store')
+    .validator(['ProjectStore'])
+    .as('project-store');
+
+  Route.post('update', 'ProjectController.update')
+    .validator(['ProjectUpdate'])
+    .as('project-update');
+
+  Route.get('delete/:id?', 'ProjectController.delete')
+    .as('project-delete');
+}).prefix('project');
