@@ -18,6 +18,7 @@ class ProjectController {
         'users.full_name',
         'statuses.name as status_name',
         'statuses.type as status_type',
+        'test_cases.id as test_case_id',
         'test_cases.title as test_case_name',
         'test_cases.deleted as test_case_deleted'
       ).from('test_cases')
