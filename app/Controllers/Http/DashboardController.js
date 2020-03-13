@@ -11,9 +11,10 @@ class DashboardController {
       .select(
         'projects.id',
         'projects.title',
+        'projects.deleted',
         'projects.description',
-        'users.full_name as name',
         'users.email',
+        'users.full_name as name',
       )
       .from('projects')
       .leftJoin('users', 'projects.user_id', 'users.id')

@@ -28,11 +28,9 @@
         @each(testCase in testCases.data)
         <div class="column is-3">
           <div class="card">
-            <div class="card-header">
+            <div class="card-header {{ (testCase.test_case_deleted === 'y') ? 'disabled-element' : '' }}">
               <div class="card-header-title">
-                <h3 class="title is-6">
-                  Test case: <a href="#">{{ testCase.test_case_name }}</a>
-                </h3>
+                <a href="#">Test case: {{ testCase.test_case_name }}</a>
               </div>
             </div>
             <div class="card-content">

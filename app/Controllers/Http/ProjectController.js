@@ -19,6 +19,7 @@ class ProjectController {
         'statuses.name as status_name',
         'statuses.type as status_type',
         'test_cases.title as test_case_name',
+        'test_cases.deleted as test_case_deleted'
       ).from('test_cases')
       .where('test_cases.project_id', id)
       .leftJoin('users', 'test_cases.user_id', 'users.id')
@@ -77,11 +78,10 @@ class ProjectController {
 
   async delete({ params, response }) {
     const { id } = params;
+    const project = await Project.find(id);
 
-    await Project
-      .query()
-      .where('id', id)
-      .delete();
+    project.deleted = 'y';
+    await project.save();
 
     return response.route('dashboard');
   }
