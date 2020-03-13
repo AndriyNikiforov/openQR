@@ -83,6 +83,7 @@ Route.group(() => {
     .as('project-store');
 
   Route.post('update', 'ProjectController.update')
+    .validator(['ProjectUpdate'])
     .as('project-update');
 
   Route.get('delete/:id?', 'ProjectController.delete')

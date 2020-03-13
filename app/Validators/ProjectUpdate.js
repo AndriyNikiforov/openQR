@@ -1,8 +1,9 @@
 'use strict'
 
-class ProjectStore {
+class ProjectUpdate {
   get rules () {
     return {
+      id: 'required|integer',
       title: 'required|string',
       description: 'required|string',
       technical_info: 'required|string',
@@ -29,4 +30,4 @@ class ProjectStore {
   }
 }
 
-module.exports = ProjectStore
+module.exports = ProjectUpdate
