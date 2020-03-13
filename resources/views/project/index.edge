@@ -25,30 +25,30 @@
     </nav>
     <div class="columns is-multiline">
       @if(testCases.data)
-      @each(testCase in testCases.data)
-      <div class="column is-3">
-        <div class="card">
-          <div class="card-header">
-            <div class="card-header-title">
-              <h3 class="title is-6">
-                Test case: <a href="#">{{ testCase.test_case_name }}</a>
-              </h3>
-            </div>
-          </div>
-          <div class="card-content">
-            <div class="media">
-              <div class="media-content">
-                <p class="title is-6">
-                  Qa: <a href="#"><b>{{ testCase.full_name }}</b></a>
-                </p>
+        @each(testCase in testCases.data)
+        <div class="column is-3">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-header-title">
+                <h3 class="title is-6">
+                  Test case: <a href="#">{{ testCase.test_case_name }}</a>
+                </h3>
               </div>
             </div>
-            <div class="content">
+            <div class="card-content">
+              <div class="media">
+                <div class="media-content">
+                  <p class="title is-6">
+                    Qa: <a href="#"><b>{{ testCase.full_name }}</b></a>
+                  </p>
+                </div>
+              </div>
+              <div class="content">
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      @endeach
+        @endeach
       @endif
     </div>
   </div>

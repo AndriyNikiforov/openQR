@@ -6,6 +6,14 @@
     @include('layouts.components.admin_menu')
   </div>
   <div class="column is-9">
+    <nav class="panel">
+      <p class="panel-heading">
+        Actions
+      </p>
+      <div class="panel-block">
+        <a href="{{ route('project-create-page') }}" style="width: 100%" class="button is-link">Create</a>
+      </div>
+    </nav>
     <div class="columns is-multiline">
       @each(project in projects.data)
       <div class="column is-3">

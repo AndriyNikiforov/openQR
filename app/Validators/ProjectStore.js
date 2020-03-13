@@ -4,7 +4,6 @@ class ProjectStore {
   get rules () {
     return {
       'title': 'required|string',
-      'user_id': 'required|integer',
       'description': 'required|string',
       'technical_info': 'required|string',
     }
@@ -18,7 +17,7 @@ class ProjectStore {
     return {
       'title.required': 'You must provide a title',
       'description.required': 'You must provide description',
-      'technical_info': 'You must provide technical info'
+      'technical_info.required': 'You must provide technical info'
     };
   }
 

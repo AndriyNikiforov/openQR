@@ -66,7 +66,7 @@ Route.group(() => {
 }).prefix('dashboard');
 
 Route.group(() => {
-  Route.get('/:id?/:page?', 'ProjectController.index')
+  Route.get('/dashboard/:id?/:page?', 'ProjectController.index')
     .as('project');
 
   Route.get('/page/create', 'ProjectController.createPage')
@@ -75,19 +75,16 @@ Route.group(() => {
   Route.get('/page/edit/:id?', 'ProjectController.editPage')
     .as('project-edit-page');
 
-  Route.get('/create', 'ProjectController.createPage')
-    .validator(['ProjectStore'])
-    .as('project-create');
-
   Route.get('/edit/:id?', 'ProjectController.editPage')
     .as('project-edit');
 
   Route.post('store', 'ProjectController.store')
+    .validator(['ProjectStore'])
     .as('project-store');
 
   Route.post('update', 'ProjectController.update')
     .as('project-update');
 
-  Route.delete('delete', 'ProjectController.delete')
+  Route.get('delete/:id?', 'ProjectController.delete')
     .as('project-delete');
 }).prefix('project');

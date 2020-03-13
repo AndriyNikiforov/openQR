@@ -31,10 +31,8 @@ class ProjectController {
     });
   }
 
-  async createPage({ view, auth }) {
-    const userData = auth.getUser();
-
-    return view.render('project.create', { user: userData });
+  async createPage({ view }) {
+    return view.render('project.create');
   }
 
   async editPage({ params, view, response }) {
@@ -49,13 +47,13 @@ class ProjectController {
   }
 
   async store({ request, response, auth }) {
-    const data = request.only([
+    let data = request.only([
       'title',
       'description',
       'technical_info',
     ]);
 
-    data.user_id = auth.getUser().id;
+    data.user_id = auth.user.id;
     const project = await Project.create(data);
 
     return response.route('project', { id: project.id });
@@ -69,7 +67,7 @@ class ProjectController {
       'technical_info'
     ]);
 
-    data.user_id = auth.getUser().id;
+    data.user_id = auth.user.id;
     await Project.query()
       .where('id', data.id)
       .update(data);
