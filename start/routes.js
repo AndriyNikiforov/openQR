@@ -94,9 +94,9 @@ Route.group(() => {
   Route.get('/:id?', 'TestCaseController.index')
     .as('test-case');
 
-  Route.get('/page/create')
-    .as('test-case-create-page');
+  // Route.get('/page/create')
+  //   .as('test-case-create-page');
 
-  Route.get('/page/edit/:id?')
-    .as('test-case-edit-page');
+  // Route.get('/page/edit/:id?')
+  //   .as('test-case-edit-page');
 }).prefix('test-case');

@@ -34,10 +34,15 @@ class TestCaseController {
     const projectData = await Database
       .select('title')
       .where('id', id)
-      .first()
+      .first();
+
+    const statusesData = await Database
+      .select('*')
+      .from('statuses');
 
     return view.render('test_case.create', {
-      project: projectData
+      project: projectData,
+      statuses: statusesData
     });
   }
 
