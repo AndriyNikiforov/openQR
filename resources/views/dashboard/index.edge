@@ -6,6 +6,11 @@
     @include('layouts.components.admin_menu')
   </div>
   <div class="column is-9">
+    <nav class="breadcrumb" aria-label="breadcrumbs">
+      <ul>
+        <li><a href="#">Projects</a></li>
+      </ul>
+    </nav>
     <nav class="panel">
       <p class="panel-heading">
         Actions
@@ -18,10 +23,12 @@
       @each(project in projects.data)
       <div class="column is-3">
         <div class="card">
-          <div class="card-header">
-            <h3 class="card-header-title">
-              <a href="{{ route('project', { id: project.id }) }}"> Project: {{ project.title }}</a>
-            </h3>
+          <div class="card-header {{ (project.deleted === 'y') ? 'disabled-element' : '' }}">
+            <div class="card-header-title">
+              <a href="{{ route('project', { id: project.id }) }}">
+                Project: {{ project.title }}
+              </a>
+            </div>
           </div>
           <div class="card-content">
             <div class="media">
