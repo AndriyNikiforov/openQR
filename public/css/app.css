@@ -16744,3 +16744,19 @@ body {
   padding-right: 5rem;
 }
 
+.disabled-element {
+  background-color: #ffdd57;
+}
+
+.disabled-element > div > a {
+  color: #000000;
+}
+
+.disabled-element > div > a:hover {
+  color: #363636;
+}
+
+.line-element {
+  background-color: #7a7a7a;
+}
+

@@ -64,3 +64,59 @@ Route.group(() => {
   Route.get('/:page?', 'DashboardController.index')
     .as('dashboard');
 }).prefix('dashboard');
+
+Route.group(() => {
+  Route.get('/dashboard/:id?/:page?', 'ProjectController.index')
+    .as('project');
+
+  Route.get('/page/create', 'ProjectController.createPage')
+    .as('project-create-page');
+
+  Route.get('/page/edit/:id?', 'ProjectController.editPage')
+    .as('project-edit-page');
+
+  Route.get('/edit/:id?', 'ProjectController.editPage')
+    .as('project-edit');
+
+  Route.post('store', 'ProjectController.store')
+    .validator(['ProjectStore'])
+    .as('project-store');
+
+  Route.post('update', 'ProjectController.update')
+    .validator(['ProjectUpdate'])
+    .as('project-update');
+
+  Route.get('delete/:id?', 'ProjectController.delete')
+    .as('project-delete');
+}).prefix('project');
+
+Route.group(() => {
+  Route.post('/add', 'ProjectMemberController.add')
+    .validator(['ProjectMemberAdd'])
+    .as('project-member-create');
+
+  Route.get('/remove/:id?', 'ProjectMemberController.remove')
+    .as('project-member-remove')
+}).prefix('/project/member');
+
+Route.group(() => {
+  Route.get('/:id?', 'TestCaseController.index')
+    .as('test-case');
+
+  Route.get('/page/create', 'TestCaseController.createPage')
+    .as('test-case-create-page');
+
+  Route.get('/page/edit/:id?', 'TestCaseController.editPage')
+    .as('test-case-edit-page');
+
+  Route.post('store', 'TestCaseController.store')
+    .validator(['TestCaseStore'])
+    .as('test-case-store');
+
+  Route.post('update', 'TestCaseController.update')
+    .validator(['TestCaseUpdate'])
+    .as('test-case-update');
+
+  Route.get('remove/:id?', 'TestCaseController.delete')
+    .as('test-case-remove');
+}).prefix('test-case');

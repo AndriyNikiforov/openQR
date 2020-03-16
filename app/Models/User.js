@@ -7,8 +7,16 @@ class User extends Model {
     return this.hasOne('App/Models/Role');
   }
 
+  async projectMembers() {
+    return this.hasOne('App/Models/ProjectMember');
+  }
+
   async projects() {
     return this.belongsTo('App/Models/Project');
+  }
+
+  async priorities() {
+    return this.belongsTo('App/Models/Priority');
   }
 }
 

@@ -18275,6 +18275,11 @@ $(document).ready(function () {
   $('#not-found-account').click(function () {
     $('#not-found-message').hide();
   });
+  $('#test-case-table tbody').click(function (e) {
+    e.preventDefault();
+    var parent = $(e.target).parent('tr');
+    $(parent).hasClass('is-selected') ? $(parent).removeClass('is-selected') : $(parent).addClass('is-selected');
+  });
 });
 
 /***/ }),

@@ -4,8 +4,21 @@
 const Model = use('Model')
 
 class Project extends Model {
+  static boot() {
+    super.boot();
+    this.addHook('afterUpdate', 'ProjectHook.changeStatusTestCase');
+  }
+
+  async projectMembers() {
+    return this.hasOne('App/Models/ProjectMember');
+  }
+
   async users() {
     return this.hasOne('App/Models/User');
+  }
+
+  async testCases() {
+    return this.belongsTo('App/Models/TestCase');
   }
 }
 

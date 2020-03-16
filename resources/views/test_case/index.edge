@@ -1,0 +1,75 @@
+@layout('layouts.admin')
+
+@section('content')
+<div class="columns">
+  <div class="column is-2">
+    @include('layouts.components.admin_menu')
+  </div>
+  <div class="column is-9">
+    <nav class="breadcrumb" aria-label="breadcrumbs">
+      <ul>
+        <li><a href="#">Project: {{ testCase.pt_name }}</a></li>
+        <li><a href="#">Qa: {{ testCase.full_name }} {{ testCase.email }}</a></li>
+      </ul>
+    </nav>
+    <div class="section">
+      <div class="container">
+        <div class="column is-5 is-offset-3">
+          <div class="box">
+            <nav class="level">
+              <div class="level-left">
+                <div class="level-item">
+                  <h3>Test case: {{ testCase.title }}</h3>
+                </div>
+              </div>
+              <div class="level-right">
+                <div class="level-item">
+                  <span class="card-header-icon tag {{ testCase.st_type }}">{{ testCase.st_name }}</span>
+                </div>
+              </div>
+            </nav>
+            <hr class="line-element">
+            <div class="media">
+              <div class="content">
+                {{ testCase.description || 'Not found' }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br>
+      <table id="test-case-table" class="table is-hoverable is-fullwidth">
+        <thead>
+          <tr>
+            <th>Steps</th>
+            <th>Test steps</th>
+            <th>Expected Result</th>
+            <th>Actial Result</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tfoot>
+          <tr>
+            <th>Steps</th>
+            <th>Test steps</th>
+            <th>Expected Result</th>
+            <th>Actial Result</th>
+            <th>Status</th>
+          </tr>
+        </tfoot>
+        <tbody>
+          <tr>
+            <th>1</th>
+            <td><a href="https://en.wikipedia.org/wiki/Leicester_City_F.C." title="Leicester City F.C.">Leicester City</a> <strong>(C)</strong>
+            </td>
+            <td>38</td>
+            <td>23</td>
+            <td>12</td>
+          </tr>
+          <tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+@endsection
