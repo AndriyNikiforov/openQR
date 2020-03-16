@@ -83,11 +83,12 @@
       </a>
     </li>
     <li>
-      @if(testCases.page + 1 <= testCases.lastPage) <a
+      @if((testCases.page + 1) <= testCases.lastPage)
+      <a
         href="{{ route('project', { page: testCases.page + 1, id: project.id }) }}" class="pagination-link">
         {{ testCases.page + 1 }}
-        @endif
-        </a>
+      </a>
+      @endif
     </li>
     <li>
       <span class="pagination-ellipsis">&hellip;</span>
