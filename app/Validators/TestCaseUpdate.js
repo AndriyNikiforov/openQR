@@ -3,8 +3,36 @@
 class TestCaseUpdate {
   get rules () {
     return {
-      // validation rules
-    }
+      id: 'required|integer',
+      user_id: 'required|integer',
+      title: 'required|string',
+      description: 'required|string',
+      status_id: 'required|integer',
+      steps: 'required|object',
+      project_id: 'required|integer'
+    };
+  }
+
+  get validateAll () {
+    return true;
+  }
+
+  get messages () {
+    return {
+      'user_id.required': 'You must provide a user',
+      'title.required': 'You must provide a title',
+      'description.required': 'You must provide a description',
+      'status_id.required': 'You must provide a status',
+      'steps.required': 'You must provide a steps',
+      'project_id.required': 'You must provide a project'
+    };
+  }
+
+  async fails (errorMessages) {
+    this.ctx.session.withErrors(errorMessages)
+      .flashAll()
+
+    return this.ctx.response.redirect('back');
   }
 }
 

@@ -91,12 +91,32 @@ Route.group(() => {
 }).prefix('project');
 
 Route.group(() => {
+  Route.post('/add', 'ProjectMemberController.add')
+    .validator(['ProjectMemberAdd'])
+    .as('project-member-create');
+
+  Route.get('/remove/:id?', 'ProjectMemberController.remove')
+    .as('project-member-remove')
+}).prefix('/project/member');
+
+Route.group(() => {
   Route.get('/:id?', 'TestCaseController.index')
     .as('test-case');
 
-  // Route.get('/page/create')
-  //   .as('test-case-create-page');
+  Route.get('/page/create', 'TestCaseController.createPage')
+    .as('test-case-create-page');
 
-  // Route.get('/page/edit/:id?')
-  //   .as('test-case-edit-page');
+  Route.get('/page/edit/:id?', 'TestCaseController.editPage')
+    .as('test-case-edit-page');
+
+  Route.post('store', 'TestCaseController.store')
+    .validator(['TestCaseStore'])
+    .as('test-case-store');
+
+  Route.post('update', 'TestCaseController.update')
+    .validator(['TestCaseUpdate'])
+    .as('test-case-update');
+
+  Route.get('remove/:id?', 'TestCaseController.delete')
+    .as('test-case-remove');
 }).prefix('test-case');
