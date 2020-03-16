@@ -9,6 +9,10 @@ class Project extends Model {
     this.addHook('afterUpdate', 'ProjectHook.changeStatusTestCase');
   }
 
+  async projectMembers() {
+    return this.hasOne('App/Models/ProjectMember');
+  }
+
   async users() {
     return this.hasOne('App/Models/User');
   }
