@@ -12,7 +12,7 @@ class TestCaseSchema extends Schema {
       table.integer('project_id');
       table.integer('status_id').nullable();
       table.timestamps();
-    })
+    });
   }
 
   down () {
