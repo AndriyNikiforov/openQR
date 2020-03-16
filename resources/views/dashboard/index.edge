@@ -20,6 +20,7 @@
       </div>
     </nav>
     <div class="columns is-multiline">
+      @if(projects.data.length != 0)
       @each(project in projects.data)
       <div class="column is-3">
         <div class="card">
@@ -47,7 +48,12 @@
           </div>
         </div>
       </div>
+      @else
+      <div class="column has-text-centered">
+        <h3 class="title is-3">Not found</h3>
+      </div>
       @endeach
+      @endif
     </div>
   </div>
 </div>

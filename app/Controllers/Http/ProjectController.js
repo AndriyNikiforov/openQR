@@ -5,7 +5,7 @@ const Project = use('App/Models/Project');
 const Database = use('Database');
 
 class ProjectController {
-  async index({ params, view, response }) {
+  async index({ params, view }) {
     let { id, page } = params;
     page = page || 1;
 
@@ -25,7 +25,8 @@ class ProjectController {
       .where('test_cases.project_id', id)
       .leftJoin('users', 'test_cases.user_id', 'users.id')
       .leftJoin('statuses', 'test_cases.status_id', 'statuses.id')
-      .paginate(page, 8)
+      .paginate(page, 8);
+
 
     return view.render('project.index', {
       project: projectData,
