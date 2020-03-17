@@ -75,30 +75,6 @@ class TestCaseController {
     });
   }
 
-  async detailPage({ params, view }) {
-    const { id } = params;
-    const testCaseData = await Database
-      .select(
-        'users.email',
-        'users.full_name',
-        'test_cases.title',
-        'test_cases.steps',
-        'test_cases.description',
-        'statuses.name as st_name',
-        'statuses.type as st_type',
-        'projects.title as pt_name'
-      )
-      .from('test_cases')
-      .where('test_cases.id', id)
-      .leftJoin('projects', 'test_cases.project_id', 'projects.id')
-      .leftJoin('users', 'test_cases.user_id', 'users.id')
-      .first();
-
-    return view.render('test_case.detail', {
-      testCase: testCaseData
-    });
-  }
-
   async store({ request, response }) {
     const testCaseData = request.only([
       'title',

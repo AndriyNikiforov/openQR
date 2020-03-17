@@ -91,11 +91,11 @@ Route.group(() => {
 }).prefix('project');
 
 Route.group(() => {
-  Route.post('/add', 'ProjectMemberController.add')
+  Route.post('/add', 'ProjectMemberApiController.add')
     .validator(['ProjectMemberAdd'])
     .as('project-member-create');
 
-  Route.get('/remove/:id?', 'ProjectMemberController.remove')
+  Route.get('/remove/:id?', 'ProjectMemberApiController.remove')
     .as('project-member-remove')
 }).prefix('/project/member');
 
@@ -120,3 +120,20 @@ Route.group(() => {
   Route.get('remove/:id?', 'TestCaseController.delete')
     .as('test-case-remove');
 }).prefix('test-case');
+
+Route.group(() => {
+  Route.get('/:id?', 'ProjectMemberController.index')
+    .as('project-members');
+
+  Route.get('page/create', 'ProjectMemberController.createPage')
+    .as('project-members-create-page');
+
+  Route.get('page/update/:id?', 'ProjectMemberController.updatePage')
+    .as('project-members-edit-page');
+
+  Route.post('store', 'ProjectMemberController.create')
+    .as('project-members-store');
+
+  Route.post('update', 'ProjectMemberController.update')
+    .as('project-members-update');
+}).prefix('project/members');
