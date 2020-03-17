@@ -75,7 +75,7 @@ class TestCaseController {
     });
   }
 
-  async detailPage({ params, view }) {
+  async detailPage({ params, response }) {
     const { id } = params;
     const testCaseData = await Database
       .select(
@@ -94,7 +94,7 @@ class TestCaseController {
       .leftJoin('users', 'test_cases.user_id', 'users.id')
       .first();
 
-    return view.render('test_case.detail', {
+    return response.json({
       testCase: testCaseData
     });
   }

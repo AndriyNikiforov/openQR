@@ -1,32 +1,15 @@
-@layout('layouts.admin')
-
-@section('content')
-<div class="columns">
-  <div class="column is-2">
-    @include('layouts.components.admin_menu')
-  </div>
-  <div class="column is-9">
-    <nav class="breadcrumb" aria-label="breadcrumbs">
-      <ul>
-        <li><a href="#">Project: {{ project.title }}</a></li>
-        <li><a href="#">Created at: {{ project.created_at }}</a></li>
-      </ul>
-    </nav>
-    <nav class="panel">
-      <p class="panel-heading">
-        Actions
-      </p>
-      <div class="panel-block">
-        <a href="{{ route('test-case-edit-page', { id: project.id }) }}" style="width: 100%"
-          class="button is-link">Update</a>
-      </div>
-      <div class="panel-block">
-        <a href="{{ route('test-case-delete', { id: project.id }) }}" style="width: 100%"
-          class="button is-danger">Remove</a>
-      </div>
-    </nav>
-    <div class="columns is-multiline">
-    </div>
+<div id="test-case-detail" class="modal">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Modal title</p>
+      <button class="delete"></button>
+    </header>
+    <section class="modal-card-body">
+      <p>Text</p>
+    </section>
+    <footer class="modal-card-foot">
+      <h5>Info</h5>
+    </footer>
   </div>
 </div>
-@endsection
