@@ -1,8 +1,8 @@
 'use strict'
 
-const DashboardService = use('App/Services/DashboardService');
+const DashboardService = use('App/Service/DashboardService');
 
-class DashboardController {
+class DashboardApiController {
   async index({ view, params }) {
     let { page } = params;
     const viewData = await DashboardService.list(page);
@@ -11,4 +11,4 @@ class DashboardController {
   }
 }
 
-module.exports = DashboardController
+module.exports = DashboardApiController

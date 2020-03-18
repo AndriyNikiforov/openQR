@@ -1,79 +1,29 @@
 'use strict'
 
-const Database = use('Database');
 const ProjectMember = use('App/Models/ProjectMember');
+const ProjectMemberService = use('App/Services/ProjectMemberService');
 
 class ProjectMemberController {
   async index({ params, view }) {
     const { id } = params;
+    const viewData = await ProjectMemberService.list(id);
 
-    const projectData = await Database
-      .select(
-        'projects.id',
-        'projects.title'
-      ).where('id', id);
-
-    const projectMembersData = await Database
-      .select(
-        'users.full_name',
-        'users.email',
-        'roles.title'
-      )
-      .where('project_members.project_id', id)
-      .leftJoin('users', 'project_members.user_id', 'users.id')
-      .leftJoin('roles', 'users.role_id', 'roles.id');
-
-    return view.render('project_member.index', {
-      project: projectData,
-      projectMembers: projectMembersData
-    });
+    return view.render('project_member.index', viewData);
   }
 
   async createPage({ view }) {
-    const projectsData = await Database
-      .select(
-        'projects.id',
-        'projects.title'
-      )
-      .from('projects');
-    const usersData = await Database
-      .select(
-        'users.id',
-        'users.full_name',
-        'roles.title',
-      )
-      .from('users')
-      .leftJoin('roles', 'users.role_id', 'roles.id');
+    const viewData = await ProjectMemberService
+      .createPageData();
 
-    return view.render('project_member.create', {
-      users: usersData,
-      projects: projectsData
-    });
+    return view.render('project_member.create', viewData);
   }
 
   async updatePage({ params, view }) {
     const { id } = params;
+    const viewData = await ProjectMemberService
+      .updatePageData(id);
 
-    const projectsData = await Database
-      .select(
-        'projects.id',
-        'projects.title'
-      ).from('projects');
-
-    const projectMembersData = await Database
-      .select(
-        'users.full_name',
-        'users.email',
-        'roles.title'
-      )
-      .where('project_members.id', id)
-      .leftJoin('users', 'project_members.user_id', 'users.id')
-      .leftJoin('roles', 'users.role_id', 'roles.id');
-
-    return view.render('project_member.update', {
-      projects: projectsData,
-      projectMembers: projectMembersData
-    });
+    return view.render('project_member.update', viewData);
   }
 
   async create({ request, response }) {
