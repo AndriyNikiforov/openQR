@@ -139,6 +139,18 @@ Route.group(() => {
 }).prefix('project/members');
 
 Route.group(() => {
+  Route.get('/', 'ProfileController.index')
+    .as('profile');
+
+  Route.get('/edit', 'ProfileController.editPage')
+    .as('profile-edit-page');
+
+  Route.post('/update', 'ProfileController.update')
+    .as('profile-update');
+}).prefix('profile');
+
+
+Route.group(() => {
   Route.get('/members', 'Api/ProjectMemberApiController.list')
     .as('api-member-list');
 
