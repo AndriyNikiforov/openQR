@@ -49,7 +49,7 @@ class ProjectMemberApiController {
     const projectMember = await ProjectMember
       .find(projectMemberData.id);
 
-    projectMember.fill(projectMemberData);
+    projectMember.merge(projectMemberData);
     await projectMember.save();
 
     return response.json({

@@ -23,12 +23,11 @@ class ProfileService {
     const userData = await Database
       .select(
         'users.email',
-        'users.full_name',
-        'roles.title'
+        'users.full_name'
       )
       .from('users')
       .where('users.id', id)
-      .leftJoin('roles', 'users.role_id', 'roles.id');
+      .first();
 
     return { user: userData };
   }

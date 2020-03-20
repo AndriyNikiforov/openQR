@@ -1,0 +1,48 @@
+@layout('layouts.admin')
+
+@section('content')
+<div class="columns">
+  <div class="column is-2">
+    @include('layouts.components.admin_menu')
+  </div>
+  <div class="column is-9">
+    <nav class="breadcrumb" aria-label="breadcrumbs">
+      <ul>
+        <li><a href="#">Update profile</a></li>
+      </ul>
+    </nav>
+    <div class="section">
+      <div class="container">
+        <div class="column is-5 is-offset-3">
+          <form method="POST" action="{{ route('profile-update') }}">
+            {{ csrfField() }}
+            <div class="field">
+              <label class="label">Email</label>
+              <div class="control">
+                <input class="input" name="email" value="{{ user.email }}" type="email">
+                {{ elIf('<p class="help is-danger">$self</p>', getErrorFor('email'), hasErrorFor('email')) }}
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Full name</label>
+              <div class="control">
+                <input name="full_name" type="text" class="input" value="{{ user.full_name }}">
+                {{ elIf('<p class="help is-danger">$self</p>', getErrorFor('full_name'), hasErrorFor('full_name')) }}
+              </div>
+            </div>
+            <br>
+            <div class="field is-grouped">
+              <div class="control">
+                <button type="submit" class="button is-link">Update</button>
+              </div>
+              <div class="control">
+                <button type="button" class="button is-link is-light">Cancel</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+@endsection

@@ -4,7 +4,7 @@ const User = use('App/Models/User');
 const ProfileService = use('App/Services/ProfileService');
 
 class ProfileController {
-  async index({ auth, view, response }) {
+  async index({ auth, view }) {
     const id = auth.user.id;
     const viewData = await ProfileService
       .userData(id);
@@ -12,7 +12,7 @@ class ProfileController {
     return view.render('profile.index', viewData);
   }
 
-  async editPage({ view }) {
+  async editPage({ view, auth }) {
     const id = auth.user.id;
     const viewData = await ProfileService
       .editPageData(id);
@@ -28,10 +28,10 @@ class ProfileController {
     ]);
     const user = await User.find(id);
 
-    user.fill(userData);
+    user.merge(userData);
     await user.save();
 
-    return response.redirect('back');
+    return response.route('profile');
   }
 }
 
