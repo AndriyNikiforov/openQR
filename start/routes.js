@@ -151,6 +151,20 @@ Route.group(() => {
 
 
 Route.group(() => {
+  Route.get('/', 'TodoController.index')
+    .as('todo');
+
+  Route.post('/create', 'TodoController.create')
+    .as('todo-create');
+
+  Route.post('/update', 'TodoController.update')
+    .as('todo-update');
+
+  Route.get('/remove/:id?', 'TodoController.remove')
+    .as('todo-remove');
+}).prefix('todo')
+
+Route.group(() => {
   Route.get('/members', 'Api/ProjectMemberApiController.list')
     .as('api-member-list');
 
