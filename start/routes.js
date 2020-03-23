@@ -151,7 +151,7 @@ Route.group(() => {
 
 
 Route.group(() => {
-  Route.get('/', 'TodoController.index')
+  Route.get('/:page?', 'TodoController.index')
     .as('todo');
 
   Route.post('/create', 'TodoController.create')

@@ -2,16 +2,24 @@
 
 const Todo = use('App/Models/Todo');
 const dayjs = require('dayjs');
+const Database = use('Database');
 
 class TodoController {
-  async index({ view, auth }) {
+  async index({ view, params, auth, response }) {
     const id = auth.user.id;
-    const todosData = await Todo
+    let { page } = params;
+    page = page || 1;
+    const todosData = await Database
       .query()
+      .select(
+        'todos.title',
+        'todos.text',
+        'todos.deleted_at'
+      ).from('todos')
       .where('user_id', id)
-      .fetch();
+      .paginate(page, 8);
 
-    return view.render('', {
+    return view.render('todo.index', {
       todos: todosData
     });
   }
