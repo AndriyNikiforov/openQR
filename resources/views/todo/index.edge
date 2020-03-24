@@ -8,7 +8,7 @@
   <div class="column is-9">
     <nav class="breadcrumb" aria-label="breadcrumbs">
       <ul>
-        <a href="">Create</a>
+        <a href="#">Todo</a>
       </ul>
     </nav>
     <nav class="panel">
@@ -16,12 +16,9 @@
         Actions
       </p>
       <div class="panel-block">
-        <a href="" style="width: 100%"
-          class="button is-link">Update</a>
-      </div>
-      <div class="panel-block">
-        <a href="" style="width: 100%"
-          class="button is-danger">Remove</a>
+        <a class="button is-success" href="{{ route('todo-create-page') }}" style="width:100%">
+          Create
+        </a>
       </div>
     </nav>
     <div class="columns is-multiline">
@@ -31,8 +28,13 @@
           <div class="card">
             <div class="card-header">
               <div class="card-header-title">
-              <a>{{ todo.title }}</a>
+                <a href="{{ route('todo-update-page', { id: todo.id }) }}">Title: {{ todo.title }}</a>
               </div>
+              <a href="{{ route('todo-remove', { id: todo.id }) }}" class="card-header-icon">
+                <span class="icon">
+                  <i class="delete"></i>
+                </span>
+              </a>
             </div>
             <div class="card-content">
               <div class="media">

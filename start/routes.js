@@ -132,9 +132,11 @@ Route.group(() => {
     .as('project-members-edit-page');
 
   Route.post('store', 'ProjectMemberController.create')
+    .validator(['ProjectMemberAdd'])
     .as('project-members-store');
 
   Route.post('update', 'ProjectMemberController.update')
+    .validator(['ProjectMemberUpdate'])
     .as('project-members-update');
 }).prefix('project/members');
 
@@ -146,6 +148,7 @@ Route.group(() => {
     .as('profile-edit-page');
 
   Route.post('/update', 'ProfileController.update')
+    .validator(['ProfileUpdate'])
     .as('profile-update');
 }).prefix('profile');
 
@@ -154,10 +157,18 @@ Route.group(() => {
   Route.get('/:page?', 'TodoController.index')
     .as('todo');
 
-  Route.post('/create', 'TodoController.create')
-    .as('todo-create');
+  Route.get('/page/create', 'TodoController.createPage')
+    .as('todo-create-page');
+
+  Route.get('/page/update/:id?', 'TodoController.updatePage')
+    .as('todo-update-page')
+
+  Route.post('/store', 'TodoController.create')
+    .validator(['TodoCreate'])
+    .as('todo-store');
 
   Route.post('/update', 'TodoController.update')
+    .validator(['TodoUpdate'])
     .as('todo-update');
 
   Route.get('/remove/:id?', 'TodoController.remove')
