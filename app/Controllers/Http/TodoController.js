@@ -79,7 +79,7 @@ class TodoController {
     const { id } = params;
     const todo = await Todo.find(id);
 
-    todo.deleted_at = Date.now();
+    todo.deleted_at = 'y';
     await todo.save();
 
     return response.route('todo')

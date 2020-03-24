@@ -11,7 +11,7 @@ class TodoSchema extends Schema {
       table.string('title');
       table.text('text');
       table.timestamps();
-      table.timestamp('deleted_at', 0);
+      table.string('deleted_at').defaultTo('n');
     });
   }
 
