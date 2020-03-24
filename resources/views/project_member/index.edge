@@ -1,0 +1,47 @@
+@layout('layouts.admin')
+
+@section('content')
+<div class="columns">
+  <div class="column is-2">
+    @include('layouts.components.admin_menu')
+  </div>
+  <div class="column is-9">
+    <nav class="breadcrumb" aria-label="breadcrumbs">
+      <ul>
+        <li><a href="{{ route('project-members-create-page') }}">Create</a></li>
+      </ul>
+    </nav>
+    <div class="section">
+      <div class="container">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-header-title">
+              <a href="{{ route('project', { id: project.id }) }}">
+                {{ project.title }}
+              </a>
+            </div>
+          </div>
+          <div class="card-content">
+            <div class="media">
+              <div class="media-content">
+                <p class="title is-6">
+                  <ul>
+                     @each(projectMember as projectMembers)
+                      <li>
+                        {{ projectMember.full_name }}
+                        {{ projectMember.email }}
+                        {{ projectMember.title }}
+                      </li>
+                     @endeach
+                  </ul>
+                </p>
+              </div>
+            </div>
+            <div class="content">
+            </div>
+          </div>
+        </div>      </div>
+    </div>
+  </div>
+</div>
+@endsection
