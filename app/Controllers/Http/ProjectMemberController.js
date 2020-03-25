@@ -11,19 +11,19 @@ class ProjectMemberController {
     return view.render('project_member.index', viewData);
   }
 
+  async addMember({ params, view }) {
+    const { id } = params;
+    const viewData = await ProjectMemberService
+      .addMemberData(id);
+
+    return view.render('project_member.detail_create', viewData);
+  }
+
   async createPage({ view }) {
     const viewData = await ProjectMemberService
       .createPageData();
 
     return view.render('project_member.create', viewData);
-  }
-
-  async updatePage({ params, view }) {
-    const { id } = params;
-    const viewData = await ProjectMemberService
-      .updatePageData(id);
-
-    return view.render('project_member.update', viewData);
   }
 
   async create({ request, response }) {
@@ -34,23 +34,6 @@ class ProjectMemberController {
     const projectMember = new ProjectMember();
 
     projectMember.fill(projectMemberData);
-    await projectMember.save();
-
-    return response.route('project-members', {
-      id: projectMember.project_id
-    });
-  }
-
-  async update({ request, response }) {
-    const projectMemberData = request.only([
-      'id',
-      'user_id',
-      'project_id'
-    ]);
-    const projectMember = await ProjectMember
-      .find(projectMemberData.id);
-
-    projectMember.merge(projectMemberData);
     await projectMember.save();
 
     return response.route('project-members', {

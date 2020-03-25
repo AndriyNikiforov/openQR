@@ -8,7 +8,7 @@
   <div class="column is-9">
     <nav class="breadcrumb" aria-label="breadcrumbs">
       <ul>
-        <li><a href="{{ route('project-members-create-page') }}">Create</a></li>
+        <li><a href="{{ route('project-members-fast-create-page', { id: project.id }) }}">Create</a></li>
       </ul>
     </nav>
     <div class="section">
@@ -17,7 +17,7 @@
           <div class="card-header">
             <div class="card-header-title">
               <a href="{{ route('project', { id: project.id }) }}">
-                {{ project.title }}
+                Project: {{ project.title }}
               </a>
             </div>
           </div>
@@ -25,8 +25,9 @@
             <div class="media">
               <div class="media-content">
                 <p class="title is-6">
+                  @if(projectMembers.length != 0)
                   <ul>
-                     @each(projectMember as projectMembers)
+                     @each(projectMember in projectMembers)
                       <li>
                         {{ projectMember.full_name }}
                         {{ projectMember.email }}
@@ -34,13 +35,17 @@
                       </li>
                      @endeach
                   </ul>
+                  @else
+                    Not found
+                  @endif
                 </p>
               </div>
             </div>
             <div class="content">
             </div>
           </div>
-        </div>      </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

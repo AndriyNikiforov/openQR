@@ -8,7 +8,9 @@ class ProjectMemberService {
       .select(
         'projects.id',
         'projects.title'
-      ).where('id', id);
+      ).where('id', id)
+      .from('projects')
+      .first();
 
     const projectMembersData = await Database
       .select(
@@ -16,6 +18,7 @@ class ProjectMemberService {
         'users.email',
         'roles.title'
       )
+      .from('project_members')
       .where('project_members.project_id', id)
       .leftJoin('users', 'project_members.user_id', 'users.id')
       .leftJoin('roles', 'users.role_id', 'roles.id');
@@ -49,26 +52,25 @@ class ProjectMemberService {
     };
   }
 
-  async updatePageData(id) {
-    const projectsData = await Database
-      .select(
-        'projects.id',
-        'projects.title'
-      ).from('projects');
+  async addMemberData(id) {
+    const projectData = await Database
+      .select('*')
+      .from('projects')
+      .where('projects.id', id)
+      .first();
 
-    const projectMembersData = await Database
+    const usersData = await Database
       .select(
+        'users.id',
         'users.full_name',
-        'users.email',
-        'roles.title'
+        'roles.title',
       )
-      .where('project_members.id', id)
-      .leftJoin('users', 'project_members.user_id', 'users.id')
+      .from('users')
       .leftJoin('roles', 'users.role_id', 'roles.id');
 
     return {
-      projects: projectsData,
-      projectMembers: projectMembersData,
+      project: projectData,
+      users: usersData
     };
   }
 }

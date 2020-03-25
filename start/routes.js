@@ -128,16 +128,15 @@ Route.group(() => {
   Route.get('page/create', 'ProjectMemberController.createPage')
     .as('project-members-create-page');
 
-  Route.get('page/update/:id?', 'ProjectMemberController.updatePage')
-    .as('project-members-edit-page');
+  Route.get('page/create/fast/:id?', 'ProjectMemberController.addMember')
+    .as('project-members-fast-create-page')
 
   Route.post('store', 'ProjectMemberController.create')
     .validator(['ProjectMemberAdd'])
     .as('project-members-store');
 
-  Route.post('update', 'ProjectMemberController.update')
-    .validator(['ProjectMemberUpdate'])
-    .as('project-members-update');
+  Route.get('remove/:id?', 'ProjectMemberController.remove')
+    .as('project-members-remove');
 }).prefix('project/members');
 
 Route.group(() => {
