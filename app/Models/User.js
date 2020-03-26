@@ -22,6 +22,10 @@ class User extends Model {
   async todos() {
     return this.belongsTo('App/Models/Todo')
   }
+
+  async inviteMails() {
+    return this.belongsTo('App/Models/InviteMail');
+  }
 }
 
 module.exports = User

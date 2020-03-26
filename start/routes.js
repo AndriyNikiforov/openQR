@@ -175,6 +175,17 @@ Route.group(() => {
 }).prefix('todo')
 
 Route.group(() => {
+  Route.get('list/:page?', 'InviteProjectMemberController.index')
+    .as('invite-list');
+
+  Route.get('form', 'InviteProjectMemberController.mailForm')
+    .as('invite-form');
+
+  Route.post('send', 'InviteProjectMemberController.sendMail')
+    .as('invite-send');
+}).prefix('invite');
+
+Route.group(() => {
   Route.get('/members', 'Api/ProjectMemberApiController.list')
     .as('api-member-list');
 
