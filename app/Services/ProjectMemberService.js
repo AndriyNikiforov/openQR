@@ -14,6 +14,7 @@ class ProjectMemberService {
 
     const projectMembersData = await Database
       .select(
+        'project_members.id',
         'users.full_name',
         'users.email',
         'roles.title'

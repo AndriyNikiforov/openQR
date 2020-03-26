@@ -24,21 +24,31 @@
           <div class="card-content">
             <div class="media">
               <div class="media-content">
-                <p class="title is-6">
+                <div class="content">
                   @if(projectMembers.length != 0)
-                  <ul>
-                     @each(projectMember in projectMembers)
-                      <li>
+                  <div class="card">
+                    @each(projectMember in projectMembers)
+                    <div class="card-header">
+                      <div class="card-header-title">
                         {{ projectMember.full_name }}
-                        {{ projectMember.email }}
-                        {{ projectMember.title }}
-                      </li>
-                     @endeach
-                  </ul>
+                      </div>
+                      <a href="{{ route('project-members-remove', { id: projectMember.id }) }}"
+                        class="card-header-icon">
+                        <span class="icon">
+                          <i class="fas fa-trash-alt" aria-hidden="true"></i>
+                        </span>
+                      </a>
+                    </div>
+                    <div class="card-content">
+                      Email: {{ projectMember.email }}
+                      Position: {{ projectMember.title }}
+                    </div>
+                    @endeach
+                  </div>
                   @else
-                    Not found
+                  Not found
                   @endif
-                </p>
+                </div>
               </div>
             </div>
             <div class="content">
