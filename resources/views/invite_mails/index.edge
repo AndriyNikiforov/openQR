@@ -11,10 +11,10 @@
         <li><a href="{{ route('project-members-fast-create-page', { id: project.id }) }}">Add project member</a></li>
       </ul>
     </nav>
-    <div class="section">
+    <div class="container">
       <div class="container">
-        <div class="column is-5 is-offset-3">
-          <div  class="card">
+        <div class="column is-6 is-offset-3">
+          <div class="card">
             <div class="card-header">
             </div>
             <div class="card-content">
@@ -22,7 +22,7 @@
                 <div class="media-content">
                   <div class="content">
                     @if(mails.data.length != 0)
-                    @each(mail in mails)
+                    @each(mail in mails.data)
                     <div class="card">
                       <div class="card-header">
                         <div class="card-header-title">
@@ -37,16 +37,60 @@
                     <br />
                     @endeach
                     @else
-                    Not found
+                    <div class="has-text-centered">
+                      <b>Not found</b>
+                    </div>
                     @endif
                   </div>
                 </div>
               </div>
-              <div class="content">
-              </div>
             </div>
           </div>
         </div>
+        <div class="column is-full">
+          <nav class="pagination is-centered" role="navigation" aria-label="pagination">
+            <ul class="pagination-list">
+              <li>
+                <a href="{{ route('invite-list', { page: 1 }) }}" class="pagination-link">
+                  First page
+                </a>
+              </li>
+              <li>
+                <span class="pagination-ellipsis">&hellip;</span>
+              </li>
+              <li>
+                @if(mails.page - 1 > 0)
+                <a href="{{ route('invite-list', { page: mails.page - 1 }) }}" class="pagination-link">
+                  {{ mails.page - 1 }}
+                </a>
+                @else
+                <a></a>
+                @endif
+              </li>
+              <li>
+                <a href="{{ route('invite-list', { page: mails.page }) }}" class="pagination-link is-current">
+                  {{ mails.page }}
+                </a>
+              </li>
+              <li>
+                @if((mails.page + 1) <= mails.lastPage)
+                <a
+                  href="{{ route('invite-list', { page: mails.page + 1 }) }}" class="pagination-link">
+                  {{ mails.page + 1 }}
+                </a>
+                @endif
+              </li>
+              <li>
+                <span class="pagination-ellipsis">&hellip;</span>
+              </li>
+              <li>
+                <a href="{{ route('invite-list', { page: testCases.lastPage }) }}" class="pagination-link">
+                  Last page
+                </a>
+              </li>
+            </ul>
+          </nav>
+          </div>
       </div>
     </div>
   </div>

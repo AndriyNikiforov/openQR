@@ -1,61 +1,78 @@
 @layout('layouts.admin')
 
 @section('content')
-  <section class="section is-small">
-    <div class="container">
-      <div class="has-text-centered">
-        <div class="columns is-8 is-variable ">
-          <div class="column is-two-thirds has-text-left">
-            <h1 class="title is-2">Invite to project</h1>
-            <p class="is-size-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla eligendi soluta
-              voluptate facere molestiae consequatur.</p>
-            <div class="social-media" style="margin-top: 2rem">
-              Elements
-            </div>
+<section class="section is-small">
+  <div class="container">
+    <div class="has-text-centered">
+      <div class="columns is-8 is-variable ">
+        <div class="column is-two-thirds has-text-left">
+          <h1 class="title is-2">Invite to project</h1>
+          <p class="is-size-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla eligendi soluta
+            voluptate facere molestiae consequatur.</p>
+          <div class="social-media" style="margin-top: 2rem">
+            Elements
           </div>
-          <div class="column is-one-third has-text-left">
-            <form action="{{ route('invite-send-message') }}" method="POST">
-              {{ csrfField() }}
-              <div class="field">
-                <label class="label">Email</label>
-                <div class="control has-icons-left">
-                <input value="{{ old('email', '') }}" name="email" class="input is-medium" type="text">
-                  <span class="icon is-small is-left">
-                    <i class="fas fa-envelope"></i>
-                  </span>
-                  {{ elIf('<p class="help is-danger">$self</p>', getErrorFor('email'), hasErrorFor('email')) }}
-                </div>
+        </div>
+        <div class="column is-one-third has-text-left">
+          <form action="{{ route('invite-send') }}" method="POST">
+            {{ csrfField() }}
+            <div class="field">
+              <label class="label">Email</label>
+              <div class="control has-icons-left">
+                <input value="{{ old('email', '') }}" name="email" class="input" type="text">
+                <span class="icon is-small is-left">
+                  <i class="fas fa-envelope"></i>
+                </span>
+                {{ elIf('<p class="help is-danger">$self</p>', getErrorFor('email'), hasErrorFor('email')) }}
               </div>
-              <div class="field">
-                <label class="label">Message</label>
-                <div class="control">
-                  <textarea name="message" class="textarea is-medium">
+            </div>
+            <div class="field">
+              <label class="label">Message</label>
+              <div class="control">
+                <textarea name="message" class="textarea">
                     {{ old('message', '') }}
                   </textarea>
-                  {{ elIf('<p class="help is-danger">$self</p>', getErrorFor('message'), hasErrorFor('message')) }}
+                {{ elIf('<p class="help is-danger">$self</p>', getErrorFor('message'), hasErrorFor('message')) }}
+              </div>
+            </div>
+            <div class="field">
+              <div class="control">
+                <label class="label">Projects</label>
+                <div class="select is-primary">
+                  <select name="project_id">
+                    @each(project in projects)
+                    <option value="{{ project.project_id }}">
+                      {{ project.project_name }}
+                    </option>
+                    @endeach
+                  </select>
                 </div>
               </div>
+              <br />
               <div class="field">
                 <div class="control">
-                  <label class="label">Projects & pm</label>
+                  <label class="label">Project managers</label>
                   <div class="select is-primary">
-                    <select>
+                    <select name="user_id">
                       @each(project in projects)
-                      <option value="{{ project.user_id }}">
-                        {{ project.project_name }} {{ project.user_name }}
-                      </option>
+                        <option value="{{ project.user_id }}">
+                          {{ project.user_name }}
+                        </option>
                       @endeach
                     </select>
+                  </div>
                 </div>
               </div>
-              <br/>
+              <br />
               <div class="control">
-                <button type="submit" class="button is-link is-fullwidth has-text-weight-medium is-medium">Send Message</button>
+                <button type="submit" class="button is-link is-fullwidth has-text-weight-medium is-medium">
+                  Send Message
+                </button>
               </div>
-            </form>
-          </div>
+          </form>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 @endsection

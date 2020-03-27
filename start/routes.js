@@ -182,6 +182,7 @@ Route.group(() => {
     .as('invite-form');
 
   Route.post('send', 'InviteProjectMemberController.sendMail')
+    .validator(['InviteProjectMemberCreate'])
     .as('invite-send');
 }).prefix('invite');
 

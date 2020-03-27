@@ -11,14 +11,16 @@ class InviteProjectMemberController {
 
     const mailsData = await Database
       .select(
+        'users.id',
         'users.full_name',
+        'invite_mails.project_id',
         'invite_mails.email',
         'invite_mails.message'
       )
       .where('invite_mails.user_id', id)
       .from('invite_mails')
       .leftJoin('users', 'invite_mails.email', 'users.email')
-      .paginate(page, 5);
+      .paginate(page, 4);
 
     return view.render('invite_mails.index', {
       mails: mailsData
@@ -30,6 +32,7 @@ class InviteProjectMemberController {
       .select(
         'users.id as user_id',
         'users.full_name as user_name',
+        'projects.id as project_id',
         'projects.title as project_name'
       )
       .from('users')
@@ -44,7 +47,8 @@ class InviteProjectMemberController {
     const data = request.only([
       'email',
       'message',
-      'user_id'
+      'user_id',
+      'project_id'
     ]);
     const inviteMail = new InviteMail();
 
