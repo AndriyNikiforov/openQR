@@ -4,7 +4,7 @@ const Database = use('Database');
 const InviteMail = use('App/Models/InviteMail');
 
 class InviteProjectMemberController {
-  async index({ params, view, auth, response }) {
+  async index({ params, view, auth }) {
     const id = auth.user.id;
     let { page } = params;
     page = page || 1;
@@ -12,14 +12,16 @@ class InviteProjectMemberController {
     const mailsData = await Database
       .select(
         'users.id',
-        'users.full_name',
-        'invite_mails.project_id',
+        'projects.title',
+        'users.full_name as user_name',
         'invite_mails.email',
-        'invite_mails.message'
+        'invite_mails.message',
+        'invite_mails.project_id'
       )
       .where('invite_mails.user_id', id)
       .from('invite_mails')
       .leftJoin('users', 'invite_mails.email', 'users.email')
+      .leftJoin('projects', 'invite_mails.project_id', 'projects.id')
       .paginate(page, 4);
 
     return view.render('invite_mails.index', {

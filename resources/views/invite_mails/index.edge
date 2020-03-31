@@ -26,12 +26,17 @@
                     <div class="card">
                       <div class="card-header">
                         <div class="card-header-title">
-                          {{ mail.full_name }}
+                          {{ mail.user_name }}
                           {{ mail.email }}
                         </div>
                       </div>
                       <div class="card-content">
                         {{ mail.message }}
+                      </div>
+                      <div class="card-footer">
+                        <div class="card-footer-item">
+                          Project: {{ mail.title }}
+                        </div>
                       </div>
                     </div>
                     <br />
