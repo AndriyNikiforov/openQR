@@ -1,11 +1,10 @@
 'use strict'
 
 const Todo = use('App/Models/Todo');
-const dayjs = require('dayjs');
 const Database = use('Database');
 
 class TodoController {
-  async index({ view, params, auth, response }) {
+  async index({ view, params, auth }) {
     const id = auth.user.id;
     let { page } = params;
     page = page || 1;
@@ -31,7 +30,7 @@ class TodoController {
     return view.render('todo.create');
   }
 
-  async updatePage({ params, view, response }) {
+  async updatePage({ params, view }) {
     const { id } = params;
     const todoData = await Database
       .select(
