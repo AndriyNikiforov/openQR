@@ -18,7 +18,8 @@ class TodoController {
         'todos.text',
         'todos.deleted_at'
       ).from('todos')
-      .where('user_id', id)
+      .where('todos.user_id', id)
+      .whereNot('todos.deleted_at', 'y')
       .paginate(page, 8);
 
     return view.render('todo.index', {
@@ -39,7 +40,7 @@ class TodoController {
         'todos.text'
       )
       .from('todos')
-      .where('id', id)
+      .where('todos.id', id)
       .first();
 
     return view.render('todo.edit', {
@@ -75,11 +76,11 @@ class TodoController {
     return response.route('todo');
   }
 
-  async remove({ params }) {
+  async remove({ params, response }) {
     const { id } = params;
     const todo = await Todo.find(id);
 
-    todo.deleted_at = 'y';
+    todo.merge({ deleted_at: 'y' });
     await todo.save();
 
     return response.route('todo')

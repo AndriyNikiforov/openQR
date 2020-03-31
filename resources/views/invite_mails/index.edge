@@ -29,13 +29,19 @@
                           {{ mail.user_name }}
                           {{ mail.email }}
                         </div>
+                        <a href="#" class="card-header-icon">
+                          <i class="far fa-plus-square"></i>
+                        </a>
                       </div>
                       <div class="card-content">
                         {{ mail.message }}
                       </div>
                       <div class="card-footer">
                         <div class="card-footer-item">
-                          Project: {{ mail.title }}
+                          <b>Project:</b>
+                        </div>
+                        <div class="card-footer-item">
+                          {{ mail.title }}
                         </div>
                       </div>
                     </div>
