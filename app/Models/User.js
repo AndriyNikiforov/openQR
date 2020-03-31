@@ -26,6 +26,10 @@ class User extends Model {
   async inviteMails() {
     return this.belongsTo('App/Models/InviteMail');
   }
+
+  async bugReports() {
+    return this.belongsTo('App/Models/BugReport');
+  }
 }
 
 module.exports = User

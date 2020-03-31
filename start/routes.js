@@ -187,21 +187,5 @@ Route.group(() => {
 }).prefix('invite');
 
 Route.group(() => {
-  Route.get('/members', 'Api/ProjectMemberApiController.list')
-    .as('api-member-list');
 
-  Route.get('/member/create', 'Api/ProjectMemberApiController.addData')
-    .as('api-member-add-data');
-
-  Route.get('/member/edit', 'Api/ProjectMemberApiController.updateData')
-    .as('api-member-update-data');
-
-  Route.post('/members/add', 'Api/ProjectMemberApiController.add')
-    .as('api-member-add');
-
-  Route.put('/members/update', 'Api/ProjectMemberApiController.update')
-    .as('api-member-update');
-
-  Route.delete('/members/remove', 'Api/ProjectMemberApiController.remove')
-    .as('api-member-remove');
 }).prefix('api/v1/');
