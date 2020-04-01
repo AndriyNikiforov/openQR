@@ -1,10 +1,11 @@
 'use strict'
 
-const BugReport = use('App/Models/BugReport');
 const Database = use('Database');
+const BugReport = use('App/Models/BugReport');
 
 class BugReportController {
-  async index({ params, view }) {
+  async index({ params, view, auth }) {
+    const id = auth.user.id;
     let { page } = params;
     page = page || 1;
     const viewData = await Database
@@ -12,9 +13,10 @@ class BugReportController {
         'bug_reports.title',
         'bug_reports.description',
         'bug_reports.id',
-        'projects.title'
+        'projects.title as project'
       )
       .from('bug_reports')
+      .where('user_id', id)
       .leftJoin('projects', 'bug_reports.project_id', 'projects.id')
       .paginate(page, 8);
 
@@ -54,6 +56,17 @@ class BugReportController {
     });
   }
 
+  async detailPage({ params, view }) {
+    const { id } = params;
+    const bugReportData = await BugReport
+      .find(id);
+
+    return view.render('bug_report.detail', {
+      bugReport: bugReportData,
+      project: bugReportData.project.title
+    });
+  }
+
   async store({ request, response }) {
     const data = request.only([
       'title',
@@ -66,7 +79,7 @@ class BugReportController {
     bugReport.fill(data);
     await bugReport.save();
 
-    return response.route('');
+    return response.route('bug-report');
   }
 
   async update({ request, response }) {
@@ -83,7 +96,7 @@ class BugReportController {
     bugReport.merge(data);
     await bugReport.save();
 
-    return response.route('');
+    return response.route('bug-report');
   }
 
   async remove({ params, response }) {
@@ -92,7 +105,7 @@ class BugReportController {
 
     await bugReport.delete();
 
-    return response.route('');
+    return response.route('bug-report');
   }
 }
 

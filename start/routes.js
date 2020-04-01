@@ -187,5 +187,31 @@ Route.group(() => {
 }).prefix('invite');
 
 Route.group(() => {
+  Route.get('/', 'BugReportController.index')
+    .as('bug-report');
+
+  Route.get('/page/create', 'BugReportController.createPage')
+    .as('bug-report-create-page');
+
+  Route.get('/page/update/:id?', 'BugReportController.updatePage')
+    .as('bug-report-update-page');
+
+  Route.get('/page/detail/:id?', 'BugReportController.detailPage')
+    .as('bug-report-detail-page');
+
+  Route.post('/store', 'BugReportController.store')
+    .validator(['BugReportCreate'])
+    .as('bug-report-store');
+
+  Route.post('/update', 'BugReportController.update')
+    .validator(['BugReportUpdate'])
+    .as('bug-report-update');
+
+  Route.get('/remove', 'BugReportController.remove')
+    .as('bug-report-remove');
+}).prefix('bug-report');
+
+
+Route.group(() => {
 
 }).prefix('api/v1/');
