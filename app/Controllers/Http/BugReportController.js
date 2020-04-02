@@ -69,10 +69,10 @@ class BugReportController {
 
   async store({ request, response }) {
     const data = request.only([
-      'title',
-      'description',
       'text',
-      'project_id'
+      'title',
+      'project_id',
+      'description'
     ]);
     const bugReport = new BugReport();
 
@@ -85,10 +85,10 @@ class BugReportController {
   async update({ request, response }) {
     const data = request.only([
       'id',
-      'title',
-      'description',
       'text',
-      'project_id'
+      'title',
+      'project_id',
+      'description'
     ]);
 
     const bugReport = await BugReport.find(data.id);
