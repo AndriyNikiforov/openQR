@@ -211,7 +211,24 @@ Route.group(() => {
     .as('bug-report-remove');
 }).prefix('bug-report');
 
-
 Route.group(() => {
+  Route.get('/', 'BoardController.index')
+    .as('board');
 
-}).prefix('api/v1/');
+  Route.get('/page/create', 'BoardController.createPage')
+    .as('board-crate-page');
+
+  Route.get('/page/update', 'BoardController.updatePage')
+    .as('board-update-page');
+
+  Route.post('/store', 'BoardController.store')
+    .as('board-store');
+
+  Route.post('/update', 'BoardController.update')
+    .as('board-update');
+
+  Route.get('/remove/:id?', 'BoardController.remove')
+    .as('board-remove');
+}).prefix('board');
+
+
