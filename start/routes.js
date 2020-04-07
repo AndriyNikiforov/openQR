@@ -222,9 +222,11 @@ Route.group(() => {
     .as('board-update-page');
 
   Route.post('/store', 'BoardController.store')
+    .validator(['BoardCreate'])
     .as('board-store');
 
   Route.post('/update', 'BoardController.update')
+    .validator(['BoardUpdate'])
     .as('board-update');
 
   Route.get('/remove/:id?', 'BoardController.remove')

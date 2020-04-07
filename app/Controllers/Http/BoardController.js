@@ -55,7 +55,7 @@ class BoardController {
     board.fill(data);
     await board.save();
 
-    return response.route('');
+    return response.route('board');
   }
 
   async update({ request, response }) {
@@ -69,7 +69,7 @@ class BoardController {
     board.merge(data);
     await board.save();
 
-    return response.route('');
+    return response.route('board');
   }
 
   async remove({ params, response }) {
@@ -78,7 +78,7 @@ class BoardController {
 
     await board.delete();
 
-    return response.route('');
+    return response.route('board');
   }
 }
 
