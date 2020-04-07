@@ -1,19 +1,43 @@
 'use strict'
 
 const ProjectMember = use('App/Models/ProjectMember');
+const ProjectMemberService = use('App/Services/ProjectMemberService');
 
 class ProjectMemberController {
-  async add({ request, response }) {
+  async index({ params, view }) {
+    const { id } = params;
+    const viewData = await ProjectMemberService.list(id);
+
+    return view.render('project_member.index', viewData);
+  }
+
+  async addMember({ params, view }) {
+    const { id } = params;
+    const viewData = await ProjectMemberService
+      .addMemberData(id);
+
+    return view.render('project_member.detail_create', viewData);
+  }
+
+  async createPage({ view }) {
+    const viewData = await ProjectMemberService
+      .createPageData();
+
+    return view.render('project_member.create', viewData);
+  }
+
+  async create({ request, response }) {
     const projectMemberData = request.only([
       'user_id',
       'project_id'
     ]);
+    const projectMember = new ProjectMember();
 
-    await ProjectMember.create(projectMemberData);
+    projectMember.fill(projectMemberData);
+    await projectMember.save();
 
-    return response.json({
-      status: 200,
-      message: 'Success added'
+    return response.route('project-members', {
+      id: projectMember.project_id
     });
   }
 
@@ -22,11 +46,7 @@ class ProjectMemberController {
     const projectMember = await ProjectMember.find(id);
 
     await projectMember.delete();
-
-    return response.json({
-      status: 200,
-      message: 'Success removed'
-    });
+    return response.route('back')
   }
 }
 

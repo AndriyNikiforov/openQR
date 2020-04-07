@@ -1,9 +1,9 @@
 'use strict'
 
-class ProjectMemberAdd {
+class BoardCreate {
   get rules () {
     return {
-      user_id: 'required|integer',
+      title: 'required|string',
       project_id: 'required|integer'
     }
   }
@@ -14,9 +14,7 @@ class ProjectMemberAdd {
 
   get messages () {
     return {
-      'user_id.unique': 'You must provide new user',
-      'user_id.required': 'You must provide a user',
-      'project_id.required': 'You must provide a project'
+      'title.required': 'You must provide a title'
     };
   }
 
@@ -28,4 +26,4 @@ class ProjectMemberAdd {
   }
 }
 
-module.exports = ProjectMemberAdd
+module.exports = BoardCreate

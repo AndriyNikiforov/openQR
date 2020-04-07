@@ -1,0 +1,55 @@
+@layout('layouts.admin')
+
+@section('content')
+<div class="columns">
+  <div class="column is-2">
+    @include('layouts.components.admin_menu')
+  </div>
+  <div class="column is-9">
+    <nav class="breadcrumb" aria-label="breadcrumbs">
+      <ul>
+        <li><a href="#">Add to project team</a></li>
+      </ul>
+    </nav>
+    <div class="section">
+      <div class="container">
+        <div class="column is-5 is-offset-3">
+          <form method="POST" action="{{ route('project-members-store') }}">
+            {{ csrfField() }}
+            <div class="field">
+              <div class="control">
+                <label class="label">Project</label>
+                <input type="hidden" name="project_id" value="{{ project.id }}" />
+                {{ project.title }}
+              </div>
+            </div>
+            <div class="filed">
+              <div class="control">
+                <label class="label">Users list</label>
+                <div class="select is-primary">
+                  <select name="user_id">
+                    @each(user in users)
+                    <option value="{{ user.id }}">
+                      Name: {{ user.full_name }} || {{ user.title }}
+                    </option>
+                    @endeach
+                  </select>
+                </div>
+              </div>
+            </div>
+            <br />
+            <div class="field is-grouped">
+              <div class="control">
+                <button type="submit" class="button is-link">Submit</button>
+              </div>
+              <div class="control">
+                <button class="button is-link is-light">Cancel</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+@endsection

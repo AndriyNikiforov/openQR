@@ -18,6 +18,18 @@ class User extends Model {
   async priorities() {
     return this.belongsTo('App/Models/Priority');
   }
+
+  async todos() {
+    return this.belongsTo('App/Models/Todo')
+  }
+
+  async inviteMails() {
+    return this.belongsTo('App/Models/InviteMail');
+  }
+
+  async bugReports() {
+    return this.belongsTo('App/Models/BugReport');
+  }
 }
 
 module.exports = User
