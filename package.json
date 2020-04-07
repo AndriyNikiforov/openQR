@@ -29,6 +29,7 @@
     "@adonisjs/session": "^1.0.27",
     "@adonisjs/shield": "^1.0.8",
     "@adonisjs/validator": "^5.0.6",
+    "@ckeditor/ckeditor5-build-classic": "^18.0.0",
     "@fortawesome/fontawesome-free": "^5.12.1",
     "bulma": "^0.8.0",
     "dayjs": "^1.8.22",

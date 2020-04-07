@@ -2,77 +2,30 @@
 
 const TestCase = use('App/Models/TestCase');
 const Database = use('Database');
+const TestCaseService = use('App/Services/TestCaseService');
 
 class TestCaseController {
   async index({ params, view }) {
     const { id } = params;
-    const testCaseData = await Database
-      .select(
-        'users.email',
-        'users.full_name',
-        'test_cases.title',
-        'test_cases.steps',
-        'test_cases.description',
-        'statuses.name as st_name',
-        'statuses.type as st_type',
-        'projects.title as pt_name'
-      )
-      .from('test_cases')
-      .where('test_cases.id', id)
-      .leftJoin('projects', 'test_cases.project_id', 'projects.id')
-      .leftJoin('statuses', 'test_cases.status_id', 'statuses.id')
-      .leftJoin('users', 'test_cases.user_id', 'users.id')
-      .first();
+    const viewData = await TestCaseService.list(id);
 
-    return view.render('test_case.index', {
-      testCase: testCaseData
-    });
+    return view.render('test_case.index', viewData);
   }
 
   async createPage({ view, params }) {
     const { id } = params;
-    const projectData = await Database
-      .select('title')
-      .where('id', id)
-      .first();
+    const viewData = await TestCaseService
+      .createPageData(id);
 
-    const statusesData = await Database
-      .select('*')
-      .from('statuses');
-
-    return view.render('test_case.create', {
-      project: projectData,
-      statuses: statusesData
-    });
+    return view.render('test_case.create', viewData);
   }
 
   async editPage({ params, view }) {
     const { id } = params;
-    const testCaseData = await Database
-      .select(
-        'users.email',
-        'users.full_name',
-        'test_cases.title',
-        'test_cases.steps',
-        'test_cases.description',
-        'statuses.name as st_name',
-        'statuses.type as st_type',
-        'projects.title as pt_name'
-      )
-      .from('test_cases')
-      .where('test_cases.id', id)
-      .leftJoin('projects', 'test_cases.project_id', 'projects.id')
-      .leftJoin('users', 'test_cases.user_id', 'users.id')
-      .first();
+    const viewData = await TestCaseService
+      .editPageData(id);
 
-    const statusesData = await Database
-      .select('*')
-      .from('statuses');
-
-    return view.render('test_case.edit', {
-      testCase: testCaseData,
-      statuses: statusesData
-    });
+    return view.render('test_case.edit', viewData);
   }
 
   async store({ request, response }) {

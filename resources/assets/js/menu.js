@@ -17,4 +17,24 @@ $(document).ready(() => {
      $(parent).removeClass('is-selected') :
      $(parent).addClass('is-selected');
   });
+
+  $('#users-dropdown').click((e) => {
+    e.preventDefault();
+
+    if ($('#users-dropdown').hasClass('is-active')) {
+      $('#users-dropdown').removeClass('is-active');
+    } else {
+      $('#users-dropdown').addClass('is-active');
+    }
+  });
+
+  $('#projects-dropdown').click((e) => {
+    e.preventDefault();
+
+    if ($('#projects-dropdown').hasClass('is-active')) {
+      $('#projects-dropdown').removeClass('is-active');
+    } else {
+      $('#projects-dropdown').addClass('is-active');
+    }
+  });
 });

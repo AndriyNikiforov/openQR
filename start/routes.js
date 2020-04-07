@@ -128,12 +128,109 @@ Route.group(() => {
   Route.get('page/create', 'ProjectMemberController.createPage')
     .as('project-members-create-page');
 
-  Route.get('page/update/:id?', 'ProjectMemberController.updatePage')
-    .as('project-members-edit-page');
+  Route.get('page/create/fast/:id?', 'ProjectMemberController.addMember')
+    .as('project-members-fast-create-page')
 
   Route.post('store', 'ProjectMemberController.create')
+    .validator(['ProjectMemberAdd'])
     .as('project-members-store');
 
-  Route.post('update', 'ProjectMemberController.update')
-    .as('project-members-update');
+  Route.get('remove/:id?', 'ProjectMemberController.remove')
+    .as('project-members-remove');
 }).prefix('project/members');
+
+Route.group(() => {
+  Route.get('/', 'ProfileController.index')
+    .as('profile');
+
+  Route.get('/edit', 'ProfileController.editPage')
+    .as('profile-edit-page');
+
+  Route.post('/update', 'ProfileController.update')
+    .validator(['ProfileUpdate'])
+    .as('profile-update');
+}).prefix('profile');
+
+
+Route.group(() => {
+  Route.get('/:page?', 'TodoController.index')
+    .as('todo');
+
+  Route.get('/page/create', 'TodoController.createPage')
+    .as('todo-create-page');
+
+  Route.get('/page/update/:id?', 'TodoController.updatePage')
+    .as('todo-update-page')
+
+  Route.post('/store', 'TodoController.create')
+    .validator(['TodoCreate'])
+    .as('todo-store');
+
+  Route.post('/update', 'TodoController.update')
+    .validator(['TodoUpdate'])
+    .as('todo-update');
+
+  Route.get('/remove/:id?', 'TodoController.remove')
+    .as('todo-remove');
+}).prefix('todo')
+
+Route.group(() => {
+  Route.get('list/:page?', 'InviteProjectMemberController.index')
+    .as('invite-list');
+
+  Route.get('form', 'InviteProjectMemberController.mailForm')
+    .as('invite-form');
+
+  Route.post('send', 'InviteProjectMemberController.sendMail')
+    .validator(['InviteProjectMemberCreate'])
+    .as('invite-send');
+}).prefix('invite');
+
+Route.group(() => {
+  Route.get('/', 'BugReportController.index')
+    .as('bug-report');
+
+  Route.get('/page/create', 'BugReportController.createPage')
+    .as('bug-report-create-page');
+
+  Route.get('/page/update/:id?', 'BugReportController.updatePage')
+    .as('bug-report-update-page');
+
+  Route.get('/page/detail/:id?', 'BugReportController.detailPage')
+    .as('bug-report-detail-page');
+
+  Route.post('/store', 'BugReportController.store')
+    .validator(['BugReportCreate'])
+    .as('bug-report-store');
+
+  Route.post('/update', 'BugReportController.update')
+    .validator(['BugReportUpdate'])
+    .as('bug-report-update');
+
+  Route.get('/remove', 'BugReportController.remove')
+    .as('bug-report-remove');
+}).prefix('bug-report');
+
+Route.group(() => {
+  Route.get('/', 'BoardController.index')
+    .as('board');
+
+  Route.get('/page/create', 'BoardController.createPage')
+    .as('board-crate-page');
+
+  Route.get('/page/update', 'BoardController.updatePage')
+    .as('board-update-page');
+
+  Route.post('/store', 'BoardController.store')
+    .validator(['BoardCreate'])
+    .as('board-store');
+
+  Route.post('/update', 'BoardController.update')
+    .validator(['BoardUpdate'])
+    .as('board-update');
+
+  Route.get('/remove/:id?', 'BoardController.remove')
+    .as('board-remove');
+}).prefix('board');
+
+
