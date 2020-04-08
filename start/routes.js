@@ -248,3 +248,12 @@ Route.group(() => {
   Route.get('/remove', 'BoardColumnController.remove')
     .as('board-column-remove');
 }).prefix('board-column');
+
+Route.group(() => {
+  Route.post('/store', 'ProjectCommentController.store')
+    .validator(['ProjectCommentCreate'])
+    .as('project-comments-store');
+
+  Route.get('/remove/:id?', 'ProjectCommentController.remove')
+    .as('project-comments-remove');
+}).prefix('project-comments')

@@ -30,6 +30,10 @@ class User extends Model {
   async bugReports() {
     return this.belongsTo('App/Models/BugReport');
   }
+
+  async projectComments() {
+    return this.belongsTo('App/Models/ProjectComment');
+  }
 }
 
 module.exports = User

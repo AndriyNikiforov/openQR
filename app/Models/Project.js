@@ -20,6 +20,10 @@ class Project extends Model {
   async testCases() {
     return this.belongsTo('App/Models/TestCase');
   }
+
+  async projectComments() {
+    return this.belongsTo('App/Models/ProjectComment');
+  }
 }
 
 module.exports = Project
