@@ -1,0 +1,30 @@
+'use strict'
+
+class ProjectCommentCreate {
+  get rules () {
+    return {
+      text: 'required|string',
+      project_id: 'required|integer'
+    }
+  }
+
+  get validateAll () {
+    return true;
+  }
+
+  get messages () {
+    return {
+      'text.required': 'You must provide a text',
+      'project_id.required': 'You must provide a project'
+    };
+  }
+
+  async fails (errorMessages) {
+    this.ctx.session.withErrors(errorMessages)
+      .flashAll()
+
+    return this.ctx.response.redirect('back');
+  }
+}
+
+module.exports = ProjectCommentCreate

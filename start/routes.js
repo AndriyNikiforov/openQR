@@ -233,4 +233,27 @@ Route.group(() => {
     .as('board-remove');
 }).prefix('board');
 
+Route.group(() => {
+  Route.get('/', 'BoardColumnController.index')
+    .as('board-column');
 
+  Route.post('/store', 'BoardColumnController.store')
+    .validator(['BoardColumnCreate'])
+    .as('board-column-store');
+
+  Route.post('/update', 'BoardColumnController.update')
+    .validator(['BoardColumnUpdate'])
+    .as('board-column-update');
+
+  Route.get('/remove', 'BoardColumnController.remove')
+    .as('board-column-remove');
+}).prefix('board-column');
+
+Route.group(() => {
+  Route.post('/store', 'ProjectCommentController.store')
+    .validator(['ProjectCommentCreate'])
+    .as('project-comments-store');
+
+  Route.get('/remove/:id?', 'ProjectCommentController.remove')
+    .as('project-comments-remove');
+}).prefix('project-comments')
