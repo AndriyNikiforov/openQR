@@ -1,26 +1,18 @@
-# Adonis fullstack application
+# OpenQa open-source solution for manage qa resurces (test-cases, bug-reports), team, tasks
 
-This is the fullstack boilerplate for AdonisJs, it comes pre-configured with.
+## Based on AdonisJS framework
 
-1. Bodyparser
-2. Session
-3. Authentication
-4. Web security middleware
-5. CORS
-6. Edge template engine
-7. Lucid ORM
-8. Migrations and seeds
+## ER diagram
 
-## Setup
+![alt text](./db.png)
 
-Use the adonis command to install the blueprint
+### For start up the project
+
+Run the following command to run docker
 
 ```bash
-adonis new yardstick
+sudo docker-compose up
 ```
-
-or manually clone the repo and then run `npm install`.
-
 
 ### Migrations
 
@@ -28,4 +20,12 @@ Run the following command to run startup migrations.
 
 ```js
 adonis migration:run
+```
+
+### Seeds
+
+Run the following command to run startup migrations.
+
+```js
+adonis seed
 ```
