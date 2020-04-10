@@ -257,3 +257,25 @@ Route.group(() => {
   Route.get('/remove/:id?', 'ProjectCommentController.remove')
     .as('project-comments-remove');
 }).prefix('project-comments')
+
+Route.group(() => {
+  Route.get('/', 'SecurityErrorController.index')
+    .as('security-error');
+
+  Route.get('/page/create', 'SecurityErrorController.createPage')
+    .as('security-error-create-page');
+
+  Route.get('/page/update', 'SecurityErrorController.updatePage')
+    .as('security-error-update-page');
+
+  Route.post('/store', 'SecurityErrorController.store')
+    .validator(['SecurityErrorCreate'])
+    .as('security-error-store');
+
+  Route.post('/update', 'SecurityErrorController.update')
+    .validator(['SecurityErrorUpdate'])
+    .as('security-error-update');
+
+  Route.get('/remove', 'SecurityErrorController.remove')
+    .as('security-error-remove');
+}).prefix('security-error');
