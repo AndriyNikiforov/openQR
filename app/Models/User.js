@@ -34,6 +34,10 @@ class User extends Model {
   async projectComments() {
     return this.belongsTo('App/Models/ProjectComment');
   }
+
+  async securityErrors() {
+    return this.belongsTo('App/Models/SecurityError');
+  }
 }
 
 module.exports = User
