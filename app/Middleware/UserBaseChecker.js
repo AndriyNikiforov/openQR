@@ -20,7 +20,6 @@ class UserBaseChecker {
       return response.route('signInPage');
     }
 
-
     await next();
   }
 }

@@ -1,7 +1,4 @@
 'use strict'
-/** @typedef {import('@adonisjs/framework/src/Request')} Request */
-/** @typedef {import('@adonisjs/framework/src/Response')} Response */
-/** @typedef {import('@adonisjs/framework/src/View')} View */
 
 class PmCheck {
   /**
@@ -9,14 +6,18 @@ class PmCheck {
    * @param {Request} ctx.request
    * @param {Function} next
    */
-  async handle ({ request, auth }, next) {
-    const { slug } = auth.user.roles;
+  async handle ({ response, auth }, next) {
+    try {
+      const user = await auth.getUser();
 
-    if (slug == 'qa') {
-      return response.back();
+      if (user.roles.slug != 'qa') {
+        return response.route('dashboard', { page: 1 });
+      }
+    } catch(error) {
+      return response.route('signInPage');
     }
 
-    await next()
+    await next();
   }
 }
 
