@@ -10,11 +10,11 @@ class SecurityErrorController {
 
     const viewData = await Database
       .select(
+        'users.full_name',
         'security_errors.id',
         'security_errors.title',
         'security_errors.text',
-        'security_errors.score',
-        'users.full_name'
+        'security_errors.score'
       )
       .from('security_errors')
       .leftJoin('users', 'users.id', 'security_errors.user_id')
@@ -41,9 +41,9 @@ class SecurityErrorController {
   async store({ request, response, auth }) {
     const userId = auth.user.id;
     const data = request.only([
-      'title',
       'text',
-      'score'
+      'score',
+      'title'
     ]);
 
     data.user_id = userId;
@@ -58,9 +58,9 @@ class SecurityErrorController {
   async update({ request, response }) {
     const data = request.only([
       'id',
-      'title',
       'text',
-      'score'
+      'score',
+      'title'
     ]);
     const securityError = await SecurityError.find(id);
 
@@ -75,7 +75,6 @@ class SecurityErrorController {
     const securityError = await SecurityError.find(id);
 
     await securityError.delete();
-
     return response.route('security-error');
   }
 }

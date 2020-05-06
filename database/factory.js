@@ -26,7 +26,6 @@ Factory.blueprint('App/Models/Project', (faker) => {
 Factory.blueprint('App/Models/TestCase', (faker) => {
   return {
     title: faker.word(),
-    steps: {},
     user_id: 1,
     status_id: 1,
     project_id: 1

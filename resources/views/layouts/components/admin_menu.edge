@@ -3,47 +3,23 @@
     <p class="menu-label">
       Dashboard
     </p>
-    <ul class="menu-list">
-      <li>
-        <a href="#">Test cases</a>
-        <ul>
-          <li><a href="#">Test cases list</a></li>
-          <li><a href="#">Bug reports</a></li>
-        </ul>
-      </li>
-    </ul>
     <p class="menu-label">
       Boards
     </p>
     <ul class="menu-list">
-      <li><a href="#">Tasks</a></li>
+      <li><a href="{{ route('board') }}">Tasks</a></li>
       <li>
         <a href="#">Projects</a>
         <ul class="menu-list">
           <li><a href="{{ route('dashboard') }}">Projects list</a></li>
-          <li><a href="#">Project comments</a></li>
         </ul>
       </li>
     </ul>
     <p class="menu-label">
-      Mobile
+      Todos
     </p>
     <ul class="menu-list">
-      <li><a href="#">Devices</a></li>
-      <li><a href="#">Problems</a></li>
-    </ul>
-    <p class="menu-label">
-      Calendar
-    </p>
-    <ul class="menu-list">
-      <li><a href="#">Events</a></li>
-      <li><a href={{ route('todo') }}>Todos</a></li>
-    </ul>
-    <p class="menu-label">
-      Security
-    </p>
-    <ul class="menu-list">
-      <li><a href="#">Vulnerabilities</a></li>
+      <li><a href={{ route('todo') }}>List</a></li>
     </ul>
   </aside>
 </section>

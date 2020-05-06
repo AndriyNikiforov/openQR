@@ -108,7 +108,7 @@ Route.group(() => {
   Route.get('/:id?', 'TestCaseController.index')
     .as('test-case');
 
-  Route.get('/page/create', 'TestCaseController.createPage')
+  Route.get('/page/create/:id?', 'TestCaseController.createPage')
     .as('test-case-create-page');
 
   Route.get('/page/edit/:id?', 'TestCaseController.editPage')
@@ -127,6 +127,26 @@ Route.group(() => {
 })
   .middleware(['qa'])
   .prefix('test-case');
+
+Route.group(() => {
+  Route.get('/page/create/:test_case_id?', 'ActionController.createPage')
+    .as('action-create-page');
+  Route.get('/page/update/:id?/:test_case_id?', 'ActionController.editPage')
+    .as('action-update-page');
+
+  Route.post('/store', 'ActionController.store')
+    .validator(['ActionCreate'])
+    .as('action-store');
+
+  Route.post('/update', 'ActionController.update')
+    .validator(['ActionUpdate'])
+    .as('action-update');
+
+  Route.get('/remove/:id?/:test_case_id?', 'ActionController.remove')
+    .as('action-remove');
+})
+  .middleware(['qa'])
+  .prefix('action');
 
 Route.group(() => {
   Route.get('/:id?', 'ProjectMemberController.index')
@@ -283,6 +303,9 @@ Route.group(() => {
 }).prefix('board-column-row');
 
 Route.group(() => {
+  Route.get('/', 'ProjectCommentController.index')
+    .as('project-comments');
+
   Route.post('/store', 'ProjectCommentController.store')
     .validator(['ProjectCommentCreate'])
     .as('project-comments-store');

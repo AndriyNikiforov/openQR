@@ -8,7 +8,6 @@ class TestCaseSchema extends Schema {
     this.create('test_cases', (table) => {
       table.increments();
       table.string('title');
-      table.json('steps');
       table.integer('project_id');
       table.integer('status_id').nullable();
       table.timestamps();

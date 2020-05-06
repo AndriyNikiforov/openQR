@@ -8,9 +8,18 @@
   <div class="column is-9">
     <nav class="breadcrumb" aria-label="breadcrumbs">
       <ul>
-        <li><a href="#">Project: {{ testCase.pt_name }}</a></li>
+        <li><a href="{{ route('project', { id: testCase.pt_id }) }}">Project: {{ testCase.pt_name }}</a></li>
         <li><a href="#">Qa: {{ testCase.full_name }} {{ testCase.email }}</a></li>
       </ul>
+    </nav>
+    <nav class="panel">
+      <p class="panel-heading">
+        Actions
+      </p>
+      <div class="panel-block">
+        <a href="{{ route('action-create-page', { test_case_id: testCase.id}) }}" style="width: 100%"
+          class="button is-link">Create action</a>
+      </div>
     </nav>
     <div class="section">
       <div class="container">
@@ -38,35 +47,44 @@
         </div>
       </div>
       <br>
-      <table id="test-case-table" class="table is-hoverable is-fullwidth">
+      <table class="table">
         <thead>
           <tr>
-            <th>Steps</th>
-            <th>Test steps</th>
-            <th>Expected Result</th>
-            <th>Actial Result</th>
-            <th>Status</th>
+            <th>Id</th>
+            <th>Step number</th>
+            <th>Action description</th>
+            <th>Result</th>
+            <th>Action</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tfoot>
           <tr>
-            <th>Steps</th>
-            <th>Test steps</th>
-            <th>Expected Result</th>
-            <th>Actial Result</th>
-            <th>Status</th>
+            <th>Id</th>
+            <th>Step number</th>
+            <th>Action description</th>
+            <th>Result</th>
+            <th>Action</th>
+            <th>Action</th>
           </tr>
         </tfoot>
         <tbody>
+          @if(testActions != null)
+          @each(testAction in testActions)
           <tr>
-            <th>1</th>
-            <td><a href="https://en.wikipedia.org/wiki/Leicester_City_F.C." title="Leicester City F.C.">Leicester City</a> <strong>(C)</strong>
-            </td>
-            <td>38</td>
-            <td>23</td>
-            <td>12</td>
+            <th>{{ testAction.id }}</th>
+            <td>{{ testAction.step_number }}</td>
+            <td>{{ testAction.actions_desc }}</td>
+            <td>{{ testAction.result }}</td>
+            <td><a href="{{ route('action-update-page', { id: testAction.id, test_case_id: testCase.id }) }}">Edit</a></td>
+            <td><a href="{{ route('action-remove', { id: testAction.id, test_case_id: testCase.id }) }}">Remove</a></td>
           </tr>
+          @endeach
+          @else
           <tr>
+            <td>Empty</td>
+          </tr>
+          @endif
         </tbody>
       </table>
     </div>
