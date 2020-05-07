@@ -20,33 +20,32 @@ class SecurityErrorController {
       .leftJoin('users', 'users.id', 'security_errors.user_id')
       .paginate(page, 7);
 
-    return view.render('', {
+    return view.render('security_error.index', {
       securityErrors: viewData
     });
   }
 
   async createPage({ view }) {
-    return view.render('');
+    return view.render('security_error.create');
   }
 
   async updatePage({ params, view }) {
     const { id } = params;
     const viewData = await SecurityError.find(id);
 
-    return view.render('', {
+    return view.render('security_error.update', {
       securityError: viewData
     });
   }
 
   async store({ request, response, auth }) {
-    const userId = auth.user.id;
     const data = request.only([
       'text',
       'score',
-      'title'
+      'title',
+      'user_id'
     ]);
 
-    data.user_id = userId;
     const securityError = new SecurityError();
 
     securityError.fill(data);
@@ -60,9 +59,10 @@ class SecurityErrorController {
       'id',
       'text',
       'score',
-      'title'
+      'title',
+      'user_id'
     ]);
-    const securityError = await SecurityError.find(id);
+    const securityError = await SecurityError.find(data.id);
 
     securityError.fill(data);
     await securityError.save();

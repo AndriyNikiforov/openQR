@@ -93,6 +93,7 @@ Route.group(() => {
     .as('project-update');
 
   Route.get('delete/:id?', 'ProjectController.delete')
+    .middleware(['pm'])
     .as('project-delete');
 }).prefix('project');
 
@@ -322,26 +323,28 @@ Route.group(() => {
 }).prefix('project-comments')
 
 Route.group(() => {
-  Route.get('/', 'SecurityErrorController.index')
+  Route.get('/:page?', 'SecurityErrorController.index')
     .as('security-error');
 
   Route.get('/page/create', 'SecurityErrorController.createPage')
     .middleware(['qa'])
     .as('security-error-create-page');
 
-  Route.get('/page/update', 'SecurityErrorController.updatePage')
+  Route.get('/page/update/:id?', 'SecurityErrorController.updatePage')
     .middleware(['qa'])
     .as('security-error-update-page');
 
   Route.post('/store', 'SecurityErrorController.store')
     .validator(['SecurityErrorCreate'])
+    .middleware(['qa'])
     .as('security-error-store');
 
   Route.post('/update', 'SecurityErrorController.update')
     .validator(['SecurityErrorUpdate'])
+    .middleware(['qa'])
     .as('security-error-update');
 
-  Route.get('/remove', 'SecurityErrorController.remove')
+  Route.get('/remove/:id?', 'SecurityErrorController.remove')
     .middleware(['qa'])
     .as('security-error-remove');
 }).prefix('security-error');
