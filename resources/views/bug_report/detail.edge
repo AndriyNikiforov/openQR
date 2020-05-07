@@ -1,0 +1,47 @@
+@layout('layouts.admin')
+
+@section('content')
+<div class="columns">
+  <div class="column is-2">
+    @include('layouts.components.admin_menu')
+  </div>
+  <div class="container has-text-centered">
+    <div class="column is-5 is-offset-3">
+      <nav class="breadcrumb" aria-label="breadcrumbs">
+        <ul>
+          <li><a href="#">Profile: {{ bugReport.full_name }}</a></li>
+        </ul>
+      </nav>
+      <div class="columns is-multiline">
+        <div class="column is-12">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-header-title">
+                Title: {{ bugReport.title }}
+              </div>
+            </div>
+            <div class="card-content">
+              <div class="media">
+                <div class="media-content">
+                  <h3>About</h3>
+                  <p class="is-6">
+                    {{ bugReport.text }}
+                  </p>
+                  <br />
+                  <h3>Description</h3>
+                  <p class="media-content">
+                    {{ bugReport.description }}
+                  </p>
+                </div>
+              </div>
+              <div class="content">
+                <a href="{{ route('project', { id: project.id }) }}">Project: {{ project.title }}</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+@endsection

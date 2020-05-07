@@ -9,18 +9,12 @@ class UserBaseChecker {
    * @param {Request} ctx.request
    * @param {Function} next
    */
-  async handle ({ request, auth, response }, next) {
-    try {
-      const user = await auth.getUser();
-
-      if (user.full_name != '') {
-        return response.route('dashboard', { page: 1 });
+  async handle ({ auth, response }, next) {
+      if (!auth.user) {
+        return response.route('signInPage');
       }
-    } catch(error) {
-      return response.route('signInPage');
-    }
 
-    await next();
+    await next  ();
   }
 }
 

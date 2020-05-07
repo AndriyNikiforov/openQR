@@ -42,7 +42,8 @@ const namedMiddleware = {
   auth: 'Adonis/Middleware/Auth',
   guest: 'Adonis/Middleware/AllowGuestOnly',
   pm: 'App/Middleware/PmCheck',
-  qa: 'App/Middleware/QaCheck'
+  qa: 'App/Middleware/QaCheck',
+  accessProject: 'App/Middleware/ProjectAccess'
 }
 
 /*

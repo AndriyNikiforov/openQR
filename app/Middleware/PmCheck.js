@@ -1,5 +1,7 @@
 'use strict'
 
+const Role = use('App/Models/Role');
+
 class PmCheck {
   /**
    * @param {object} ctx
@@ -7,14 +9,10 @@ class PmCheck {
    * @param {Function} next
    */
   async handle ({ response, auth }, next) {
-    try {
-      const user = await auth.getUser();
+    const role = await Role.find(auth.user.role_id);
 
-      if (user.roles.slug != 'qa') {
-        return response.route('dashboard', { page: 1 });
-      }
-    } catch(error) {
-      return response.route('signInPage');
+    if (role.id != 3) {
+      return response.redirect('back');
     }
 
     await next();

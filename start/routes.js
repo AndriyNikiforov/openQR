@@ -63,10 +63,13 @@ Route.get('/logout', 'AuthController.logout')
 Route.group(() => {
   Route.get('/:page?', 'DashboardController.index')
     .as('dashboard');
-}).prefix('dashboard');
+})
+  .middleware(['admin'])
+  .prefix('dashboard');
 
 Route.group(() => {
   Route.get('/dashboard/:id?/:page?', 'ProjectController.index')
+    .middleware(['accessProject'])
     .as('project');
 
   Route.get('/page/create', 'ProjectController.createPage')
@@ -109,9 +112,11 @@ Route.group(() => {
     .as('test-case');
 
   Route.get('/page/create/:id?', 'TestCaseController.createPage')
+    .middleware(['qa'])
     .as('test-case-create-page');
 
   Route.get('/page/edit/:id?', 'TestCaseController.editPage')
+    .middleware(['qa'])
     .as('test-case-edit-page');
 
   Route.post('store', 'TestCaseController.store')
@@ -123,10 +128,9 @@ Route.group(() => {
     .as('test-case-update');
 
   Route.get('remove/:id?', 'TestCaseController.delete')
+    .middleware(['qa'])
     .as('test-case-remove');
-})
-  .middleware(['qa'])
-  .prefix('test-case');
+}).prefix('test-case');
 
 Route.group(() => {
   Route.get('/page/create/:test_case_id?', 'ActionController.createPage')
@@ -234,13 +238,16 @@ Route.group(() => {
 
   Route.post('/store', 'BugReportController.store')
     .validator(['BugReportCreate'])
+    .middleware(['qa'])
     .as('bug-report-store');
 
   Route.post('/update', 'BugReportController.update')
     .validator(['BugReportUpdate'])
+    .middleware(['qa'])
     .as('bug-report-update');
 
   Route.get('/remove', 'BugReportController.remove')
+    .middleware(['qa'])
     .as('bug-report-remove');
 }).prefix('bug-report');
 

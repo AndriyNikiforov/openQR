@@ -3,6 +3,7 @@
 const dayjs = require('dayjs');
 const Project = use('App/Models/Project');
 const ProjectService = use('App/Services/ProjectService');
+const ProjectMember = use('App/Models/ProjectMember');
 
 class ProjectController {
   async index({ params, view }) {
@@ -36,7 +37,17 @@ class ProjectController {
     ]);
 
     data.user_id = auth.user.id;
-    const project = await Project.create(data);
+    const project = new Project();
+    const projectMember = new ProjectMember();
+
+    project.fill(data);
+    await project.save();
+
+    projectMember.fill({
+      user_id: data.user_id,
+      project_id: project.id
+    });
+    await projectMember.save();
 
     return response.route('project', { id: project.id });
   }

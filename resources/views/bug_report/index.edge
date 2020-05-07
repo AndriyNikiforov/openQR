@@ -16,30 +16,29 @@
         Actions
       </p>
       <div class="panel-block">
-        <a style="width:100%" class="button is-success" href="#">
-          Project members
-        </a>
-      </div>
-      <div class="panel-block">
-        <a href="#" style="width: 100%"
-          class="button is-link">Update</a>
-      </div>
-      <div class="panel-block">
-        <a href="#" style="width: 100%"
-          class="button is-danger">Remove</a>
+        <a href="{{ route('bug-report-create-page') }}" style="width: 100%"
+          class="button is-link">Create report</a>
       </div>
     </nav>
     <div class="columns is-multiline">
       @if(bugReports.data.length != 0)
       @each(bugReport in bugReports.data)
-      <div class="column is-3">
+      <div class="column is-4">
         <div class="card">
           <div class="card-header">
             <div class="card-header-title">
-              <a href="#">Bug report:
+              <a href="{{ route('bug-report-detail-page', { id: bugReport.id }) }}">Bug report:
                 {{ bugReport.title }}</a>
-              <a href="#">Project:
+              <a href="{{ route('project', { id: bugReport.project_id }) }}">Project:
                 {{ bugReport.project }}</a>
+            </div>
+            <div class="panel">
+              <div class="panel-block">
+                <a href="{{ route('bug-report-update-page', { id: bugReport.id }) }}">Edit</a>
+              </div>
+              <div class="panel-block">
+                <a href="{{ route('bug-report-remove', { id: bugReport.id }) }}">Remove</a>
+              </div>
             </div>
           </div>
           <div class="card-content">
@@ -85,7 +84,7 @@
     </li>
     <li>
       <a href="{{ route('bug-report', { page: bugReport.page }) }}" class="pagination-link is-current">
-        {{ bugReport.page }}
+        {{ bugReport.page || 1 }}
       </a>
     </li>
     <li>

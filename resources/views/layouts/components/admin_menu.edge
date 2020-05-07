@@ -3,15 +3,15 @@
     <p class="menu-label">
       Dashboard
     </p>
-    <p class="menu-label">
-      Boards
-    </p>
     <ul class="menu-list">
-      <li><a href="{{ route('board') }}">Tasks</a></li>
       <li>
         <a href="#">Projects</a>
         <ul class="menu-list">
           <li><a href="{{ route('dashboard') }}">Projects list</a></li>
+        </ul>
+        <a href="#">Bug reports</a>
+        <ul class="menu-list">
+          <li><a href="{{ route('bug-report') }}">Bug reports</a></li>
         </ul>
       </li>
     </ul>
