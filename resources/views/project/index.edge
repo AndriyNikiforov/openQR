@@ -12,10 +12,18 @@
         <li><a href="#">Created at: {{ project.created_at }}</a></li>
       </ul>
     </nav>
+    @if(project.deleted === 'y')
+    <nav></nav>
+    @else
     <nav class="panel">
       <p class="panel-heading">
         Actions
       </p>
+      <div class="panel-block">
+        <a style="width:100%" class="button is-success" href="{{ route('project-news', { id: project.id }) }}">
+          Project news
+        </a>
+      </div>
       <div class="panel-block">
         <a style="width:100%" class="button is-success" href="{{ route('project-members', { id: project.id }) }}">
           Project members
@@ -35,6 +43,7 @@
           class="button is-danger">Project Remove</a>
       </div>
     </nav>
+    @endif
     <div class="columns is-multiline">
       @if(testCases.data.length != 0)
       @each(testCase in testCases.data)
@@ -46,12 +55,16 @@
                 {{ testCase.test_case_name }}</a>
             </div>
             <div class="panel">
+              @if(testCase.test_case_deleted === 'y')
+                <div></div>
+              @else
               <div class="panel-block">
                 <a href="{{ route('test-case-edit-page', { id: testCase.test_case_id }) }}">Edit</a>
               </div>
               <div class="panel-block">
                 <a href="{{ route('test-case-remove', { id: testCase.test_case_id }) }}">Remove</a>
               </div>
+              @endif
             </div>
           </div>
           <div class="card-content">

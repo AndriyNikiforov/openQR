@@ -311,16 +311,19 @@ Route.group(() => {
 }).prefix('board-column-row');
 
 Route.group(() => {
-  Route.get('/', 'ProjectCommentController.index')
-    .as('project-comments');
+  Route.get('/:id?', 'ProjectNewController.index')
+    .as('project-news');
 
-  Route.post('/store', 'ProjectCommentController.store')
+  Route.get('/page/create/:project_id?', 'ProjectNewController.createPage')
+    .as('project-news-create-page');
+
+  Route.post('/store', 'ProjectNewController.store')
     .validator(['ProjectCommentCreate'])
-    .as('project-comments-store');
+    .as('project-news-store');
 
-  Route.get('/remove/:id?', 'ProjectCommentController.remove')
-    .as('project-comments-remove');
-}).prefix('project-comments')
+  Route.get('/remove/:id?', 'ProjectNewController.remove')
+    .as('project-news-remove');
+}).prefix('project-news')
 
 Route.group(() => {
   Route.get('/:page?', 'SecurityErrorController.index')

@@ -4,6 +4,7 @@ class ProjectCommentCreate {
   get rules () {
     return {
       text: 'required|string',
+      user_id: 'required|integer',
       project_id: 'required|integer'
     }
   }
