@@ -253,64 +253,6 @@ Route.group(() => {
 }).prefix('bug-report');
 
 Route.group(() => {
-  Route.get('/', 'BoardController.index')
-    .as('board');
-
-  Route.get('/page/create', 'BoardController.createPage')
-    .as('board-crate-page');
-
-  Route.get('/page/update', 'BoardController.updatePage')
-    .as('board-update-page');
-
-  Route.post('/store', 'BoardController.store')
-    .validator(['BoardCreate'])
-    .as('board-store');
-
-  Route.post('/update', 'BoardController.update')
-    .validator(['BoardUpdate'])
-    .as('board-update');
-
-  Route.get('/remove/:id?', 'BoardController.remove')
-    .as('board-remove');
-})
-  .middleware(['pm'])
-  .prefix('board');
-
-Route.group(() => {
-  Route.get('/', 'BoardColumnController.index')
-    .as('board-column');
-
-  Route.post('/store', 'BoardColumnController.store')
-    .validator(['BoardColumnCreate'])
-    .as('board-column-store');
-
-  Route.post('/update', 'BoardColumnController.update')
-    .validator(['BoardColumnUpdate'])
-    .as('board-column-update');
-
-  Route.get('/remove', 'BoardColumnController.remove')
-    .as('board-column-remove');
-})
-  .middleware(['pm'])
-  .prefix('board-column');
-
-Route.group(() => {
-  Route.get('/detail/:id?', 'BoardColumnRowController.detail')
-    .as('board-column-row-detail');
-
-  Route.post('/store', 'BoardColumnRowController.store')
-    .middleware(['pm'])
-    .as('board-column-row-store');
-
-  Route.post('/update', 'BoardColumnRowController.update')
-    .as('board-column-row-update');
-
-  Route.get('/remove/:id?', 'BoardColumnRowController.remove')
-    .middleware(['pm'])
-    .as('board-column-row-remove');
-}).prefix('board-column-row');
-
-Route.group(() => {
   Route.get('/:id?', 'ProjectNewController.index')
     .as('project-news');
 
