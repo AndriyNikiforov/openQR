@@ -45,7 +45,7 @@
           @each(project in projects.data)
           <tr class="{{ (project.deleted === 'y') ? 'disabled-element' : '' }}">
             <th>{{ project.id }}</th>
-            <td>{{ project.title }}</td>
+            <td><a href="{{ route('project', { id: project.id }) }}">{{ project.title }}</a></td>
             <td>{{ project.name }}</td>
             <td>{{ project.email }}</td>
             <td>{{ project.description }}</td>
