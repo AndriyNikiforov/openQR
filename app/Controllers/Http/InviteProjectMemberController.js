@@ -1,20 +1,20 @@
 'use strict'
 
 const InviteMail = use('App/Models/InviteMail');
-const InviteProjectService = use('App/Services/InviteProjectService');
+const InviteProjectMemberService = use('App/Services/InviteProjectMemberService');
 
 class InviteProjectMemberController {
   async index({ params, view, auth }) {
     const id = auth.user.id;
     let { page } = params;
-    const viewData = await InviteProjectService
+    const viewData = await InviteProjectMemberService
       .list(page, id);
 
     return view.render('invite_mails.index', viewData);
   }
 
   async mailForm({ view }) {
-    const data = await InviteProjectService
+    const data = await InviteProjectMemberService
       .mailFormData();
 
     return view.render('invite_mails.form', data);
