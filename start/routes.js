@@ -247,7 +247,7 @@ Route.group(() => {
     .middleware(['qa'])
     .as('bug-report-update');
 
-  Route.get('/remove', 'BugReportController.remove')
+  Route.get('/remove/:id?', 'BugReportController.remove')
     .middleware(['qa'])
     .as('bug-report-remove');
 }).prefix('bug-report');

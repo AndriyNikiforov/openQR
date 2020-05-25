@@ -20,15 +20,18 @@
         <a href="{{ route('action-create-page', { test_case_id: testCase.id}) }}" style="width: 100%"
           class="button is-link">Create action</a>
       </div>
+      <div class="panel-block">
+        <button class="button is-success" id="to-pdf" style="width:100%">To pdf</button>
+      </div>
     </nav>
-    <div class="section">
+    <div id="content" class="section">
       <div class="container">
         <div class="column is-5 is-offset-3">
           <div class="box">
             <nav class="level">
               <div class="level-left">
                 <div class="level-item">
-                  <h3>Test case: {{ testCase.title }}</h3>
+                  <h3 id="title">Test case - {{ testCase.title }}</h3>
                 </div>
               </div>
               <div class="level-right">
@@ -47,7 +50,7 @@
         </div>
       </div>
       <br>
-      <table class="table">
+      <table class="table is-fullwidth">
         <thead>
           <tr>
             <th>Id</th>

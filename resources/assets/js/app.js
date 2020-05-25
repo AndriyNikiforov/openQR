@@ -2,4 +2,4 @@
  * Bootstrap stuff
  **/
 require('./bootstrap');
-require('./menu');
+require('./solyanka');
