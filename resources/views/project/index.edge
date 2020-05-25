@@ -24,16 +24,21 @@
           Project news
         </a>
       </div>
+      @if(auth.user.role_id == 3)
       <div class="panel-block">
         <a style="width:100%" class="button is-success" href="{{ route('project-members', { id: project.id }) }}">
           Project members
         </a>
       </div>
+      @endif
+      @if(auth.user.role_id == 1)
       <div class="panel-block">
         <a style="width:100%" class="button is-success" href="{{ route('test-case-create-page', { id: project.id }) }}">
           Create Test cases
         </a>
       </div>
+      @endif
+      @if(auth.user.role_id == 3)
       <div class="panel-block">
         <a href="{{ route('project-edit-page', { id: project.id }) }}" style="width: 100%"
           class="button is-link">Project Update</a>
@@ -42,6 +47,7 @@
         <a href="{{ route('project-delete', { id: project.id }) }}" style="width: 100%"
           class="button is-danger">Project Remove</a>
       </div>
+      @endif
     </nav>
     @endif
     <div class="columns is-multiline">
