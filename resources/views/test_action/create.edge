@@ -1,0 +1,53 @@
+@layout('layouts.admin')
+
+@section('content')
+<div class="columns">
+  <div class="column is-2">
+    @include('layouts.components.admin_menu')
+  </div>
+  <div class="column is-9">
+    <nav class="breadcrumb" aria-label="breadcrumbs">
+      <ul>
+        <li><a href="#">Create new action</a></li>
+      </ul>
+    </nav>
+    <div class="section">
+      <div class="container">
+        <div class="column is-5 is-offset-3">
+          <form method="POST" action="{{ route('action-store') }}">
+            {{ csrfField() }}
+            <input type="hidden" name="test_case_id" value="{{ test_case_id }}">
+            <div class="field">
+              <label class="label">Step number</label>
+              <div class="control">
+                <input class="input" name="step_number" value="{{ old('step_number', '') }}" type="text">
+                {{ elIf('<p class="help is-danger">$self</p>', getErrorFor('step_number'), hasErrorFor('step_number')) }}
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Action text</label>
+              <div class="control">
+                <textarea name="actions_desc" class="textarea">{{ old('actions_desc', '') }}</textarea>
+                {{ elIf('<p class="help is-danger">$self</p>', getErrorFor('actions_desc'), hasErrorFor('actions_desc')) }}
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Result</label>
+              <div class="control">
+                <input class="input" name="result" value="{{ old('result', '') }}" type="text">
+                {{ elIf('<p class="help is-danger">$self</p>', getErrorFor('result'), hasErrorFor('result')) }}
+              </div>
+            </div>
+            <br>
+            <div class="field is-grouped">
+              <div class="control">
+                <button type="submit" class="button is-link">Create</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+@endsection

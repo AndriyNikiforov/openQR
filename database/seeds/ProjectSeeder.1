@@ -16,7 +16,11 @@ class ProjectSeeder {
   async run () {
     await Factory
       .model('App/Models/Project')
-      .createMany(100)
+      .createMany(100);
+
+    await Factory
+      .model('App/Models/ProjectMember')
+      .createMany(100);
   }
 }
 

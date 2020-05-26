@@ -19,42 +19,46 @@
         <a href="{{ route('project-create-page') }}" style="width: 100%" class="button is-link">Create</a>
       </div>
     </nav>
-    <div class="columns is-multiline">
-      @if(projects.data.length != 0)
-      @each(project in projects.data)
-      <div class="column is-3">
-        <div class="card">
-          <div class="card-header {{ (project.deleted === 'y') ? 'disabled-element' : '' }}">
-            <div class="card-header-title">
-              <a href="{{ route('project', { id: project.id }) }}">
-                Project: {{ project.title }}
-              </a>
-            </div>
-          </div>
-          <div class="card-content">
-            <div class="media">
-              <div class="media-content">
-                <p class="title is-6">Project founder:</p>
-                <p class="subtitle is-7"><a href="#"><b>{{ project.name }}</b></a></p>
-              </div>
-              <div class="media-content">
-                <p class="title is-6">Email founder:</p>
-                <p class="subtitle is-7"><b>{{ project.email }}</b></p>
-              </div>
-            </div>
-            <div class="content">
-              {{ project.description }}
-            </div>
-          </div>
-        </div>
-      </div>
-      @else
-      <div class="column has-text-centered">
-        <h3 class="title is-3">Not found</h3>
-      </div>
-      @endeach
-      @endif
-    </div>
+    <table class="table is-fullwidth">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Project title</th>
+            <th>Project founder name</th>
+            <th>Project founder email</th>
+            <th>Project detail</th>
+            <th>Detail</th>
+          </tr>
+        </thead>
+        <tfoot>
+          <tr>
+            <th>#</th>
+            <th>Project title</th>
+            <th>Project founder name</th>
+            <th>Project founder email</th>
+            <th>Project detail</th>
+            <th>Detail</th>
+          </tr>
+        </tfoot>
+        <tbody>
+          @if(projects.data.length != 0)
+          @each(project in projects.data)
+          <tr class="{{ (project.deleted === 'y') ? 'disabled-element' : '' }}">
+            <th>{{ project.id }}</th>
+            <td><a href="{{ route('project', { id: project.id }) }}">{{ project.title }}</a></td>
+            <td>{{ project.name }}</td>
+            <td>{{ project.email }}</td>
+            <td>{{ project.description }}</td>
+            <td><a href="{{ route('project', { id: project.id }) }}">Detail</a></td>
+          </tr>
+          @endeach
+          @else
+          <tr>
+            <td>Empty</td>
+          </tr>
+          @endif
+        </tbody>
+      </table>
   </div>
 </div>
 @include('layouts.components.admin_pagintation')

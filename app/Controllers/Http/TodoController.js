@@ -10,7 +10,6 @@ class TodoController {
     page = page || 1;
 
     const todosData = await Database
-      .query()
       .select(
         'todos.id',
         'todos.title',

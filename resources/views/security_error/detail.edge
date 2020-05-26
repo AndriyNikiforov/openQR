@@ -1,0 +1,47 @@
+@layout('layouts.admin')
+
+@section('content')
+<div class="columns">
+  <div class="column is-2">
+    @include('layouts.components.admin_menu')
+  </div>
+  <div class="container has-text-centered">
+    <div class="column is-5 is-offset-2">
+      <nav class="panel">
+        <p class="panel-heading">
+          Actions
+        </p>
+        <div class="panel-block">
+          <button class="button is-success" id="to-bug-report-pdf" style="width:100%">To pdf</button>
+        </div>
+      </nav>
+      <div id="bug-report-content" class="columns is-multiline">
+        <div class="column is-15">
+          <div class="card">
+            <div class="card-header">
+              <div id="bug-report-title" class="card-header-title">
+                Security error - {{ secData.title }}
+              </div>
+            </div>
+            <div class="card-content">
+              <div class="media">
+                <div class="media-content">
+                  <h3>About</h3>
+                  <p class="is-6">
+                    {{ el(secData.text) }}
+                  </p>
+                  <br />
+                  <h3>Score</h3>
+                  <p class="media-content">
+                    {{ secData.score }}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+@endsection

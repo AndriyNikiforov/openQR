@@ -1,8 +1,8 @@
 <header>
-  <nav class="navbar is-warning" role="navigation">
+  <nav class="navbar" role="navigation">
     <div class="navbar-brand">
-    <a class="navbar-item" href="{{ route('main') }}">
-        <img src="{{ assetsUrl('logo1.svg') }}" width="112" height="28">
+    <a class="navbar-item" href="{{ route('dashboard') }}">
+        <img src="{{ assetsUrl('logo.svg') }}" width="112" height="28">
       </a>
 
       <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasic">
@@ -14,7 +14,9 @@
 
     <div id="navbarBasic" class="navbar-menu">
       <div class="navbar-start">
-      <a href="{{ route('profile') }}" class="navbar-item">{{ auth.user.full_name }}</a>
+        <div class="navbar-item">
+          <a href="{{ route('profile') }}" class="link">{{ auth.user.full_name }}</a>
+        </div>
       </div>
       <div class="navbar-end">
         <div class="navbar-item">

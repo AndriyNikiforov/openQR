@@ -13,10 +13,11 @@ class BugReportController {
         'bug_reports.title',
         'bug_reports.description',
         'bug_reports.id',
+        'projects.id as project_id',
         'projects.title as project'
       )
       .from('bug_reports')
-      .where('user_id', id)
+      .where('bug_reports.user_id', id)
       .leftJoin('projects', 'bug_reports.project_id', 'projects.id')
       .paginate(page, 8);
 
@@ -31,8 +32,7 @@ class BugReportController {
         'projects.id',
         'projects.title'
       )
-      .from('projects')
-      .fetch();
+      .from('projects');
 
     return view.render('bug_report.create', {
       projects: viewData
@@ -45,9 +45,7 @@ class BugReportController {
     .select(
       'projects.id',
       'projects.title'
-    )
-    .from('projects')
-    .fetch();
+    ).from('projects');
     const bugReportData = await BugReport.find(id);
 
     return view.render('bug_report.update', {
@@ -58,12 +56,29 @@ class BugReportController {
 
   async detailPage({ params, view }) {
     const { id } = params;
-    const bugReportData = await BugReport
-      .find(id);
+    const bugReportData = await Database
+      .select(
+        'bug_reports.text',
+        'bug_reports.title',
+        'bug_reports.project_id',
+        'bug_reports.description',
+        'users.full_name'
+      ).from('bug_reports')
+      .where('bug_reports.id', id)
+      .leftJoin('users', 'bug_reports.user_id', 'users.id')
+      .first();
+
+    const projectData = await Database
+      .select(
+        'projects.id',
+        'projects.title'
+      ).from('projects')
+      .where('projects.id', bugReportData.project_id)
+      .first();
 
     return view.render('bug_report.detail', {
       bugReport: bugReportData,
-      project: bugReportData.project.title
+      project: projectData
     });
   }
 
@@ -72,7 +87,8 @@ class BugReportController {
       'text',
       'title',
       'project_id',
-      'description'
+      'description',
+      'user_id'
     ]);
     const bugReport = new BugReport();
 
@@ -88,7 +104,8 @@ class BugReportController {
       'text',
       'title',
       'project_id',
-      'description'
+      'description',
+      'user_id'
     ]);
 
     const bugReport = await BugReport.find(data.id);
@@ -104,7 +121,6 @@ class BugReportController {
     const bugReport = await BugReport.find(id);
 
     await bugReport.delete();
-
     return response.route('bug-report');
   }
 }

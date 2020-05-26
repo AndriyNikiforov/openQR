@@ -1,0 +1,62 @@
+@layout('layouts.admin')
+
+@section('content')
+<div class="columns">
+  <div class="column is-2">
+    @include('layouts.components.admin_menu')
+  </div>
+  <div class="column is-9">
+    <nav class="breadcrumb" aria-label="breadcrumbs">
+      <ul>
+        <li><a href="#">Project {{ testCase.pt_name }}</a></li>
+      </ul>
+    </nav>
+    <div class="section">
+      <div class="container">
+        <div class="column is-5 is-offset-3">
+          <form method="POST" action="{{ route('test-case-update') }}">
+            {{ csrfField() }}
+            <input type="hidden" name="id" value="{{ testCase.id }}">
+            <input type="hidden" name="user_id" value="{{ auth.user.id }}">
+            <input type="hidden" name="project_id" value="{{ testCase.pt_id }}">
+            <div class="field">
+              <label class="label">Title</label>
+              <div class="control">
+                <input class="input" name="title" value="{{ testCase.title }}" type="text">
+                {{ elIf('<p class="help is-danger">$self</p>', getErrorFor('title'), hasErrorFor('title')) }}
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Description</label>
+              <div class="control">
+                <textarea name="description" class="textarea">{{ testCase.description }}</textarea>
+                {{ elIf('<p class="help is-danger">$self</p>', getErrorFor('description'), hasErrorFor('description')) }}
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Status</label>
+              <div class="select">
+                <select name="status_id">
+                  @each(status in dataSt)
+                  @if(testCase.status_id == status.id)
+                  <option selected value="{{ status.id }}">{{ status.name }}</option>
+                  @else
+                    <option value="{{ status.id }}">{{ status.name }}</option>
+                  @endif
+                  @endeach
+                </select>
+              </div>
+            </div>
+            <br>
+            <div class="field is-grouped">
+              <div class="control">
+                <button type="submit" class="button is-link">Create</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+@endsection

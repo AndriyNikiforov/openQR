@@ -12,6 +12,25 @@ class TestCaseController {
     return view.render('test_case.index', viewData);
   }
 
+  async fastCreatePage({ response }) {
+    const projectsData = await Database
+      .select(
+        'projects.id',
+        'projects.title'
+      )
+      .from('projects')
+      .fetch();
+
+    const statusesData = await Database
+      .select('*')
+      .from('statuses');
+
+    return  response.json({
+      projects: projectsData,
+      statuses: statusesData
+    });
+  }
+
   async createPage({ view, params }) {
     const { id } = params;
     const viewData = await TestCaseService
@@ -31,7 +50,6 @@ class TestCaseController {
   async store({ request, response }) {
     const testCaseData = request.only([
       'title',
-      'steps',
       'user_id',
       'status_id',
       'project_id',
@@ -49,17 +67,15 @@ class TestCaseController {
     const testCaseData = request.only([
       'id',
       'title',
-      'steps',
       'user_id',
       'status_id',
       'project_id',
       'description'
     ]);
+    const testCase = await TestCase.find(testCaseData.id);
 
-    await Database
-      .table('test_cases')
-      .where('id', testCaseData.id)
-      .update(testCaseData);
+    testCase.merge(testCaseData);
+    await testCase.save();
 
     return response.route('project', {
       id: testCaseData.project_id

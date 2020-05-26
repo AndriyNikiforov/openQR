@@ -14,11 +14,11 @@
 */
 
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
-const Route = use('Route')
+const Route = use('Route');
 
 Route.get('/', 'StaticPageController.index')
   .as('main')
-  .middleware(['admin']);
+  .middleware(['staticCheck']);
 
 Route.group(() => {
   Route.get('/about', 'StaticPageController.about')
@@ -63,19 +63,25 @@ Route.get('/logout', 'AuthController.logout')
 Route.group(() => {
   Route.get('/:page?', 'DashboardController.index')
     .as('dashboard');
-}).prefix('dashboard');
+})
+  .middleware(['admin'])
+  .prefix('dashboard');
 
 Route.group(() => {
   Route.get('/dashboard/:id?/:page?', 'ProjectController.index')
+    .middleware(['accessProject'])
     .as('project');
 
   Route.get('/page/create', 'ProjectController.createPage')
+    .middleware(['pm'])
     .as('project-create-page');
 
   Route.get('/page/edit/:id?', 'ProjectController.editPage')
+    .middleware(['pm'])
     .as('project-edit-page');
 
   Route.get('/edit/:id?', 'ProjectController.editPage')
+    .middleware(['pm'])
     .as('project-edit');
 
   Route.post('store', 'ProjectController.store')
@@ -87,6 +93,7 @@ Route.group(() => {
     .as('project-update');
 
   Route.get('delete/:id?', 'ProjectController.delete')
+    .middleware(['pm'])
     .as('project-delete');
 }).prefix('project');
 
@@ -97,16 +104,20 @@ Route.group(() => {
 
   Route.get('/remove/:id?', 'ProjectMemberApiController.remove')
     .as('project-member-remove')
-}).prefix('/project/member');
+})
+  .middleware(['pm'])
+  .prefix('/project/member');
 
 Route.group(() => {
   Route.get('/:id?', 'TestCaseController.index')
     .as('test-case');
 
-  Route.get('/page/create', 'TestCaseController.createPage')
+  Route.get('/page/create/:id?', 'TestCaseController.createPage')
+    .middleware(['qa'])
     .as('test-case-create-page');
 
   Route.get('/page/edit/:id?', 'TestCaseController.editPage')
+    .middleware(['qa'])
     .as('test-case-edit-page');
 
   Route.post('store', 'TestCaseController.store')
@@ -118,8 +129,29 @@ Route.group(() => {
     .as('test-case-update');
 
   Route.get('remove/:id?', 'TestCaseController.delete')
+    .middleware(['qa'])
     .as('test-case-remove');
 }).prefix('test-case');
+
+Route.group(() => {
+  Route.get('/page/create/:test_case_id?', 'ActionController.createPage')
+    .as('action-create-page');
+  Route.get('/page/update/:id?/:test_case_id?', 'ActionController.editPage')
+    .as('action-update-page');
+
+  Route.post('/store', 'ActionController.store')
+    .validator(['ActionCreate'])
+    .as('action-store');
+
+  Route.post('/update', 'ActionController.update')
+    .validator(['ActionUpdate'])
+    .as('action-update');
+
+  Route.get('/remove/:id?/:test_case_id?', 'ActionController.remove')
+    .as('action-remove');
+})
+  .middleware(['qa'])
+  .prefix('action');
 
 Route.group(() => {
   Route.get('/:id?', 'ProjectMemberController.index')
@@ -137,7 +169,9 @@ Route.group(() => {
 
   Route.get('remove/:id?', 'ProjectMemberController.remove')
     .as('project-members-remove');
-}).prefix('project/members');
+})
+  .middleware('pm')
+  .prefix('project/members');
 
 Route.group(() => {
   Route.get('/', 'ProfileController.index')
@@ -184,16 +218,20 @@ Route.group(() => {
   Route.post('send', 'InviteProjectMemberController.sendMail')
     .validator(['InviteProjectMemberCreate'])
     .as('invite-send');
-}).prefix('invite');
+})
+  .middleware(['pm'])
+  .prefix('invite');
 
 Route.group(() => {
   Route.get('/', 'BugReportController.index')
     .as('bug-report');
 
   Route.get('/page/create', 'BugReportController.createPage')
+    .middleware(['qa'])
     .as('bug-report-create-page');
 
   Route.get('/page/update/:id?', 'BugReportController.updatePage')
+    .middleware(['qa'])
     .as('bug-report-update-page');
 
   Route.get('/page/detail/:id?', 'BugReportController.detailPage')
@@ -201,81 +239,60 @@ Route.group(() => {
 
   Route.post('/store', 'BugReportController.store')
     .validator(['BugReportCreate'])
+    .middleware(['qa'])
     .as('bug-report-store');
 
   Route.post('/update', 'BugReportController.update')
     .validator(['BugReportUpdate'])
+    .middleware(['qa'])
     .as('bug-report-update');
 
-  Route.get('/remove', 'BugReportController.remove')
+  Route.get('/remove/:id?', 'BugReportController.remove')
+    .middleware(['qa'])
     .as('bug-report-remove');
 }).prefix('bug-report');
 
 Route.group(() => {
-  Route.get('/', 'BoardController.index')
-    .as('board');
+  Route.get('/:id?', 'ProjectNewController.index')
+    .as('project-news');
 
-  Route.get('/page/create', 'BoardController.createPage')
-    .as('board-crate-page');
+  Route.get('/page/create/:project_id?', 'ProjectNewController.createPage')
+    .as('project-news-create-page');
 
-  Route.get('/page/update', 'BoardController.updatePage')
-    .as('board-update-page');
-
-  Route.post('/store', 'BoardController.store')
-    .validator(['BoardCreate'])
-    .as('board-store');
-
-  Route.post('/update', 'BoardController.update')
-    .validator(['BoardUpdate'])
-    .as('board-update');
-
-  Route.get('/remove/:id?', 'BoardController.remove')
-    .as('board-remove');
-}).prefix('board');
-
-Route.group(() => {
-  Route.get('/', 'BoardColumnController.index')
-    .as('board-column');
-
-  Route.post('/store', 'BoardColumnController.store')
-    .validator(['BoardColumnCreate'])
-    .as('board-column-store');
-
-  Route.post('/update', 'BoardColumnController.update')
-    .validator(['BoardColumnUpdate'])
-    .as('board-column-update');
-
-  Route.get('/remove', 'BoardColumnController.remove')
-    .as('board-column-remove');
-}).prefix('board-column');
-
-Route.group(() => {
-  Route.post('/store', 'ProjectCommentController.store')
+  Route.post('/store', 'ProjectNewController.store')
     .validator(['ProjectCommentCreate'])
-    .as('project-comments-store');
+    .as('project-news-store');
 
-  Route.get('/remove/:id?', 'ProjectCommentController.remove')
-    .as('project-comments-remove');
-}).prefix('project-comments')
+  Route.get('/remove/:id?', 'ProjectNewController.remove')
+    .as('project-news-remove');
+}).prefix('project-news')
 
 Route.group(() => {
-  Route.get('/', 'SecurityErrorController.index')
+  Route.get('/:page?', 'SecurityErrorController.index')
     .as('security-error');
 
+  Route.get('/page/detail/:id?', 'SecurityErrorController.detailPage')
+    .as('security-error-detail-page');
+
   Route.get('/page/create', 'SecurityErrorController.createPage')
+    .middleware(['qa'])
     .as('security-error-create-page');
 
-  Route.get('/page/update', 'SecurityErrorController.updatePage')
+  Route.get('/page/update/:id?', 'SecurityErrorController.updatePage')
+    .middleware(['qa'])
     .as('security-error-update-page');
 
   Route.post('/store', 'SecurityErrorController.store')
     .validator(['SecurityErrorCreate'])
+    .middleware(['qa'])
     .as('security-error-store');
 
   Route.post('/update', 'SecurityErrorController.update')
     .validator(['SecurityErrorUpdate'])
+    .middleware(['qa'])
     .as('security-error-update');
 
-  Route.get('/remove', 'SecurityErrorController.remove')
+  Route.get('/remove/:id?', 'SecurityErrorController.remove')
+    .middleware(['qa'])
     .as('security-error-remove');
 }).prefix('security-error');
