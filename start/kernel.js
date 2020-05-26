@@ -43,7 +43,8 @@ const namedMiddleware = {
   guest: 'Adonis/Middleware/AllowGuestOnly',
   pm: 'App/Middleware/PmCheck',
   qa: 'App/Middleware/QaCheck',
-  accessProject: 'App/Middleware/ProjectAccess'
+  accessProject: 'App/Middleware/ProjectAccess',
+  staticCheck: 'App/Middleware/StaticCheck'
 }
 
 /*

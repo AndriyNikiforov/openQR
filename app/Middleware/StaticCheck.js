@@ -3,19 +3,19 @@
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
 
-class UserBaseChecker {
+class StaticCheck {
   /**
    * @param {object} ctx
    * @param {Request} ctx.request
    * @param {Function} next
    */
   async handle ({ auth, response }, next) {
-    if (!auth.user) {
-      return response.route('signInPage');
+    if (auth.user) {
+      return response.route('dashboard');
     }
 
-    await next  ();
+    await next()
   }
 }
 
-module.exports = UserBaseChecker
+module.exports = StaticCheck

@@ -18,7 +18,7 @@ const Route = use('Route');
 
 Route.get('/', 'StaticPageController.index')
   .as('main')
-  .middleware(['admin']);
+  .middleware(['staticCheck']);
 
 Route.group(() => {
   Route.get('/about', 'StaticPageController.about')
