@@ -21,88 +21,105 @@
       </div>
     </nav>
     <div class="columns is-multiline">
-      @if(bugReports.data.length != 0)
-      @each(bugReport in bugReports.data)
-      <div class="column is-4">
-        <div class="card">
-          <div class="card-header">
-            <div class="card-header-title">
-              <a href="{{ route('bug-report-detail-page', { id: bugReport.id }) }}">Bug report:
-                {{ bugReport.title }}</a>
-              <a href="{{ route('project', { id: bugReport.project_id }) }}">Project:
-                {{ bugReport.project }}</a>
-            </div>
-            <div class="panel">
-              <div class="panel-block">
-                <a href="{{ route('bug-report-update-page', { id: bugReport.id }) }}">Edit</a>
-              </div>
-              <div class="panel-block">
-                <a href="{{ route('bug-report-remove', { id: bugReport.id }) }}">Remove</a>
-              </div>
-            </div>
-          </div>
-          <div class="card-content">
-            <div class="media">
-              <div class="media-content">
-                <p class="title is-6">
-                  {{ bugReport.description }}
-                </p>
-              </div>
-            </div>
-            <div class="content">
-            </div>
-          </div>
-        </div>
-      </div>
-      @endeach
-      @else
-      <div class="column has-text-centered">
-        <h3 class="title is-3">Not found</h3>
-      </div>
-      @endif
-    </div>
+      <table class="table is-fullwidth">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Title</th>
+            <th>Project name</th>
+            <th>Edit</th>
+            <th>Delete</th>
+            <th>Detail</th>
+          </tr>
+        </thead>
+        <tfoot>
+          <tr>
+            <th>#</th>
+            <th>Title</th>
+            <th>Project name</th>
+            <th>Edit</th>
+            <th>Delete</th>
+            <th>Detail</th>
+          </tr>
+        </tfoot>
+        <tbody>
+          @if(bugReports.data.length != 0)
+          @each(bugReport in bugReports.data)
+          <tr>
+            <th>{{ bugReport.id }}</th>
+            <td>
+              <a href="{{ route('bug-report-detail-page', { id: bugReport.id }) }}">
+                {{ bugReport.title }}
+              </a>
+            </td>
+            <td>
+              <a href="{{ route('project', { id: bugReport.project_id }) }}">
+                {{ bugReport.project }}
+              </a>
+            </td>
+            <td>
+              <a href="{{ route('bug-report-update-page', { id: bugReport.id }) }}">Edit</a>
+            </td>
+            <td>
+              <a href="{{ route('bug-report-remove', { id: bugReport.id }) }}">Remove</a>
+            </td>
+            <td>
+              <a href="{{ route('bug-report-detail-page', { id: bugReport.id }) }}">
+                Detail
+              </a>
+            </td>
+          </tr>
+          @endeach
+          @else
+          <tr>
+            <td>Empty</td>
+          </tr>
+          @endif
+        </tbody>
+      </table>
   </div>
+  <br />
+  <nav class="pagination is-centered" role="navigation" aria-label="pagination">
+    <ul class="pagination-list">
+      <li>
+        <a href="{{ route('bug-report', { page: 1 }) }}" class="pagination-link">
+          First page
+        </a>
+      </li>
+      <li>
+        <span class="pagination-ellipsis">&hellip;</span>
+      </li>
+      <li>
+        @if(bugReport.page - 1 > 0)
+        <a href="{{ route('bug-report', { page: bugReport.page - 1 }) }}" class="pagination-link">
+          {{ bugReport.page - 1 }}
+        </a>
+        @else
+        <a></a>
+        @endif
+      </li>
+      <li>
+        <a href="{{ route('bug-report', { page: bugReport.page }) }}" class="pagination-link is-current">
+          {{ bugReport.page || 1 }}
+        </a>
+      </li>
+      <li>
+        @if((bugReport.page + 1) <= bugReport.lastPage)
+        <a
+          href="{{ route('bug-reprot', { page: bugReport.page + 1 }) }}" class="pagination-link">
+          {{ bugReport.page + 1 }}
+        </a>
+        @endif
+      </li>
+      <li>
+        <span class="pagination-ellipsis">&hellip;</span>
+      </li>
+      <li>
+        <a href="{{ route('bug-report', { page: bugReport.lastPage }) }}" class="pagination-link">
+          Last page
+        </a>
+      </li>
+    </ul>
+  </nav>
 </div>
-<nav class="pagination is-centered" role="navigation" aria-label="pagination">
-  <ul class="pagination-list">
-    <li>
-      <a href="{{ route('bug-report', { page: 1 }) }}" class="pagination-link">
-        First page
-      </a>
-    </li>
-    <li>
-      <span class="pagination-ellipsis">&hellip;</span>
-    </li>
-    <li>
-      @if(bugReport.page - 1 > 0)
-      <a href="{{ route('bug-report', { page: bugReport.page - 1 }) }}" class="pagination-link">
-        {{ bugReport.page - 1 }}
-      </a>
-      @else
-      <a></a>
-      @endif
-    </li>
-    <li>
-      <a href="{{ route('bug-report', { page: bugReport.page }) }}" class="pagination-link is-current">
-        {{ bugReport.page || 1 }}
-      </a>
-    </li>
-    <li>
-      @if((bugReport.page + 1) <= bugReport.lastPage)
-      <a
-        href="{{ route('bug-reprot', { page: bugReport.page + 1 }) }}" class="pagination-link">
-        {{ bugReport.page + 1 }}
-      </a>
-      @endif
-    </li>
-    <li>
-      <span class="pagination-ellipsis">&hellip;</span>
-    </li>
-    <li>
-      <a href="{{ route('bug-report', { page: bugReport.lastPage }) }}" class="pagination-link">
-        Last page
-      </a>
-    </li>
-  </ul>
-</nav>
 @endsection
