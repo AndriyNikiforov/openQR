@@ -1,0 +1,58 @@
+@layout('layouts.admin')
+
+@section('content')
+<div class="columns">
+  <div class="column is-2">
+    @include('layouts.components.admin_menu')
+  </div>
+  <div class="column is-9">
+    <div class="section">
+      <div class="container">
+        <div class="column is-5 is-offset-3">
+          <form method="POST" action="{{ route('bug-report-store') }}">
+            {{ csrfField() }}
+            <input type="hidden" name="user_id" value="{{ auth.user.id }}">
+            <div class="field">
+              <label class="label">Title</label>
+              <div class="control">
+                <input class="input" name="title" value="{{ old('title', '') }}" type="text">
+                {{ elIf('<p class="help is-danger">$self</p>', getErrorFor('title'), hasErrorFor('title')) }}
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Description</label>
+              <div class="control">
+                <textarea name="description" class="textarea">{{ old('description', '') }}</textarea>
+                {{ elIf('<p class="help is-danger">$self</p>', getErrorFor('description'), hasErrorFor('description')) }}
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">About</label>
+              <div class="control">
+                <textarea rows="40" cols="60" id="editor" name="text" class="textarea">{{ old('text', '') }}</textarea>
+                {{ elIf('<p class="help is-danger">$self</p>', getErrorFor('text'), hasErrorFor('text')) }}
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Project</label>
+              <div class="select">
+                <select name="project_id">
+                  @each(project in projects)
+                    <option value="{{ project.id }}">{{ project.title }}</option>
+                  @endeach
+                </select>
+              </div>
+            </div>
+            <br>
+            <div class="field is-grouped">
+              <div class="control">
+                <button type="submit" class="button is-link">Create</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+@endsection

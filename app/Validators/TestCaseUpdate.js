@@ -8,7 +8,6 @@ class TestCaseUpdate {
       title: 'required|string',
       description: 'required|string',
       status_id: 'required|integer',
-      steps: 'required|object',
       project_id: 'required|integer'
     };
   }
@@ -23,7 +22,6 @@ class TestCaseUpdate {
       'title.required': 'You must provide a title',
       'description.required': 'You must provide a description',
       'status_id.required': 'You must provide a status',
-      'steps.required': 'You must provide a steps',
       'project_id.required': 'You must provide a project'
     };
   }

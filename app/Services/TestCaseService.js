@@ -8,11 +8,12 @@ class TestCaseService {
       .select(
         'users.email',
         'users.full_name',
+        'test_cases.id',
         'test_cases.title',
-        'test_cases.steps',
         'test_cases.description',
         'statuses.name as st_name',
         'statuses.type as st_type',
+        'projects.id as pt_id',
         'projects.title as pt_name'
       )
       .from('test_cases')
@@ -22,43 +23,57 @@ class TestCaseService {
       .leftJoin('users', 'test_cases.user_id', 'users.id')
       .first();
 
+    const testActionsData = await Database
+      .select(
+        'actions.id',
+        'actions.test_case_id',
+        'actions.step_number',
+        'actions.actions_desc',
+        'actions.result'
+      ).from('actions')
+      .where('actions.test_case_id', id);
+
     return {
-      testCase: testCaseData
+      testCase: testCaseData,
+      testActions: testActionsData
     };
   }
 
   async createPageData(id) {
     const projectData = await Database
-      .select('title')
+      .select('title', 'id')
+      .from('projects')
       .where('id', id)
       .first();
 
     const statusesData = await Database
-      .select('*')
+      .select(
+        'statuses.id',
+        'statuses.name',
+      )
       .from('statuses');
 
     return {
       project: projectData,
-      statuses: statusesData
+      dataSt: statusesData
     }
   }
 
   async editPageData(id) {
     const testCaseData = await Database
       .select(
-        'users.email',
-        'users.full_name',
+        'test_cases.id',
         'test_cases.title',
-        'test_cases.steps',
         'test_cases.description',
         'statuses.name as st_name',
         'statuses.type as st_type',
+        'projects.id as pt_id',
         'projects.title as pt_name'
       )
       .from('test_cases')
       .where('test_cases.id', id)
       .leftJoin('projects', 'test_cases.project_id', 'projects.id')
-      .leftJoin('users', 'test_cases.user_id', 'users.id')
+      .leftJoin('statuses', 'test_cases.status_id', 'statuses.id')
       .first();
 
     const statusesData = await Database
@@ -67,7 +82,7 @@ class TestCaseService {
 
     return {
       testCase: testCaseData,
-      statuses: statusesData
+      dataSt: statusesData
     };
   }
 }

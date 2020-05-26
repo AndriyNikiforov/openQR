@@ -15,6 +15,10 @@ class TestCase extends Model {
   async priorities() {
     return this.belongsTo('App/Models/Priority');
   }
+
+  async actions() {
+    return this.belongsTo('App/Models/Action');
+  }
 }
 
 module.exports = TestCase

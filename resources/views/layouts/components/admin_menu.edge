@@ -5,45 +5,29 @@
     </p>
     <ul class="menu-list">
       <li>
-        <a href="#">Test cases</a>
-        <ul>
-          <li><a href="#">Test cases list</a></li>
-          <li><a href="#">Bug reports</a></li>
-        </ul>
-      </li>
-    </ul>
-    <p class="menu-label">
-      Boards
-    </p>
-    <ul class="menu-list">
-      <li><a href="#">Tasks</a></li>
-      <li>
         <a href="#">Projects</a>
         <ul class="menu-list">
           <li><a href="{{ route('dashboard') }}">Projects list</a></li>
-          <li><a href="#">Project comments</a></li>
+          @if(auth.user.role_id == 3)
+            <li><a href="{{ route('invite-list') }}">Invite mails</a></li>
+          @endif
+          <li><a href="{{ route('invite-form') }}">Invite form</a></li>
+        </ul>
+        <a href="#">Bug reports</a>
+        <ul class="menu-list">
+          <li><a href="{{ route('bug-report') }}">Bug reports list</a></li>
+        </ul>
+        <a href="#">Security errors</a>
+        <ul class="menu-list">
+          <li><a href="{{ route('security-error') }}">Security errors list</a></li>
         </ul>
       </li>
     </ul>
     <p class="menu-label">
-      Mobile
+      Todos
     </p>
     <ul class="menu-list">
-      <li><a href="#">Devices</a></li>
-      <li><a href="#">Problems</a></li>
-    </ul>
-    <p class="menu-label">
-      Calendar
-    </p>
-    <ul class="menu-list">
-      <li><a href="#">Events</a></li>
-      <li><a href={{ route('todo') }}>Todos</a></li>
-    </ul>
-    <p class="menu-label">
-      Security
-    </p>
-    <ul class="menu-list">
-      <li><a href="#">Vulnerabilities</a></li>
+      <li><a href={{ route('todo') }}>List</a></li>
     </ul>
   </aside>
 </section>
