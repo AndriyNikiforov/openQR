@@ -271,6 +271,9 @@ Route.group(() => {
   Route.get('/:page?', 'SecurityErrorController.index')
     .as('security-error');
 
+  Route.get('/page/detail/:id?', 'SecurityErrorController.detailPage')
+    .as('security-error-detail-page');
+
   Route.get('/page/create', 'SecurityErrorController.createPage')
     .middleware(['qa'])
     .as('security-error-create-page');

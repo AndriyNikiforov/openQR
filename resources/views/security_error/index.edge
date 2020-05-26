@@ -6,11 +6,6 @@
     @include('layouts.components.admin_menu')
   </div>
   <div class="column is-9">
-    <nav class="breadcrumb" aria-label="breadcrumbs">
-      <ul>
-
-      </ul>
-    </nav>
     <nav class="panel">
       <p class="panel-heading">
         Actions
@@ -21,85 +16,96 @@
       </div>
     </nav>
     <div class="columns is-multiline">
-      @if(securityErrors.data.length != 0)
-      @each(secData in securityErrors.data)
-      <div class="column is-4">
-        <div class="card">
-          <div class="card-header">
-            <div class="card-header-title">
-              <a href="#">Error: {{ secData.title }} Score: {{ secData.score }}</a>
-            </div>
-            <div class="panel">
-              <div class="panel-block">
+      <table class="table is-fullwidth">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Title</th>
+            <th>Score</th>
+            <th>Edit</th>
+            <th>Delete</th>
+            <th>Detail</th>
+          </tr>
+        </thead>
+        <tfoot>
+          <tr>
+            <th>#</th>
+            <th>Title</th>
+            <th>Score</th>
+            <th>Edit</th>
+            <th>Delete</th>
+            <th>Detail</th>
+          </tr>
+        </tfoot>
+        <tbody>
+          @if(securityErrors.data.length != 0)
+          @each(secData in securityErrors.data)
+            <tr>
+              <th>{{ secData.id }}</th>
+              <td>
+                <a href="{{ route('security-error-detail-page', { id: secData.id }) }}">{{ secData.title }}</a>
+              </td>
+              <td>{{ secData.score }}</td>
+              <td>
                 <a href="{{ route('security-error-update-page', { id: secData.id }) }}">Edit</a>
-              </div>
-              <div class="panel-block">
+              </td>
+              <td>
                 <a href="{{ route('security-error-remove', { id: secData.id }) }}">Remove</a>
-              </div>
-            </div>
-          </div>
-          <div class="card-content">
-            <div class="media">
-              <div class="media-content">
-                <p class="title is-6">
-                  {{ secData.text }}
-                </p>
-              </div>
-            </div>
-            <div class="content">
-            </div>
-          </div>
-        </div>
-      </div>
-      @endeach
-      @else
-      <div class="column has-text-centered">
-        <h3 class="title is-3">Not found</h3>
-      </div>
-      @endif
-    </div>
+              </td>
+              <td>
+                <a href="{{ route('security-error-detail-page', { id: secData.id }) }}">Detail</a>
+              </td>
+            </tr>
+          @endeach
+          @else
+            <tr>
+              <td>Empty</td>
+            </tr>
+          @endif
+        </tbody>
+      </table>
   </div>
+  <nav class="pagination is-centered" role="navigation" aria-label="pagination">
+    <ul class="pagination-list">
+      <li>
+        <a href="{{ route('security-error', { page: 1 }) }}" class="pagination-link">
+          First page
+        </a>
+      </li>
+      <li>
+        <span class="pagination-ellipsis">&hellip;</span>
+      </li>
+      <li>
+        @if(securityErrors.page - 1 > 0)
+        <a href="{{ route('security-error', { page: securityErrors.page - 1 }) }}" class="pagination-link">
+          {{ securityErrors.page - 1 }}
+        </a>
+        @else
+        <a></a>
+        @endif
+      </li>
+      <li>
+        <a href="{{ route('security-error', { page: securityErrors.page }) }}" class="pagination-link is-current">
+          {{ securityErrors.page || 1 }}
+        </a>
+      </li>
+      <li>
+        @if((securityErrors.page + 1) <= securityErrors.lastPage)
+        <a
+          href="{{ route('security-error', { page: securityErrors.page + 1 }) }}" class="pagination-link">
+          {{ securityErrors.page + 1 }}
+        </a>
+        @endif
+      </li>
+      <li>
+        <span class="pagination-ellipsis">&hellip;</span>
+      </li>
+      <li>
+        <a href="{{ route('security-error', { page: securityErrors.lastPage }) }}" class="pagination-link">
+          Last page
+        </a>
+      </li>
+    </ul>
+  </nav>
 </div>
-<nav class="pagination is-centered" role="navigation" aria-label="pagination">
-  <ul class="pagination-list">
-    <li>
-      <a href="{{ route('security-error', { page: 1 }) }}" class="pagination-link">
-        First page
-      </a>
-    </li>
-    <li>
-      <span class="pagination-ellipsis">&hellip;</span>
-    </li>
-    <li>
-      @if(securityErrors.page - 1 > 0)
-      <a href="{{ route('security-error', { page: securityErrors.page - 1 }) }}" class="pagination-link">
-        {{ securityErrors.page - 1 }}
-      </a>
-      @else
-      <a></a>
-      @endif
-    </li>
-    <li>
-      <a href="{{ route('security-error', { page: securityErrors.page }) }}" class="pagination-link is-current">
-        {{ securityErrors.page || 1 }}
-      </a>
-    </li>
-    <li>
-      @if((securityErrors.page + 1) <= securityErrors.lastPage)
-      <a
-        href="{{ route('security-error', { page: securityErrors.page + 1 }) }}" class="pagination-link">
-        {{ securityErrors.page + 1 }}
-      </a>
-      @endif
-    </li>
-    <li>
-      <span class="pagination-ellipsis">&hellip;</span>
-    </li>
-    <li>
-      <a href="{{ route('security-error', { page: securityErrors.lastPage }) }}" class="pagination-link">
-        Last page
-      </a>
-    </li>
-  </ul>
-</nav>
 @endsection

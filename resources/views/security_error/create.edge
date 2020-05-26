@@ -26,7 +26,7 @@
             <div class="field">
               <label class="label">Description</label>
               <div class="control">
-                <textarea name="text" class="textarea">{{ old('text', '') }}</textarea>
+                <textarea id="editor" name="text" class="textarea">{{ old('text', '') }}</textarea>
                 {{ elIf('<p class="help is-danger">$self</p>', getErrorFor('text'), hasErrorFor('text')) }}
               </div>
             </div>

@@ -25,6 +25,15 @@ class SecurityErrorController {
     });
   }
 
+  async detailPage({ params, view }) {
+    const { id } = params;
+    const viewData = await SecurityError.find(id);
+
+    return view.render('security_error.detail', {
+      secData: viewData
+    });
+  }
+
   async createPage({ view }) {
     return view.render('security_error.create');
   }
