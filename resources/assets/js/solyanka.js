@@ -71,7 +71,7 @@ $(document).ready(() => {
     .create(document.querySelector('#editor'))
     .then(editor => {
       editor.editing.view.change(writer => {
-        writer.setStyle('height', '400px', editor.editing.view.document.getRoot());
+        writer.setStyle('height', '500px', editor.editing.view.document.getRoot());
         writer.setStyle('width', '700px', editor.editing.view.document.getRoot());
       });
       window.editor = editor;

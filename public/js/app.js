@@ -28248,7 +28248,7 @@ $(document).ready(function () {
   if ($('#editor').length != 0) {
     ClassicEditor.create(document.querySelector('#editor')).then(function (editor) {
       editor.editing.view.change(function (writer) {
-        writer.setStyle('height', '400px', editor.editing.view.document.getRoot());
+        writer.setStyle('height', '500px', editor.editing.view.document.getRoot());
         writer.setStyle('width', '700px', editor.editing.view.document.getRoot());
       });
       window.editor = editor;
