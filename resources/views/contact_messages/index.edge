@@ -1,0 +1,88 @@
+@layout('layouts.admin')
+
+@section('content')
+<div class="columns">
+  <div class="column is-2">
+    @include('layouts.components.admin_menu')
+  </div>
+  <div class="column is-9">
+    <nav class="breadcrumb" aria-label="breadcrumbs">
+      <ul>
+        <a href="#">Contact messages</a>
+      </ul>
+    </nav>
+    <div class="columns is-multiline">
+      @if(contactMessages.data.length != 0)
+        @each(contactMessage in contactMessages.data)
+        <div class="column is-3">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-header-title">
+                {{ contactMessage.email }}
+              </div>
+            </div>
+            <div class="card-content">
+              <div class="media">
+                <div class="media-content">
+                  <p class="title is-6">
+                  {{ contactMessage.message }}
+                  </p>
+                </div>
+              </div>
+              <div class="content">
+              </div>
+            </div>
+          </div>
+        </div>
+        @endeach
+      @else
+      <div class="column has-text-centered">
+        <h3 class="title is-3">Not found</h3>
+      </div>
+      @endif
+    </div>
+  </div>
+</div>
+<nav class="pagination is-centered" role="navigation" aria-label="pagination">
+  <ul class="pagination-list">
+    <li>
+      <a href="{{ route('contact-messages', { page: 1 }) }}" class="pagination-link">
+        First page
+      </a>
+    </li>
+    <li>
+      <span class="pagination-ellipsis">&hellip;</span>
+    </li>
+    <li>
+      @if(contactMessages.page - 1 > 0)
+      <a href="{{ route('contact-messages', { page: contactMessages.page - 1 }) }}" class="pagination-link">
+        {{ contactMessages.page - 1 }}
+      </a>
+      @else
+      <a></a>
+      @endif
+    </li>
+    <li>
+      <a href="{{ route('contact-messages', { page: contactMessages.page }) }}" class="pagination-link is-current">
+        {{ contactMessages.page }}
+      </a>
+    </li>
+    <li>
+      @if((testCases.page + 1) <= testCases.lastPage)
+      <a
+        href="{{ route('contact-messages', { page: contactMessages.page + 1 }) }}" class="pagination-link">
+        {{ contactMessages.page + 1 }}
+      </a>
+      @endif
+    </li>
+    <li>
+      <span class="pagination-ellipsis">&hellip;</span>
+    </li>
+    <li>
+      <a href="{{ route('contact-messages', { page: contactMessages.lastPage }) }}" class="pagination-link">
+        Last page
+      </a>
+    </li>
+  </ul>
+</nav>
+@endsection

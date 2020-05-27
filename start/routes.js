@@ -27,6 +27,10 @@ Route.group(() => {
   Route.get('/contact', 'StaticPageController.contact')
     .as('contact');
 
+  Route.get('/contact/messages/:page?', 'StaticPageController.contactMessage')
+    .middleware(['pm'])
+    .as('contact-messages');
+
   Route.post('send', 'StaticPageController.sendMessage')
     .validator(['ContactMessage'])
     .as('send-message');
