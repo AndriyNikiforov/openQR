@@ -11,6 +11,7 @@ class InviteProjectMemberService {
         'users.id',
         'projects.title',
         'users.full_name as user_name',
+        'invite_mails.id as inv_mails_id',
         'invite_mails.email',
         'invite_mails.message',
         'invite_mails.project_id'
@@ -33,6 +34,8 @@ class InviteProjectMemberService {
       'projects.title as project_name'
     )
     .from('users')
+    .where('users.role_id', 3)
+    .distinct('users.id')
     .leftJoin('projects', 'projects.user_id', 'users.id');
 
     return { projects: data };
