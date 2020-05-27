@@ -37,8 +37,23 @@ class InviteProjectMemberService {
     .where('users.role_id', 3)
     .distinct('users.id')
     .leftJoin('projects', 'projects.user_id', 'users.id');
+    const users = new Map();
+    const result = [];
 
-    return { projects: data };
+    for(let item of data) {
+      if(!users.has(item.user_id)) {
+        users.set(item.user_id, true);
+        result.push({
+          user_id: item.user_id,
+          full_name: item.user_name
+        });
+      }
+    }
+
+    return {
+      projects: data,
+      users: result
+    };
   }
 }
 
