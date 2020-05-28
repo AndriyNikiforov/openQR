@@ -266,17 +266,17 @@ Route.group(() => {
 }).prefix('bug-report');
 
 Route.group(() => {
-  Route.get('/:id?', 'ProjectNewController.index')
+  Route.get('/:id?', 'ProjectNewsController.index')
     .as('project-news');
 
-  Route.get('/page/create/:project_id?', 'ProjectNewController.createPage')
+  Route.get('/page/create/:project_id?', 'ProjectNewsController.createPage')
     .as('project-news-create-page');
 
-  Route.post('/store', 'ProjectNewController.store')
+  Route.post('/store', 'ProjectNewsController.store')
     .validator(['ProjectCommentCreate'])
     .as('project-news-store');
 
-  Route.get('/remove/:id?', 'ProjectNewController.remove')
+  Route.get('/remove/:id?', 'ProjectNewsController.remove')
     .as('project-news-remove');
 }).prefix('project-news')
 

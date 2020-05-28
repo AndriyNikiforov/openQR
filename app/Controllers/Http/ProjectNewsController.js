@@ -3,7 +3,7 @@
 const Database = use('Database');
 const ProjectComment = use('App/Models/ProjectComment');
 
-class ProjectNewController {
+class ProjectNewsController {
   async index({ params, view }) {
     const { id } = params;
     const viewData = await Database
@@ -60,4 +60,4 @@ class ProjectNewController {
   }
 }
 
-module.exports = ProjectNewController
+module.exports = ProjectNewsController
