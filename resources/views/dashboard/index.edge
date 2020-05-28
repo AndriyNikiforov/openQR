@@ -11,16 +11,28 @@
         <li><a href="#">Projects</a></li>
       </ul>
     </nav>
-    @if(auth.user.role_id == 3)
     <nav class="panel">
-      <p class="panel-heading">
-        Actions
-      </p>
-      <div class="panel-block">
-        <a href="{{ route('project-create-page') }}" style="width: 100%" class="button is-link">Create</a>
-      </div>
+      @if(auth.user.role_id == 3)
+        <p class="panel-heading">
+          Actions
+        </p>
+        <div class="panel-block">
+          <a href="{{ route('project-create-page') }}" style="width: 100%" class="button is-link">Create</a>
+        </div>
+      @endif
+        <p class="panel-heading">
+          Search
+        </p>
+        <form action="{{ route('project-search') }}" method="POST">
+          <div class="panel-block">
+              {{ csrfField() }}
+              <input placeholder="Search query" class="input" type="text" name="query" style="width: 100%" value="">
+          </div>
+          <div class="panel-block">
+            <button class="button is-link" style="width: 100%" type="submit">Search</button>
+          </div>
+        </form>
     </nav>
-    @endif
     <table class="table is-fullwidth">
         <thead>
           <tr>

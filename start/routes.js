@@ -67,6 +67,9 @@ Route.get('/logout', 'AuthController.logout')
 Route.group(() => {
   Route.get('/:page?', 'DashboardController.index')
     .as('dashboard');
+
+  Route.post('/project/search', 'DashboardController.search')
+    .as('project-search');
 })
   .middleware(['admin'])
   .prefix('dashboard');
