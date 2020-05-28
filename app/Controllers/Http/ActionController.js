@@ -24,10 +24,10 @@ class ActionController {
 
   async store({ request, response }) {
     const data = request.only([
-      'test_case_id',
+      'result',
       'step_number',
       'actions_desc',
-      'result'
+      'test_case_id'
     ]);
     const action = new Action();
 
@@ -41,11 +41,11 @@ class ActionController {
 
   async update({ request, response }) {
     const data = request.only([
-      'test_case_id',
+      'id',
+      'result',
       'step_number',
       'actions_desc',
-      'result',
-      'id'
+      'test_case_id'
     ]);
     const action = await Action.find(data.id);
 

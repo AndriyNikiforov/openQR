@@ -26,10 +26,10 @@ class TestCaseService {
     const testActionsData = await Database
       .select(
         'actions.id',
-        'actions.test_case_id',
+        'actions.result',
         'actions.step_number',
         'actions.actions_desc',
-        'actions.result'
+        'actions.test_case_id'
       ).from('actions')
       .where('actions.test_case_id', id);
 

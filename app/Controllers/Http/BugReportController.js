@@ -41,9 +41,9 @@ class BugReportController {
     const data = request.only([
       'text',
       'title',
+      'user_id',
       'project_id',
-      'description',
-      'user_id'
+      'description'
     ]);
     const bugReport = new BugReport();
 
@@ -58,11 +58,10 @@ class BugReportController {
       'id',
       'text',
       'title',
+      'user_id',
       'project_id',
-      'description',
-      'user_id'
+      'description'
     ]);
-
     const bugReport = await BugReport.find(data.id);
 
     bugReport.merge(data);

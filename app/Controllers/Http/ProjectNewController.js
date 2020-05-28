@@ -36,8 +36,8 @@ class ProjectNewController {
   async store({ request, response }) {
     const data = request.only([
       'text',
-      'project_id',
-      'user_id'
+      'user_id',
+      'project_id'
     ]);
     const projectComment = new ProjectComment();
 

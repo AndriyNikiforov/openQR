@@ -12,8 +12,8 @@ class TodoController {
     const todosData = await Database
       .select(
         'todos.id',
-        'todos.title',
         'todos.text',
+        'todos.title',
         'todos.deleted_at'
       ).from('todos')
       .where('todos.user_id', id)
@@ -34,8 +34,8 @@ class TodoController {
     const todoData = await Database
       .select(
         'todos.id',
-        'todos.title',
-        'todos.text'
+        'todos.text',
+        'todos.title'
       )
       .from('todos')
       .where('todos.id', id)
@@ -48,8 +48,8 @@ class TodoController {
 
   async create({ request, response, auth }) {
     const todoData = request.only([
-      'title',
-      'text'
+      'text',
+      'title'
     ]);
     todoData.user_id = auth.user.id;
     const todo = new Todo();
@@ -62,9 +62,9 @@ class TodoController {
 
   async update({ request, response }) {
     const todoData = request.only([
-      'title',
+      'id',
       'text',
-      'id'
+      'title'
     ]);
     const todo = await Todo.find(todoData.id);
 
