@@ -1,0 +1,75 @@
+@layout('layouts.admin')
+
+@section('content')
+<div class="columns">
+  <div class="column is-2">
+    @include('layouts.components.admin_menu')
+  </div>
+  <div class="column is-9">
+    <nav class="panel">
+      <p class="panel-heading">
+        Search resault
+      </p>
+    </nav>
+    <div class="columns is-multiline">
+      <table class="table is-fullwidth">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Title</th>
+            <th>Qa name</th>
+            @if(auth.user.role_id == 1)
+            <th>Edit</th>
+            <th>Remove</th>
+            @endif
+          </tr>
+        </thead>
+        <tfoot>
+          <tr>
+            <th>#</th>
+            <th>Title</th>
+            <th>Qa name</th>
+            @if(auth.user.role_id == 1)
+            <th>Edit</th>
+            <th>Remove</th>
+            @endif
+          </tr>
+        </tfoot>
+        <tbody>
+          @if(testCases.length != 0)
+          @each(testCase in testCases)
+            <tr class="{{ (testCase.test_case_deleted === 'y') ? 'disabled-element' : '' }}">
+              <th>{{ testCase.test_case_id }}</th>
+              <td>
+                <a href="{{ route('test-case', { id: testCase.test_case_id }) }}">
+                  {{ testCase.test_case_name }}</a>
+              </td>
+              <td>
+                <a href="#"><b>{{ testCase.full_name }}</b></a>
+              </td>
+              @if(testCase.test_case_deleted === 'y')
+                <td></td>
+                <td></td>
+              @else
+                @if(auth.user.role_id == 1)
+                <td>
+                  <a href="{{ route('test-case-edit-page', { id: testCase.test_case_id }) }}">Edit</a>
+                </td>
+                <td>
+                  <a href="{{ route('test-case-remove', { id: testCase.test_case_id }) }}">Remove</a>
+                </td>
+                @endif
+              @endif
+            </tr>
+          @endeach
+          @else
+          <tr>
+            <td>Empty</td>
+          </tr>
+          @endif
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+@endsection

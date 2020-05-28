@@ -22,6 +22,18 @@ class DashboardService {
 
     return { projects: projectsData };
   }
+
+  async searchData(query) {
+    const projectsData = await Database
+      .select(
+        'projects.id',
+        'projects.title',
+        'projects.description'
+      ).from('projects')
+      .where('projects.title', 'LIKE', `%${query}%`);
+
+    return { projects: projectsData };
+  }
 }
 
 module.exports = new DashboardService();

@@ -67,6 +67,9 @@ Route.get('/logout', 'AuthController.logout')
 Route.group(() => {
   Route.get('/:page?', 'DashboardController.index')
     .as('dashboard');
+
+  Route.post('/project/search', 'DashboardController.search')
+    .as('project-search');
 })
   .middleware(['admin'])
   .prefix('dashboard');
@@ -87,6 +90,9 @@ Route.group(() => {
   Route.get('/edit/:id?', 'ProjectController.editPage')
     .middleware(['pm'])
     .as('project-edit');
+
+  Route.post('search', 'ProjectController.search')
+    .as('test-case-search')
 
   Route.post('store', 'ProjectController.store')
     .validator(['ProjectStore'])

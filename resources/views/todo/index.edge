@@ -56,48 +56,48 @@
       </div>
       @endif
     </div>
+    <nav class="pagination is-centered" role="navigation" aria-label="pagination">
+      <ul class="pagination-list">
+        <li>
+          <a href="{{ route('todo', { page: 1 }) }}" class="pagination-link">
+            First page
+          </a>
+        </li>
+        <li>
+          <span class="pagination-ellipsis">&hellip;</span>
+        </li>
+        <li>
+          @if(todos.page - 1 > 0)
+          <a href="{{ route('todo', { page: todos.page - 1 }) }}" class="pagination-link">
+            {{ todos.page - 1 }}
+          </a>
+          @else
+          <a></a>
+          @endif
+        </li>
+        <li>
+          <a href="{{ route('todo', { page: todos.page }) }}" class="pagination-link is-current">
+            {{ todos.page }}
+          </a>
+        </li>
+        <li>
+          @if((testCases.page + 1) <= testCases.lastPage)
+          <a
+            href="{{ route('todo', { page: todos.page + 1 }) }}" class="pagination-link">
+            {{ todos.page + 1 }}
+          </a>
+          @endif
+        </li>
+        <li>
+          <span class="pagination-ellipsis">&hellip;</span>
+        </li>
+        <li>
+          <a href="{{ route('todo', { page: todos.lastPage }) }}" class="pagination-link">
+            Last page
+          </a>
+        </li>
+      </ul>
+    </nav>
   </div>
 </div>
-<nav class="pagination is-centered" role="navigation" aria-label="pagination">
-  <ul class="pagination-list">
-    <li>
-      <a href="{{ route('todo', { page: 1 }) }}" class="pagination-link">
-        First page
-      </a>
-    </li>
-    <li>
-      <span class="pagination-ellipsis">&hellip;</span>
-    </li>
-    <li>
-      @if(todos.page - 1 > 0)
-      <a href="{{ route('todo', { page: todos.page - 1 }) }}" class="pagination-link">
-        {{ todos.page - 1 }}
-      </a>
-      @else
-      <a></a>
-      @endif
-    </li>
-    <li>
-      <a href="{{ route('todo', { page: todos.page }) }}" class="pagination-link is-current">
-        {{ todos.page }}
-      </a>
-    </li>
-    <li>
-      @if((testCases.page + 1) <= testCases.lastPage)
-      <a
-        href="{{ route('todo', { page: todos.page + 1 }) }}" class="pagination-link">
-        {{ todos.page + 1 }}
-      </a>
-      @endif
-    </li>
-    <li>
-      <span class="pagination-ellipsis">&hellip;</span>
-    </li>
-    <li>
-      <a href="{{ route('todo', { page: todos.lastPage }) }}" class="pagination-link">
-        Last page
-      </a>
-    </li>
-  </ul>
-</nav>
 @endsection

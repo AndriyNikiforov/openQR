@@ -16,7 +16,22 @@ class ProfileService {
       .leftJoin('test_cases', 'users.id', 'test_cases.user_id')
       .first();
 
-    return { user: userData };
+    const lastProjects = await Database
+        .select(
+         'project_members.project_id',
+         'projects.title',
+         'projects.description'
+        )
+        .where('project_members.user_id', id)
+        .from('project_members')
+        .leftJoin('projects', 'project_members.project_id', 'projects.id')
+        .orderBy('projects.updated_at', 'desc')
+        .limit(3);
+
+    return {
+      user: userData,
+      lastProjects: lastProjects
+    };
   }
 
   async editPageData(id) {
