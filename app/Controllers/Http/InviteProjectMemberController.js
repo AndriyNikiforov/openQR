@@ -16,7 +16,6 @@ class InviteProjectMemberController {
   async mailForm({ view }) {
     const data = await InviteProjectMemberService
       .mailFormData();
-
     return view.render('invite_mails.form', data);
   }
 
@@ -33,6 +32,14 @@ class InviteProjectMemberController {
     await inviteMail.save();
 
     return response.route('dashboard');
+  }
+
+  async removeMail({ params, response }) {
+    const { id } = params;
+    const inviteMail = await InviteMail.find(id);
+
+    await inviteMail.delete();
+    return response.route('invite-list');
   }
 }
 

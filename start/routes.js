@@ -27,6 +27,10 @@ Route.group(() => {
   Route.get('/contact', 'StaticPageController.contact')
     .as('contact');
 
+  Route.get('/contact/messages/:page?', 'StaticPageController.contactMessage')
+    .middleware(['pm'])
+    .as('contact-messages');
+
   Route.post('send', 'StaticPageController.sendMessage')
     .validator(['ContactMessage'])
     .as('send-message');
@@ -210,7 +214,12 @@ Route.group(() => {
 
 Route.group(() => {
   Route.get('list/:page?', 'InviteProjectMemberController.index')
+    .middleware(['pm'])
     .as('invite-list');
+
+  Route.get('remove/:id?', 'InviteProjectMemberController.removeMail')
+    .middleware(['pm'])
+    .as('invite-remove');
 
   Route.get('form', 'InviteProjectMemberController.mailForm')
     .as('invite-form');
@@ -218,9 +227,7 @@ Route.group(() => {
   Route.post('send', 'InviteProjectMemberController.sendMail')
     .validator(['InviteProjectMemberCreate'])
     .as('invite-send');
-})
-  .middleware(['pm'])
-  .prefix('invite');
+}).prefix('invite');
 
 Route.group(() => {
   Route.get('/', 'BugReportController.index')

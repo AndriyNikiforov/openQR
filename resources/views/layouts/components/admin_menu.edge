@@ -29,5 +29,13 @@
     <ul class="menu-list">
       <li><a href={{ route('todo') }}>List</a></li>
     </ul>
+    @if(auth.user.role_id == 3)
+      <p class="menu-label">
+        Contact messages
+      </p>
+      <ul class="menu-list">
+        <li><a href={{ route('contact-messages') }}>List</a></li>
+      </ul>
+    @endif
   </aside>
 </section>

@@ -6,11 +6,6 @@
     @include('layouts.components.admin_menu')
   </div>
   <div class="column is-9">
-    <nav class="breadcrumb" aria-label="breadcrumbs">
-      <ul>
-        <li><a href="{{ route('project-members-fast-create-page', { id: project.id }) }}">Add project member</a></li>
-      </ul>
-    </nav>
     <div class="container">
       <div class="container">
         <div class="column is-6 is-offset-3">
@@ -29,8 +24,8 @@
                           {{ mail.user_name }}
                           {{ mail.email }}
                         </div>
-                        <a href="#" class="card-header-icon">
-                          <i class="far fa-plus-square"></i>
+                        <a href="{{ route('invite-remove', { id: mail.inv_mails_id }) }}" class="card-header-icon">
+                          <i class="fas fa-trash"></i>
                         </a>
                       </div>
                       <div class="card-content">
@@ -41,7 +36,9 @@
                           <b>Project:</b>
                         </div>
                         <div class="card-footer-item">
-                          {{ mail.title }}
+                          <a href="{{ route('project-members-fast-create-page', { id: mail.project_id }) }}">
+                            Add member to {{ mail.title }} project
+                          </a>
                         </div>
                       </div>
                     </div>

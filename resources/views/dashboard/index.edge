@@ -11,6 +11,7 @@
         <li><a href="#">Projects</a></li>
       </ul>
     </nav>
+    @if(auth.user.role_id == 3)
     <nav class="panel">
       <p class="panel-heading">
         Actions
@@ -19,6 +20,7 @@
         <a href="{{ route('project-create-page') }}" style="width: 100%" class="button is-link">Create</a>
       </div>
     </nav>
+    @endif
     <table class="table is-fullwidth">
         <thead>
           <tr>
