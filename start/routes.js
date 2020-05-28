@@ -91,6 +91,9 @@ Route.group(() => {
     .middleware(['pm'])
     .as('project-edit');
 
+  Route.post('search', 'ProjectController.search')
+    .as('test-case-search')
+
   Route.post('store', 'ProjectController.store')
     .validator(['ProjectStore'])
     .as('project-store');
