@@ -1,15 +1,17 @@
 @layout('layouts.admin')
 
 @section('content')
-<section class="section is-small">
-  <div class="container">
+  <div class="columns">
+    <div class="column is-2">
+      @include('layouts.components.admin_menu')
+    </div>
     <div class="has-text-centered">
-      <div class="columns is-8 is-variable ">
-        <div class="column is-two-thirds has-text-left">
+      <div class="columns is-9 is-variable ">
+        <div class="column is-10 has-text-left">
           <h1 class="title is-2">Invite to project</h1>
           <p class="is-size-5">One mail and you have access</p>
         </div>
-        <div class="column is-one-third has-text-left">
+        <div class="column is-10 has-text-left">
           <form action="{{ route('invite-send') }}" method="POST">
             {{ csrfField() }}
             <div class="field">
@@ -70,5 +72,4 @@
       </div>
     </div>
   </div>
-</section>
 @endsection

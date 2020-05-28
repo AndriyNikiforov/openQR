@@ -1,7 +1,7 @@
 'use strict'
 
-const TestCase = use('App/Models/TestCase');
 const Database = use('Database');
+const TestCase = use('App/Models/TestCase');
 const TestCaseService = use('App/Services/TestCaseService');
 
 class TestCaseController {
