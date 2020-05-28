@@ -29,6 +29,24 @@ class ProjectService {
       testCases: testCasesData
     };
   }
+
+  async searchData(id, query) {
+    const testCaseData = await Database
+    .select(
+      'users.full_name',
+      'statuses.name as status_name',
+      'statuses.type as status_type',
+      'test_cases.id as test_case_id',
+      'test_cases.title as test_case_name',
+      'test_cases.deleted as test_case_deleted'
+    ).from('test_cases')
+      .where('test_cases.project_id', id)
+      .where('test_cases.title', 'LIKE', `%${query}%`)
+      .leftJoin('users', 'test_cases.user_id', 'users.id')
+      .leftJoin('statuses', 'test_cases.status_id', 'statuses.id');
+
+    return { testCases: testCaseData };
+  }
 }
 
 module.exports = new ProjectService();

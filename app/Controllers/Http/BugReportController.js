@@ -2,84 +2,39 @@
 
 const Database = use('Database');
 const BugReport = use('App/Models/BugReport');
+const BugReportService = use('App/Services/BugReportService');
 
 class BugReportController {
   async index({ params, view, auth }) {
     const id = auth.user.id;
     let { page } = params;
-    page = page || 1;
-    const viewData = await Database
-      .select(
-        'bug_reports.title',
-        'bug_reports.description',
-        'bug_reports.id',
-        'projects.id as project_id',
-        'projects.title as project'
-      )
-      .from('bug_reports')
-      .where('bug_reports.user_id', id)
-      .leftJoin('projects', 'bug_reports.project_id', 'projects.id')
-      .paginate(page, 8);
+    const viewData = await BugReportService
+      .list(id, page);
 
-    return view.render('bug_report.index', {
-      bugReports: viewData
-    });
+    return view.render('bug_report.index', viewData);
   }
 
   async createPage({ view }) {
-    const viewData = await Database
-      .select(
-        'projects.id',
-        'projects.title'
-      )
-      .from('projects');
+    const viewData = await BugReportService
+      .createPageData();
 
-    return view.render('bug_report.create', {
-      projects: viewData
-    });
+    return view.render('bug_report.create', viewData);
   }
 
   async updatePage({ params, view }) {
     const { id } = params;
-    const projectsData = await Database
-    .select(
-      'projects.id',
-      'projects.title'
-    ).from('projects');
-    const bugReportData = await BugReport.find(id);
+    const viewData = await BugReportService
+      .updatePageData(id);
 
-    return view.render('bug_report.update', {
-      bugReport: bugReportData,
-      projects: projectsData
-    });
+    return view.render('bug_report.update', viewData);
   }
 
   async detailPage({ params, view }) {
     const { id } = params;
-    const bugReportData = await Database
-      .select(
-        'bug_reports.text',
-        'bug_reports.title',
-        'bug_reports.project_id',
-        'bug_reports.description',
-        'users.full_name'
-      ).from('bug_reports')
-      .where('bug_reports.id', id)
-      .leftJoin('users', 'bug_reports.user_id', 'users.id')
-      .first();
+    const viewData = await BugReportService
+      .detailPageData(id);
 
-    const projectData = await Database
-      .select(
-        'projects.id',
-        'projects.title'
-      ).from('projects')
-      .where('projects.id', bugReportData.project_id)
-      .first();
-
-    return view.render('bug_report.detail', {
-      bugReport: bugReportData,
-      project: projectData
-    });
+    return view.render('bug_report.detail', viewData);
   }
 
   async store({ request, response }) {

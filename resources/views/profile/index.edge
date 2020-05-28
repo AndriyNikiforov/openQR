@@ -40,7 +40,31 @@
               </div>
             </div>
           </div>
+          @if(lastProjects.length != 0)
+          @each(project in lastProjects)
+          <br />
+          <div class="card">
+            <div class="card-header">
+              <div class="card-header-title">
+                <a href="{{ route('project', { id: project.id }) }}">
+                  Project: {{ project.title }}
+                </a>
+              </div>
+            </div>
+            <div class="card-content">
+              <div class="media">
+                <div class="media-content">
+                  <p class="title is-6">
+                    {{ project.description }}
+                  </p>
+                </div>
+              </div>
+          </div>
         </div>
+        @endeach
+        @else
+          <h3>Not found</h3>
+        @endif
       </div>
     </div>
   </div>

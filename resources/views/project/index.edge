@@ -10,6 +10,11 @@
       <ul>
         <li><a href="#">Project: {{ project.title }}</a></li>
         <li><a href="#">Created at: {{ project.created_at }}</a></li>
+        <li>
+          <a href="{{ route('project-news', { id: project.id }) }}">
+            Project news
+          </a>
+        </li>
       </ul>
     </nav>
     @if(project.deleted === 'y')
@@ -19,122 +24,130 @@
       <p class="panel-heading">
         Actions
       </p>
-      <div class="panel-block">
-        <a style="width:100%" class="button is-success" href="{{ route('project-news', { id: project.id }) }}">
-          Project news
-        </a>
-      </div>
+      <form action="{{ route('test-case-search') }}" method="POST">
+        <div class="panel-block">
+          {{ csrfField() }}
+          <input type="hidden" name="id" value="{{ project.id }}">
+          <input placeholder="Search query" class="input" type="text" name="query" style="width: 100%" value="">
+        </div>
+        <div class="panel-block">
+          <button class="button is-link" style="width: 100%" type="submit">Search</button>
+        </div>
+      </form>
       @if(auth.user.role_id == 3)
       <div class="panel-block">
-        <a style="width:100%" class="button is-success" href="{{ route('project-members', { id: project.id }) }}">
+        <a style="width:50%" class="button is-success" href="{{ route('project-members', { id: project.id }) }}">
           Project members
         </a>
-      </div>
-      @endif
-      @if(auth.user.role_id == 1)
-      <div class="panel-block">
-        <a style="width:100%" class="button is-success" href="{{ route('test-case-create-page', { id: project.id }) }}">
+        <a style="width:50%" class="button is-success" href="{{ route('test-case-create-page', { id: project.id }) }}">
           Create Test cases
         </a>
       </div>
       @endif
       @if(auth.user.role_id == 3)
       <div class="panel-block">
-        <a href="{{ route('project-edit-page', { id: project.id }) }}" style="width: 100%"
+        <a href="{{ route('project-edit-page', { id: project.id }) }}" style="width: 50%"
           class="button is-link">Project Update</a>
-      </div>
-      <div class="panel-block">
-        <a href="{{ route('project-delete', { id: project.id }) }}" style="width: 100%"
+        <a href="{{ route('project-delete', { id: project.id }) }}" style="width: 50%"
           class="button is-danger">Project Remove</a>
       </div>
       @endif
     </nav>
     @endif
     <div class="columns is-multiline">
-      @if(testCases.data.length != 0)
-      @each(testCase in testCases.data)
-      <div class="column is-4">
-        <div class="card">
-          <div class="card-header {{ (testCase.test_case_deleted === 'y') ? 'disabled-element' : '' }}">
-            <div class="card-header-title">
-              <a href="{{ route('test-case', { id: testCase.test_case_id }) }}">Test case:
-                {{ testCase.test_case_name }}</a>
-            </div>
-            <div class="panel">
+      <table class="table is-fullwidth">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Title</th>
+            <th>Qa name</th>
+            <th>Edit</th>
+            <th>Remove</th>
+          </tr>
+        </thead>
+        <tfoot>
+          <tr>
+            <th>#</th>
+            <th>Title</th>
+            <th>Qa name</th>
+            <th>Edit</th>
+            <th>Remove</th>
+          </tr>
+        </tfoot>
+        <tbody>
+          @if(testCases.data.length != 0)
+          @each(testCase in testCases.data)
+            <tr class="{{ (testCase.test_case_deleted === 'y') ? 'disabled-element' : '' }}">
+              <th>{{ testCase.test_case_id }}</th>
+              <td>
+                <a href="{{ route('test-case', { id: testCase.test_case_id }) }}">
+                  {{ testCase.test_case_name }}</a>
+              </td>
+              <td>
+                <a href="#"><b>{{ testCase.full_name }}</b></a>
+              </td>
               @if(testCase.test_case_deleted === 'y')
-                <div></div>
+                <td></td>
+                <td></td>
               @else
-              <div class="panel-block">
-                <a href="{{ route('test-case-edit-page', { id: testCase.test_case_id }) }}">Edit</a>
-              </div>
-              <div class="panel-block">
-                <a href="{{ route('test-case-remove', { id: testCase.test_case_id }) }}">Remove</a>
-              </div>
+                <td>
+                  <a href="{{ route('test-case-edit-page', { id: testCase.test_case_id }) }}">Edit</a>
+                </td>
+                <td>
+                  <a href="{{ route('test-case-remove', { id: testCase.test_case_id }) }}">Remove</a>
+                </td>
               @endif
-            </div>
-          </div>
-          <div class="card-content">
-            <div class="media">
-              <div class="media-content">
-                <p class="title is-6">
-                  Qa: <a href="#"><b>{{ testCase.full_name }}</b></a>
-                </p>
-              </div>
-            </div>
-            <div class="content">
-            </div>
-          </div>
-        </div>
-      </div>
-      @endeach
-      @else
-      <div class="column has-text-centered">
-        <h3 class="title is-3">Not found</h3>
-      </div>
-      @endif
-    </div>
+            </tr>
+          @endeach
+          @else
+          <tr>
+            <td>Empty</td>
+          </tr>
+          @endif
+        </tbody>
+      </table>
   </div>
+  <nav class="pagination is-centered" role="navigation" aria-label="pagination">
+    <ul class="pagination-list">
+      <li>
+        <a href="{{ route('project', { page: 1 }) }}" class="pagination-link">
+          First page
+        </a>
+      </li>
+      <li>
+        <span class="pagination-ellipsis">&hellip;</span>
+      </li>
+      <li>
+        @if(testCases.page - 1 > 0)
+        <a href="{{ route('project', { page: testCases.page - 1, id: project.id }) }}" class="pagination-link">
+          {{ testCases.page - 1 }}
+        </a>
+        @else
+        <a></a>
+        @endif
+      </li>
+      <li>
+        <a href="{{ route('project', { page: testCases.page, id: project.id }) }}" class="pagination-link is-current">
+          {{ testCases.page }}
+        </a>
+      </li>
+      <li>
+        @if((testCases.page + 1) <= testCases.lastPage)
+        <a
+          href="{{ route('project', { page: testCases.page + 1, id: project.id }) }}" class="pagination-link">
+          {{ testCases.page + 1 }}
+        </a>
+        @endif
+      </li>
+      <li>
+        <span class="pagination-ellipsis">&hellip;</span>
+      </li>
+      <li>
+        <a href="{{ route('project', { page: testCases.lastPage, id: project.id }) }}" class="pagination-link">
+          Last page
+        </a>
+      </li>
+    </ul>
+  </nav>
 </div>
-<nav class="pagination is-centered" role="navigation" aria-label="pagination">
-  <ul class="pagination-list">
-    <li>
-      <a href="{{ route('project', { page: 1 }) }}" class="pagination-link">
-        First page
-      </a>
-    </li>
-    <li>
-      <span class="pagination-ellipsis">&hellip;</span>
-    </li>
-    <li>
-      @if(testCases.page - 1 > 0)
-      <a href="{{ route('project', { page: testCases.page - 1, id: project.id }) }}" class="pagination-link">
-        {{ testCases.page - 1 }}
-      </a>
-      @else
-      <a></a>
-      @endif
-    </li>
-    <li>
-      <a href="{{ route('project', { page: testCases.page, id: project.id }) }}" class="pagination-link is-current">
-        {{ testCases.page }}
-      </a>
-    </li>
-    <li>
-      @if((testCases.page + 1) <= testCases.lastPage)
-      <a
-        href="{{ route('project', { page: testCases.page + 1, id: project.id }) }}" class="pagination-link">
-        {{ testCases.page + 1 }}
-      </a>
-      @endif
-    </li>
-    <li>
-      <span class="pagination-ellipsis">&hellip;</span>
-    </li>
-    <li>
-      <a href="{{ route('project', { page: testCases.lastPage, id: project.id }) }}" class="pagination-link">
-        Last page
-      </a>
-    </li>
-  </ul>
-</nav>
 @endsection

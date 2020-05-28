@@ -1,5 +1,6 @@
 'use strict'
 
+const Project = use('App/Models/Project');
 const Database = use('Database');
 
 class ProjectMemberService {
@@ -31,13 +32,7 @@ class ProjectMemberService {
   }
 
   async createPageData() {
-    const projectsData = await Database
-      .select(
-        'projects.id',
-        'projects.title'
-      )
-      .from('projects');
-
+    const projectsData = await Project.all();
     const usersData = await Database
       .select(
         'users.id',

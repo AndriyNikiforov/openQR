@@ -1,5 +1,6 @@
 'use strict'
 
+const Database = use('Database');
 const ContactMessage = use('App/Models/ContactMessage');
 
 class StaticPageController {
@@ -13,6 +14,19 @@ class StaticPageController {
 
   async contact({ view }) {
     return view.render('main.contact');
+  }
+
+  async contactMessage({ params, view }) {
+    let { page } = params;
+    page = page || 1;
+    const contactMessages = await Database
+      .select('*')
+      .from('contact_messages')
+      .paginate(page, 5);
+
+    return view.render('contact_messages.index', {
+      contactMessages: contactMessages
+    });
   }
 
   async sendMessage({ request, response }) {

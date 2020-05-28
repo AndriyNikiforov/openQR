@@ -18,7 +18,18 @@ class ProjectController {
     return view.render('project.create');
   }
 
-  async editPage({ params, view, response }) {
+  async search({ request, view }) {
+    const data = request.only([
+      'id',
+      'query'
+    ]);
+    const viewData = await ProjectService
+      .searchData(data.id, data.query);
+
+    return view.render('project.search', viewData);
+  }
+
+  async editPage({ params, view }) {
     const { id } = params;
     const projectData = await Project.find(id);
     projectData.created_at = dayjs(projectData.created_at)
