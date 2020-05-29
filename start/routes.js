@@ -206,6 +206,9 @@ Route.group(() => {
   Route.get('/page/update/:id?', 'TodoController.updatePage')
     .as('todo-update-page')
 
+  Route.post('/search/:query?', 'TodoController.search')
+    .as('todo-search');
+
   Route.post('/store', 'TodoController.create')
     .validator(['TodoCreate'])
     .as('todo-store');
