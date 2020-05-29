@@ -6,11 +6,6 @@
     @include('layouts.components.admin_menu')
   </div>
   <div class="column is-9">
-    <nav class="breadcrumb" aria-label="breadcrumbs">
-      <ul>
-
-      </ul>
-    </nav>
     <nav class="panel">
       <p class="panel-heading">
         Actions
@@ -21,8 +16,8 @@
       </div>
     </nav>
     <div class="columns is-multiline">
-      @if(projectComments.length != 0)
-      @each(projectComment in projectComments)
+      @if(projectComments.data.length != 0)
+      @each(projectComment in projectComments.data)
       <div class="column is-4">
         <div class="card">
           <div class="card-header">
@@ -33,6 +28,9 @@
             <div class="panel">
               <div class="panel-block">
                 <a href="{{ route('project-news-remove', { id: projectComment.pc_id }) }}">Remove</a>
+              </div>
+              <div class="panel-block">
+                <a href="{{ route('project-news-update-page', { id: projectComment.pc_id }) }}">Update</a>
               </div>
             </div>
           </div>
@@ -59,4 +57,47 @@
     </div>
   </div>
 </div>
+<br />
+<nav class="pagination is-centered" role="navigation" aria-label="pagination">
+  <ul class="pagination-list">
+    <li>
+      <a href="{{ route('project-news', { id: project_id, page: 1 }) }}" class="pagination-link">
+        First page
+      </a>
+    </li>
+    <li>
+      <span class="pagination-ellipsis">&hellip;</span>
+    </li>
+    <li>
+      @if(projectComments.page - 1 > 0)
+      <a href="{{ route('project-news', { id: project_id, page: projectComments.page - 1 }) }}" class="pagination-link">
+        {{ projectComments.page - 1 }}
+      </a>
+      @else
+      <a></a>
+      @endif
+    </li>
+    <li>
+      <a href="{{ route('project-news', { id: project_id, page: projectComments.page }) }}" class="pagination-link is-current">
+        {{ projectComments.page || 1 }}
+      </a>
+    </li>
+    <li>
+      @if((projectComments.page + 1) <= projectComments.lastPage)
+      <a
+        href="{{ route('project-news', { id: project_id, page: projectComments.page + 1 }) }}" class="pagination-link">
+        {{ projectComments.page + 1 }}
+      </a>
+      @endif
+    </li>
+    <li>
+      <span class="pagination-ellipsis">&hellip;</span>
+    </li>
+    <li>
+      <a href="{{ route('project-news', { id: project_id, page: projectComments.lastPage }) }}" class="pagination-link">
+        Last page
+      </a>
+    </li>
+  </ul>
+</nav>
 @endsection
