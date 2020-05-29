@@ -47,6 +47,14 @@ class ProjectService {
 
     return { testCases: testCaseData };
   }
+
+  async editPageData(id) {
+    const projectData = await Project.find(id);
+    projectData.created_at = dayjs(projectData.created_at)
+      .format('YYYY-DD-MM');
+
+    return { project: projectData };
+  }
 }
 
 module.exports = new ProjectService();

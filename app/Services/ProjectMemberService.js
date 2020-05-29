@@ -15,10 +15,10 @@ class ProjectMemberService {
 
     const projectMembersData = await Database
       .select(
-        'project_members.id',
-        'users.full_name',
         'users.email',
-        'roles.title'
+        'roles.title',
+        'users.full_name',
+        'project_members.id'
       )
       .from('project_members')
       .where('project_members.project_id', id)
