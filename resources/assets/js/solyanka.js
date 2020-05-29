@@ -66,6 +66,19 @@ $(document).ready(() => {
       .save();
   });
 
+  $('#to-stat-pdf').click((e) => {
+    e.preventDefault();
+
+    const elementHTML = document.getElementById('stat-content');
+    htmlToPdf()
+      .set({
+        filename: 'Statistic',
+        html2canvas: { scale: 4 }
+      })
+      .from(elementHTML)
+      .save();
+  });
+
   if($('#editor').length != 0) {
   ClassicEditor
     .create(document.querySelector('#editor'))
