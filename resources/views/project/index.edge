@@ -15,6 +15,11 @@
             Project news
           </a>
         </li>
+        <li>
+          <a href="{{ route('stat-project', { id: project.id }) }}">
+            Project statistic
+          </a>
+        </li>
       </ul>
     </nav>
     @if(project.deleted === 'y')
@@ -41,7 +46,7 @@
           Project members
         </a>
         @endif
-        @if(aurh.user.role_id == 1)
+        @if(auth.user.role_id == 1)
         <a style="width:100%" class="button is-success" href="{{ route('test-case-create-page', { id: project.id }) }}">
           Create Test cases
         </a>

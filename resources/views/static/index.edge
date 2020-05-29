@@ -1,0 +1,48 @@
+@layout('layouts.admin')
+
+@section('content')
+<div class="columns">
+  <div class="column is-2">
+    @include('layouts.components.admin_menu')
+  </div>
+  <div class="column is-9">
+    <nav class="breadcrumb" aria-label="breadcrumbs">
+      <ul>
+        <a href="#">Statics</a>
+      </ul>
+    </nav>
+    <div class="columns is-multiline">
+        <div class="column is-3">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-header-title">
+                Statistic information
+              </div>
+            </div>
+            <div class="card-content">
+              <div class="media">
+                <div class="media-content">
+                  <p class="title is-6">
+                    <h3>All: {{ countAll }}</h3>
+                  </p>
+                  <p class="title is-6">
+                    <h3>Success: {{ coyntSuccess || 0 }} %</h3>
+                  </p>
+                  <p class="title is-6">
+                    <h3>Failed: {{ countFailed || 0 }} %</h3>
+                  </p>
+                  <p class="title is-6">
+                    <h3>Future: {{ countFuture || 0 }} %</h3>
+                  </p>
+                  <p class="title is-6">
+                    <h3>In progress: {{ countInProgress || 0 }} %</h3>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
+@endsection
