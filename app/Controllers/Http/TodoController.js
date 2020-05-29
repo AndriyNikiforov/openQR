@@ -81,7 +81,7 @@ class TodoController {
     todo.merge({ deleted_at: 'y' });
     await todo.save();
 
-    return response.route('todo')
+    return response.route('todo');
   }
 }
 

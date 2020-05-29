@@ -54,7 +54,6 @@ class SecurityErrorController {
       'title',
       'user_id'
     ]);
-
     const securityError = new SecurityError();
 
     securityError.fill(data);

@@ -14,9 +14,9 @@ class InviteProjectMemberController {
   }
 
   async mailForm({ view }) {
-    const data = await InviteProjectMemberService
+    const viewData = await InviteProjectMemberService
       .mailFormData();
-    return view.render('invite_mails.form', data);
+    return view.render('invite_mails.form', viewData);
   }
 
   async sendMail({ request, response }) {

@@ -6,7 +6,8 @@ const ProjectMemberService = use('App/Services/ProjectMemberService');
 class ProjectMemberController {
   async index({ params, view }) {
     const { id } = params;
-    const viewData = await ProjectMemberService.list(id);
+    const viewData = await ProjectMemberService
+      .list(id);
 
     return view.render('project_member.index', viewData);
   }
@@ -43,7 +44,8 @@ class ProjectMemberController {
 
   async remove({ params, response }) {
     const { id } = params;
-    const projectMember = await ProjectMember.find(id);
+    const projectMember = await ProjectMember
+      .find(id);
 
     await projectMember.delete();
     return response.route('back')

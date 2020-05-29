@@ -7,7 +7,8 @@ const TestCaseService = use('App/Services/TestCaseService');
 class TestCaseController {
   async index({ params, view }) {
     const { id } = params;
-    const viewData = await TestCaseService.list(id);
+    const viewData = await TestCaseService
+      .list(id);
 
     return view.render('test_case.index', viewData);
   }
@@ -25,7 +26,7 @@ class TestCaseController {
       .select('*')
       .from('statuses');
 
-    return  response.json({
+    return response.json({
       projects: projectsData,
       statuses: statusesData
     });
@@ -72,7 +73,8 @@ class TestCaseController {
       'project_id',
       'description'
     ]);
-    const testCase = await TestCase.find(testCaseData.id);
+    const testCase = await TestCase
+      .find(testCaseData.id);
 
     testCase.merge(testCaseData);
     await testCase.save();
@@ -84,7 +86,8 @@ class TestCaseController {
 
   async delete({ params, response }) {
     const { id } = params;
-    const testCase = await TestCase.find(id);
+    const testCase = await TestCase
+      .find(id);
 
     await testCase.delete();
     return response.route('back');

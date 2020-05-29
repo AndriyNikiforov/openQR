@@ -1,9 +1,8 @@
 'use strict'
 
-const dayjs = require('dayjs');
 const Project = use('App/Models/Project');
-const ProjectService = use('App/Services/ProjectService');
 const ProjectMember = use('App/Models/ProjectMember');
+const ProjectService = use('App/Services/ProjectService');
 
 class ProjectController {
   async index({ params, view }) {
@@ -31,13 +30,10 @@ class ProjectController {
 
   async editPage({ params, view }) {
     const { id } = params;
-    const projectData = await Project.find(id);
-    projectData.created_at = dayjs(projectData.created_at)
-    .format('YYYY-DD-MM');
+    const viewData = await ProjectService
+      .editPageData(id);
 
-    return view.render('project.edit', {
-      project: projectData
-    });
+    return view.render('project.edit', viewData);
   }
 
   async store({ request, response, auth }) {
