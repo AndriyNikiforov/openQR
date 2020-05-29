@@ -27,6 +27,7 @@
                     </option>
                     @endeach
                   </select>
+                  {{ elIf('<p class="help is-danger">$self</p>', getErrorFor('project_id'), hasErrorFor('project_id')) }}
                 </div>
               </div>
             </div>
@@ -41,6 +42,7 @@
                       </option>
                     @endeach
                   </select>
+                  {{ elIf('<p class="help is-danger">$self</p>', getErrorFor('user_id'), hasErrorFor('user_id')) }}
                 </div>
               </div>
             </div>
