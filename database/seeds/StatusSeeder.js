@@ -10,7 +10,6 @@
 |
 */
 
-const Factory = use('Factory')
 const Database = use('Database');
 
 class StatusSeeder {
