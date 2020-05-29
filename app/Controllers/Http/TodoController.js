@@ -2,27 +2,16 @@
 
 const Todo = use('App/Models/Todo');
 const Database = use('Database');
+const TodoService = use('App/Services/TodoService');
 
 class TodoController {
   async index({ view, params, auth }) {
     const id = auth.user.id;
     let { page } = params;
-    page = page || 1;
+    const viewData = await TodoService
+      .list(page, id);
 
-    const todosData = await Database
-      .select(
-        'todos.id',
-        'todos.title',
-        'todos.text',
-        'todos.deleted_at'
-      ).from('todos')
-      .where('todos.user_id', id)
-      .whereNot('todos.deleted_at', 'y')
-      .paginate(page, 8);
-
-    return view.render('todo.index', {
-      todos: todosData
-    });
+    return view.render('todo.index', viewData);
   }
 
   async createPage({ view }) {
@@ -31,25 +20,25 @@ class TodoController {
 
   async updatePage({ params, view }) {
     const { id } = params;
-    const todoData = await Database
-      .select(
-        'todos.id',
-        'todos.title',
-        'todos.text'
-      )
-      .from('todos')
-      .where('todos.id', id)
-      .first();
+    const viewData = await TodoService
+      .editPageData(id);
 
-    return view.render('todo.edit', {
-      todo: todoData
-    });
+    return view.render('todo.edit', viewData);
+  }
+
+  async search({ request, view, auth }) {
+    const data = request.only(['query']);
+    const id = auth.user.id;
+    const viewData = await TodoService
+      .searchData(id, data.query);
+
+    return view.render('todo.search', viewData);
   }
 
   async create({ request, response, auth }) {
     const todoData = request.only([
-      'title',
-      'text'
+      'text',
+      'title'
     ]);
     todoData.user_id = auth.user.id;
     const todo = new Todo();
@@ -62,9 +51,9 @@ class TodoController {
 
   async update({ request, response }) {
     const todoData = request.only([
-      'title',
+      'id',
       'text',
-      'id'
+      'title'
     ]);
     const todo = await Todo.find(todoData.id);
 
@@ -81,7 +70,7 @@ class TodoController {
     todo.merge({ deleted_at: 'y' });
     await todo.save();
 
-    return response.route('todo')
+    return response.route('todo');
   }
 }
 

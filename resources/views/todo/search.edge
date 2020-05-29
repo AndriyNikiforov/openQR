@@ -1,0 +1,68 @@
+@layout('layouts.admin')
+
+@section('content')
+<div class="columns">
+  <div class="column is-2">
+    @include('layouts.components.admin_menu')
+  </div>
+  <div class="column is-9">
+    <nav class="panel">
+      <p class="panel-heading">
+        Search resault
+      </p>
+    </nav>
+    <div class="columns is-multiline">
+      <table class="table is-fullwidth">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Title</th>
+            <th>Text</th>
+            <th>Remove</th>
+            <th>Update</th>
+          </tr>
+        </thead>
+        <tfoot>
+          <tr>
+            <th>#</th>
+            <th>Title</th>
+            <th>Text</th>
+            <th>Remove</th>
+            <th>Update</th>
+          </tr>
+        </tfoot>
+        <tbody>
+          @if(todosData.length != 0)
+          @each(todoData in todosData)
+            <tr class="{{ (todoData.deletd_at === 'y') ? 'disabled-element' : '' }}">
+              <th>{{ todoData.id }}</th>
+              <td>
+                {{ todoData.title }}
+              </td>
+              <td>
+                <a href="#"><b>{{ todoData.text }}</b></a>
+              </td>
+              @if(todoData.deleted_at === 'y')
+                <td></td>
+                <td></td>
+              @else
+                <td>
+                  <a href="{{ route('todo-update-page', { id: todoData.id }) }}">Edit</a>
+                </td>
+                <td>
+                  <a href="{{ route('todo-remove', { id: todoData.id }) }}">Remove</a>
+                </td>
+              @endif
+            </tr>
+          @endeach
+          @else
+          <tr>
+            <td>Empty</td>
+          </tr>
+          @endif
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+@endsection

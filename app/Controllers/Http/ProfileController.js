@@ -23,8 +23,8 @@ class ProfileController {
   async update({ request, response, auth }) {
     const id = auth.user.id;
     const userData = request.only([
-      'full_name',
-      'email'
+      'email',
+      'full_name'
     ]);
     const user = await User.find(id);
 

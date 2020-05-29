@@ -206,6 +206,9 @@ Route.group(() => {
   Route.get('/page/update/:id?', 'TodoController.updatePage')
     .as('todo-update-page')
 
+  Route.post('/search/:query?', 'TodoController.search')
+    .as('todo-search');
+
   Route.post('/store', 'TodoController.create')
     .validator(['TodoCreate'])
     .as('todo-store');
@@ -266,17 +269,24 @@ Route.group(() => {
 }).prefix('bug-report');
 
 Route.group(() => {
-  Route.get('/:id?', 'ProjectNewController.index')
+  Route.get('/:id?/:page?', 'ProjectNewsController.index')
     .as('project-news');
 
-  Route.get('/page/create/:project_id?', 'ProjectNewController.createPage')
+  Route.get('/page/create/:project_id?', 'ProjectNewsController.createPage')
     .as('project-news-create-page');
 
-  Route.post('/store', 'ProjectNewController.store')
+  Route.get('/page/update/:id?', 'ProjectNewsController.updatePage')
+    .as('project-news-update-page');
+
+  Route.post('/store', 'ProjectNewsController.store')
     .validator(['ProjectCommentCreate'])
     .as('project-news-store');
 
-  Route.get('/remove/:id?', 'ProjectNewController.remove')
+  Route.post('/update', 'ProjectNewsController.update')
+    .validator(['ProjectCommentUpdate'])
+    .as('project-news-update');
+
+  Route.get('/remove/:id?', 'ProjectNewsController.remove')
     .as('project-news-remove');
 }).prefix('project-news')
 

@@ -1,15 +1,14 @@
 @layout('layouts.admin')
 
 @section('content')
-<section class="section is-small">
-  <div class="container">
-    <div class="has-text-centered">
-      <div class="columns is-8 is-variable ">
-        <div class="column is-two-thirds has-text-left">
-          <h1 class="title is-2">Invite to project</h1>
-          <p class="is-size-5">One mail and you have access</p>
-        </div>
-        <div class="column is-one-third has-text-left">
+<div class="columns">
+  <div class="column is-2">
+    @include('layouts.components.admin_menu')
+  </div>
+  <div class="column is-9">
+    <div class="section">
+      <div class="container">
+        <div class="column is-5 is-offset-3">
           <form action="{{ route('invite-send') }}" method="POST">
             {{ csrfField() }}
             <div class="field">
@@ -51,9 +50,9 @@
                   <div class="select is-primary">
                     <select name="user_id">
                       @each(item in users)
-                        <option value="{{ item.user_id }}">
-                          {{ item.full_name }}
-                        </option>
+                      <option value="{{ item.user_id }}">
+                        {{ item.full_name }}
+                      </option>
                       @endeach
                     </select>
                   </div>
@@ -70,5 +69,4 @@
       </div>
     </div>
   </div>
-</section>
-@endsection
+  @endsection

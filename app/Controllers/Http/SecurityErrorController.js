@@ -12,9 +12,9 @@ class SecurityErrorController {
       .select(
         'users.full_name',
         'security_errors.id',
-        'security_errors.title',
         'security_errors.text',
-        'security_errors.score'
+        'security_errors.score',
+        'security_errors.title'
       )
       .from('security_errors')
       .leftJoin('users', 'users.id', 'security_errors.user_id')
@@ -54,7 +54,6 @@ class SecurityErrorController {
       'title',
       'user_id'
     ]);
-
     const securityError = new SecurityError();
 
     securityError.fill(data);

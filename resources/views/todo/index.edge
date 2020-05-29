@@ -20,6 +20,15 @@
           Create
         </a>
       </div>
+      <form action="{{ route('todo-search') }}" method="POST">
+        <div class="panel-block">
+          {{ csrfField() }}
+          <input placeholder="Search query" class="input" type="text" name="query" style="width: 100%" value="">
+        </div>
+        <div class="panel-block">
+          <button class="button is-link" style="width: 100%" type="submit">Search</button>
+        </div>
+      </form>
     </nav>
     <div class="columns is-multiline">
       @if(todos.data.length != 0)

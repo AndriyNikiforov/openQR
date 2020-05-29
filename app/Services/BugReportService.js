@@ -8,9 +8,9 @@ class BugReportService {
     page = page || 1;
     const viewData = await Database
       .select(
+        'bug_reports.id',
         'bug_reports.title',
         'bug_reports.description',
-        'bug_reports.id',
         'projects.id as project_id',
         'projects.title as project'
       )

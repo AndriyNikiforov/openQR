@@ -18,9 +18,9 @@ class ProfileService {
 
     const lastProjects = await Database
         .select(
-         'project_members.project_id',
          'projects.title',
-         'projects.description'
+         'projects.description',
+         'project_members.project_id'
         )
         .where('project_members.user_id', id)
         .from('project_members')
