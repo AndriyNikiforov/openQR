@@ -1,6 +1,5 @@
 'use strict'
 
-const Database = use('Database');
 const BugReport = use('App/Models/BugReport');
 const BugReportService = use('App/Services/BugReportService');
 
