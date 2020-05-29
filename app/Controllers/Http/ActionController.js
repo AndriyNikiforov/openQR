@@ -1,7 +1,6 @@
 'use strict'
 
 const Action = use('App/Models/Action');
-const Database = use('Database');
 
 class ActionController {
   async createPage({ params, view }) {

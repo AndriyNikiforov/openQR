@@ -1,7 +1,6 @@
 'use strict'
 
 const Todo = use('App/Models/Todo');
-const Database = use('Database');
 const TodoService = use('App/Services/TodoService');
 
 class TodoController {

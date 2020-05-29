@@ -319,3 +319,8 @@ Route.group(() => {
     .middleware(['qa'])
     .as('security-error-remove');
 }).prefix('security-error');
+
+Route.group(() => {
+  Route.get('project/:id', 'StatisticController.projectStat')
+    .as('stat-project')
+}).prefix('statistic');
