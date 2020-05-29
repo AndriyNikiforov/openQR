@@ -22,27 +22,27 @@
               <label class="label">Title</label>
               <div class="control">
                 <input class="input" name="title" value="{{ project.title }}" type="text">
+                {{ elIf('<p class="help is-danger">$self</p>', getErrorFor('title'), hasErrorFor('title')) }}
               </div>
             </div>
             <div class="field">
               <label class="label">Description</label>
               <div class="control">
                 <textarea name="description" class="textarea">{{ project.description }}</textarea>
+                {{ elIf('<p class="help is-danger">$self</p>', getErrorFor('description'), hasErrorFor('description')) }}
               </div>
             </div>
             <div class="field">
               <label class="label">Technical info</label>
               <div class="control">
                 <textarea name="technical_info" class="textarea">{{ project.technical_info }}</textarea>
+                {{ elIf('<p class="help is-danger">$self</p>', getErrorFor('technical_info'), hasErrorFor('technical_info')) }}
               </div>
             </div>
             <br>
             <div class="field is-grouped">
               <div class="control">
                 <button type="submit" class="button is-link">Update</button>
-              </div>
-              <div class="control">
-                <button type="button" class="button is-link is-light">Cancel</button>
               </div>
             </div>
           </form>
