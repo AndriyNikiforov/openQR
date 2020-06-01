@@ -19,7 +19,7 @@
             <div class="field">
               <label class="label">Email</label>
               <div class="control has-icons-left">
-                <input value="{{ old('email', '') }}" name="email" class="input" type="text">
+                <input value="{{ old('email', auth.user.email) }}" name="email" class="input" type="text">
                 <span class="icon is-small is-left">
                   <i class="fas fa-envelope"></i>
                 </span>
