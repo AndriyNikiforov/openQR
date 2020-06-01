@@ -18,7 +18,7 @@ class ProfileService {
 
     const lastProjects = await Database
       .select(
-        'projects.title',
+       'projects.title',
        'projects.description',
        'project_members.project_id'
       )
