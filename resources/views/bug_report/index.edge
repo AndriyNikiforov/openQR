@@ -57,12 +57,19 @@
                 {{ bugReport.project }}
               </a>
             </td>
+            @if(auth.user.role_id != 3)
             <td>
               <a href="{{ route('bug-report-update-page', { id: bugReport.id }) }}">Edit</a>
             </td>
             <td>
               <a href="{{ route('bug-report-remove', { id: bugReport.id }) }}">Remove</a>
             </td>
+            @else
+            <td>
+            </td>
+            <td>
+            </td>
+            @endif
             <td>
               <a href="{{ route('bug-report-detail-page', { id: bugReport.id }) }}">
                 Detail
