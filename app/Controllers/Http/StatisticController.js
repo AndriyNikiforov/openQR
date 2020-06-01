@@ -16,25 +16,30 @@ class StatisticController {
       .groupBy('statuses.id', 'test_cases.id');
 
     const countAll = chartData.length;
-    const countSuccess = chartData
+    let countSuccess = chartData
       .filter(item => item.status_type == 'is-success')
       .length;
-    const countFailed = chartData
+    let countFailed = chartData
       .filter(item => item.status_type == 'is-danger')
       .length;
-    const countInProgress = chartData
+    let countInProgress = chartData
         .filter(item => item.status_type == 'is-warning')
         .length;
-    const countFuture = chartData
+    let countFuture = chartData
         .filter(item => item.status_type == 'is-info')
         .length;
 
+    countFuture = ((countFuture / countAll) * 100).toFixed(1);
+    countFailed = ((countFailed / countAll) * 100).toFixed(1);
+    countSuccess = ((countSuccess / countAll) * 100).toFixed(1);
+    countInProgress = ((countInProgress / countAll) * 100).toFixed(1);
+
     return view.render('static.index', {
       countAll: countAll,
-      countFuture: ((countFuture / countAll) * 100).toFixed(1),
-      countFailed: ((countFailed / countAll) * 100).toFixed(1),
-      countSuccess: ((countSuccess / countAll) * 100).toFixed(1),
-      countInProgress: ((countInProgress / countAll) * 100).toFixed(1)
+      countFuture: (isNaN(countFuture)) ? 0 : countFuture,
+      countFailed: (isNaN(countFailed)) ? 0 : countFailed,
+      countSuccess: (isNaN(countSuccess)) ? 0 : countSuccess,
+      countInProgress: (isNaN(countInProgress)) ? 0 : countInProgress
     });
   }
 }
