@@ -42,8 +42,8 @@ class BugReportService {
     const bugReportData = await BugReport.find(id);
 
     return {
-      bugReport: bugReportData,
-      projects: projectsData
+      projects: projectsData,
+      bugReport: bugReportData
     };
   }
 
@@ -69,8 +69,8 @@ class BugReportService {
       .first();
 
     return {
-      bugReport: bugReportData,
-      project: projectData
+      project: projectData,
+      bugReport: bugReportData
     };
   }
 }

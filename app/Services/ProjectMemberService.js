@@ -43,8 +43,8 @@ class ProjectMemberService {
       .leftJoin('roles', 'users.role_id', 'roles.id');
 
     return {
-      projects: projectsData,
-      users: usersData
+      users: usersData,
+      projects: projectsData
     };
   }
 
@@ -65,8 +65,8 @@ class ProjectMemberService {
       .leftJoin('roles', 'users.role_id', 'roles.id');
 
     return {
-      project: projectData,
-      users: usersData
+      users: usersData,
+      project: projectData
     };
   }
 }
