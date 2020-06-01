@@ -16,8 +16,10 @@
         Actions
       </p>
       <div class="panel-block">
+        @if(auth.user.role_id != 3)
         <a href="{{ route('bug-report-create-page') }}" style="width: 100%"
           class="button is-link">Create report</a>
+        @endif
       </div>
     </nav>
     <div class="columns is-multiline">
