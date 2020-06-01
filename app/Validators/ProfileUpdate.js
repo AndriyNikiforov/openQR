@@ -3,7 +3,7 @@
 class ProfileUpdate {
   get rules () {
     return {
-      email: 'required|email|unique:users,email',
+      email: 'required|email',
       full_name: 'required|string|min:2',
     }
   }
@@ -16,7 +16,6 @@ class ProfileUpdate {
     return {
       'email.required': 'You must provide a email address',
       'email.email': 'You must provide a valid email address',
-      'email.unique': 'You must provide a unique email address',
       'full_name.required': 'You must provide a full name',
       'full_name.min': 'You must provide a valid size full name',
     };
