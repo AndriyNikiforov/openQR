@@ -31,7 +31,8 @@ class TestCaseService {
         'actions.actions_desc',
         'actions.test_case_id'
       ).from('actions')
-      .where('actions.test_case_id', id);
+      .where('actions.test_case_id', id)
+      .orderBy('actions.step_number');
 
     return {
       testCase: testCaseData,

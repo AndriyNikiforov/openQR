@@ -6,6 +6,12 @@ const BugReport = use('App/Models/BugReport');
 class BugReportService {
   async list(id, page) {
     page = page || 1;
+    let data = await Database
+      .select('project_id')
+      .from('project_members')
+      .where('user_id', id);
+    data = data.map(({ project_id }) => project_id);
+
     const viewData = await Database
       .select(
         'bug_reports.id',
@@ -15,35 +21,54 @@ class BugReportService {
         'projects.title as project'
       )
       .from('bug_reports')
-      .where('bug_reports.user_id', id)
+      .whereIn('bug_reports.project_id', data)
       .leftJoin('projects', 'bug_reports.project_id', 'projects.id')
+      .orderBy('bug_reports.updated_at', 'desc')
       .paginate(page, 8);
 
-    return { bugReports: viewData };
+    return {
+      data: data,
+      bugReports: viewData
+    };
   }
 
-  async createPageData() {
+  async createPageData(id) {
+    let data = await Database
+      .select('project_id')
+      .from('project_members')
+      .where('user_id', id);
+    data = data.map(({ project_id }) => project_id);
+
     const viewData = await Database
       .select(
         'projects.id',
         'projects.title'
       )
+      .whereIn('id', data)
       .from('projects');
 
     return { projects: viewData };
   }
 
-  async updatePageData(id) {
+  async updatePageData(id, userId) {
+    let data = await Database
+      .select('project_id')
+      .from('project_members')
+      .where('user_id', userId);
+    data = data.map(({ project_id }) => project_id);
+
     const projectsData = await Database
-    .select(
-      'projects.id',
-      'projects.title'
-    ).from('projects');
+      .select(
+        'projects.id',
+        'projects.title'
+      )
+      .whereIn('id', data)
+      .from('projects');
     const bugReportData = await BugReport.find(id);
 
     return {
-      bugReport: bugReportData,
-      projects: projectsData
+      projects: projectsData,
+      bugReport: bugReportData
     };
   }
 
@@ -69,8 +94,8 @@ class BugReportService {
       .first();
 
     return {
-      bugReport: bugReportData,
-      project: projectData
+      project: projectData,
+      bugReport: bugReportData
     };
   }
 }

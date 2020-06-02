@@ -6,6 +6,11 @@
     @include('layouts.components.admin_menu')
   </div>
   <div class="column is-9">
+    <nav class="breadcrumb" aria-label="breadcrumbs">
+      <ul>
+        <li><a href="#">Invite mails form</a></li>
+      </ul>
+    </nav>
     <div class="section">
       <div class="container">
         <div class="column is-5 is-offset-3">
@@ -14,7 +19,7 @@
             <div class="field">
               <label class="label">Email</label>
               <div class="control has-icons-left">
-                <input value="{{ old('email', '') }}" name="email" class="input" type="text">
+                <input value="{{ old('email', auth.user.email) }}" name="email" class="input" type="text">
                 <span class="icon is-small is-left">
                   <i class="fas fa-envelope"></i>
                 </span>
