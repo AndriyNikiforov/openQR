@@ -31,6 +31,10 @@ Route.group(() => {
     .middleware(['pm'])
     .as('contact-messages');
 
+  Route.get('/contact/messages/remove/:id?', 'StaticPageController.contactMessageRemove')
+    .middleware(['pm'])
+    .as('contact-message-remove');
+
   Route.post('send', 'StaticPageController.sendMessage')
     .validator(['ContactMessage'])
     .as('send-message');
