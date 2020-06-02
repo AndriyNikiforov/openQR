@@ -1,4 +1,4 @@
-# OpenQa open-source solution for manage qa resurces (test-cases, bug-reports), team, tasks
+# OpenQR (open qa resource ) open-source solution for manage qa resources test-cases, bug-reports, security-errors, team
 
 ## Based on AdonisJS framework
 
