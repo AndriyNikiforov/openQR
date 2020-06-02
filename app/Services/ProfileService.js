@@ -17,16 +17,16 @@ class ProfileService {
       .first();
 
     const lastProjects = await Database
-        .select(
-         'projects.title',
-         'projects.description',
-         'project_members.project_id'
-        )
-        .where('project_members.user_id', id)
-        .from('project_members')
-        .leftJoin('projects', 'project_members.project_id', 'projects.id')
-        .orderBy('projects.updated_at', 'desc')
-        .limit(3);
+      .select(
+       'projects.title',
+       'projects.description',
+       'project_members.project_id'
+      )
+      .where('project_members.user_id', id)
+      .from('project_members')
+      .leftJoin('projects', 'project_members.project_id', 'projects.id')
+      .orderBy('projects.updated_at', 'desc')
+      .limit(3);
 
     return {
       user: userData,

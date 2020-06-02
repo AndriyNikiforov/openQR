@@ -13,17 +13,19 @@ class BugReportController {
     return view.render('bug_report.index', viewData);
   }
 
-  async createPage({ view }) {
+  async createPage({ view, auth }) {
+    const id = auth.user.id;
     const viewData = await BugReportService
-      .createPageData();
+      .createPageData(id);
 
     return view.render('bug_report.create', viewData);
   }
 
-  async updatePage({ params, view }) {
+  async updatePage({ params, view, auth }) {
     const { id } = params;
+    const userId = auth.user.id;
     const viewData = await BugReportService
-      .updatePageData(id);
+      .updatePageData(id, userId);
 
     return view.render('bug_report.update', viewData);
   }

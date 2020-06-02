@@ -28572,7 +28572,7 @@ $(document).ready(function () {
     e.preventDefault();
     var elementHTML = document.getElementById('stat-content');
     htmlToPdf().set({
-      filename: 'Statistic',
+      filename: 'Statistic.pdf',
       html2canvas: {
         scale: 4
       }

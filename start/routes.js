@@ -286,7 +286,7 @@ Route.group(() => {
     .validator(['ProjectCommentUpdate'])
     .as('project-news-update');
 
-  Route.get('/remove/:id?', 'ProjectNewsController.remove')
+  Route.get('/remove/new/:id?', 'ProjectNewsController.remove')
     .as('project-news-remove');
 }).prefix('project-news')
 
