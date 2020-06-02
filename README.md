@@ -48,4 +48,4 @@ adonis seed
 
 ### Open in browser link
 
-[Open a OpenQR]: 0.0.0.0:8080/
+[Open a OpenQR](http://0.0.0.0:8080/)
