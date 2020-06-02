@@ -1,4 +1,4 @@
-# OpenQa open-source solution for manage qa resurces (test-cases, bug-reports), team, tasks
+# OpenQR (open qa resource ) open-source solution for manage qa resources test-cases, bug-reports, security-errors, team
 
 ## Based on AdonisJS framework
 
@@ -7,6 +7,19 @@
 ![alt text](./db.png)
 
 ### For start up the project
+
+Install packages
+
+```npm
+  npm i
+```
+
+Packaging css and js
+
+```npm
+  npm run build
+```
+
 
 Run the following command to run docker
 
@@ -18,6 +31,14 @@ sudo docker-compose up
 
 Run the following command to run startup migrations.
 
+Step 1
+
+```bash
+sudo docker exec -it app /bin/bash
+```
+
+Step 2
+
 ```js
 adonis migration:run
 ```
@@ -26,6 +47,18 @@ adonis migration:run
 
 Run the following command to run startup migrations.
 
+Step 1
+
+```bash
+sudo docker exec -it app /bin/bash
+```
+
+Step 2
+
 ```js
 adonis seed
 ```
+
+### Open in browser link
+
+[Open a OpenQR](http://0.0.0.0:8080/)
