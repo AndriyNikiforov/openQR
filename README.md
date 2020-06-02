@@ -45,3 +45,7 @@ Step 2
 ```js
 adonis seed
 ```
+
+### Open in browser link
+
+[Open a OpenQR](0.0.0.0:8080/)
