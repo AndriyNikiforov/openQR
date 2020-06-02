@@ -28,8 +28,20 @@ class ProfileService {
       .orderBy('projects.updated_at', 'desc')
       .limit(3);
 
+    const lastNews = await Database
+      .select(
+        'projects.title',
+        'project_comments.text',
+      )
+      .where('project_members.user_id', id)
+      .from('project_members')
+      .leftJoin('project_comments', 'project_members.project_id', 'project_comments.project_id')
+      .leftJoin('projects', 'project_comments.project_id', 'projects.id')
+      .limit(3);
+
     return {
       user: userData,
+      lastNews: lastNews,
       lastProjects: lastProjects
     };
   }
