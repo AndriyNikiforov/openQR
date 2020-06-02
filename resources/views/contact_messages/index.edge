@@ -20,6 +20,11 @@
               <div class="card-header-title">
                 {{ contactMessage.email }}
               </div>
+              <div class="card-header-title">
+                <a href="{{ route('contact-message-remove', { id: contactMessage.id }) }}">
+                  <i class="fas fa-eraser"></i>
+                </a>
+              </div>
             </div>
             <div class="card-content">
               <div class="media">

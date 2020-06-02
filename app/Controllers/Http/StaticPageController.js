@@ -29,6 +29,15 @@ class StaticPageController {
     });
   }
 
+  async contactMessageRemove({ params, response }) {
+    const { id } = params;
+    const contactMessage = await ContactMessage
+      .find(id);
+
+    await contactMessage.delete();
+    return response.route('contact-messages');
+  }
+
   async sendMessage({ request, response }) {
     const data = request.only(['email', 'message']);
 
