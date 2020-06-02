@@ -74,6 +74,40 @@
         @else
           <h3>Not found</h3>
         @endif
+        <br />
+        <div class="field is-grouped is-grouped-multiline">
+          <div class="control">
+            <div class="tags has-addons">
+              <span class="tag is-dark">last</span>
+              <span class="tag is-info">News</span>
+            </div>
+          </div>
+        </div>
+        @if(lastNews.length != 0)
+        @each(news in lastNews)
+        @if(news.title != null)
+        <br />
+        <div class="card">
+          <div class="card-header">
+            <div class="card-header-title">
+              Project: {{ news.title }}
+            </div>
+          </div>
+          <div class="card-content">
+            <div class="media">
+              <div class="media-content">
+                <p class="title is-6">
+                  {{ news.text }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        @endif
+        @endeach
+        @else
+          <h3>Not found</h3>
+        @endif
       </div>
     </div>
   </div>
