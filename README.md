@@ -8,6 +8,19 @@
 
 ### For start up the project
 
+Install packages
+
+```npm
+  npm i
+```
+
+Packaging css and js
+
+```npm
+  npm run build
+```
+
+
 Run the following command to run docker
 
 ```bash
