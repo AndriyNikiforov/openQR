@@ -37,6 +37,7 @@ class ProfileService {
       .from('project_members')
       .leftJoin('project_comments', 'project_members.project_id', 'project_comments.project_id')
       .leftJoin('projects', 'project_comments.project_id', 'projects.id')
+      .orderBy('projects.updated_at', 'desc')
       .limit(3);
 
     return {
