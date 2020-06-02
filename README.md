@@ -18,6 +18,14 @@ sudo docker-compose up
 
 Run the following command to run startup migrations.
 
+Step 1
+
+```bash
+sudo docker exec -it app /bin/bash
+```
+
+Step 2
+
 ```js
 adonis migration:run
 ```
@@ -25,6 +33,14 @@ adonis migration:run
 ### Seeds
 
 Run the following command to run startup migrations.
+
+Step 1
+
+```bash
+sudo docker exec -it app /bin/bash
+```
+
+Step 2
 
 ```js
 adonis seed
