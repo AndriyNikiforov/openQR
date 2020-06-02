@@ -39,7 +39,8 @@ class StatisticController {
       countFuture: (isNaN(countFuture)) ? 0 : countFuture,
       countFailed: (isNaN(countFailed)) ? 0 : countFailed,
       countSuccess: (isNaN(countSuccess)) ? 0 : countSuccess,
-      countInProgress: (isNaN(countInProgress)) ? 0 : countInProgress
+      countInProgress: (isNaN(countInProgress)) ? 0 : countInProgress,
+      projectId: id
     });
   }
 }
