@@ -33,10 +33,14 @@
             </div>
             <div class="panel">
               <div class="panel-block">
-                <a href="{{ route('project-news-remove', { id: projectComment.pc_id }) }}">Remove</a>
+                <a href="{{ route('project-news-remove', { id: projectComment.pc_id }) }}">
+                  <i class="fas fa-trash-alt"></i>
+                </a>
               </div>
               <div class="panel-block">
-                <a href="{{ route('project-news-update-page', { id: projectComment.pc_id }) }}">Update</a>
+                <a href="{{ route('project-news-update-page', { id: projectComment.pc_id }) }}">
+                  <i class="fas fa-edit"></i>
+                </a>
               </div>
             </div>
           </div>

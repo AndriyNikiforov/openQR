@@ -62401,8 +62401,8 @@ $(document).ready(function () {
       type: 'pie',
       data: {
         datasets: [{
-          data: [countSuccess, countFailed, countFuture, countInProgress],
-          backgroundColor: ["rgb(255, 99, 132)", "rgb(54, 162, 235)", "rgb(255, 205, 86)", "rgb(113, 120, 200)"]
+          data: [countSuccess || 0, countFailed || 0, countFuture || 0, countInProgress || 0],
+          backgroundColor: ["rgb(0, 153, 51)", "rgb(54, 162, 235)", "rgb(255, 205, 86)", "rgb(113, 120, 200)"]
         }],
         labels: ['Count Success', 'Count Failed', 'Count Future', 'Count In progress']
       },
