@@ -12,12 +12,18 @@
         <li><a href="#">Created at: {{ project.created_at }}</a></li>
         <li>
           <a href="{{ route('project-news', { id: project.id }) }}">
-            Project news
+            <div class="tags has-addons">
+              <span class="tag is-dark">Project</span>
+              <span class="tag is-info">news</span>
+            </div>
           </a>
         </li>
         <li>
           <a href="{{ route('stat-project', { id: project.id }) }}">
-            Project statistic
+            <div class="tags has-addons">
+              <span class="tag is-dark"> Project</span>
+              <span class="tag is-success">statistic</span>
+            </div>
           </a>
         </li>
       </ul>
