@@ -21,6 +21,8 @@
       </div>
     </nav>
     <div class="columns is-centered">
+      <canvas style="width:100%" id="chart-pie">
+      </canvas>
         <div id="stat-content" class="column is-4">
           <div class="card">
             <div class="card-header">
@@ -35,16 +37,16 @@
                     <h3>All: {{ countAll || 0 }}</h3>
                   </p>
                   <p class="title is-6">
-                    <h3>Success: {{ countSuccess }} %</h3>
+                    <h3>Success: <span id="countSuccess">{{ countSuccess }}</span> %</h3>
                   </p>
                   <p class="title is-6">
-                    <h3>Failed: {{ countFailed }} %</h3>
+                    <h3>Failed: <span id="countFailed">{{ countFailed }}</span> %</h3>
                   </p>
                   <p class="title is-6">
-                    <h3>Future: {{ countFuture }} %</h3>
+                    <h3>Future: <span id="countFuture">{{ countFuture }}</span> %</h3>
                   </p>
                   <p class="title is-6">
-                    <h3>In progress: {{ countInProgress }} %</h3>
+                    <h3>In progress: <span id="countInProgress">{{ countInProgress }}</span> %</h3>
                   </p>
                 </div>
               </div>
