@@ -68,8 +68,8 @@
             <th>Step number</th>
             <th>Action description</th>
             <th>Result</th>
-            <th>Action</th>
-            <th>Action</th>
+            <th>Edit</th>
+            <th>Remove</th>
           </tr>
         </tfoot>
         <tbody>
@@ -80,8 +80,16 @@
             <td>{{ testAction.step_number }}</td>
             <td>{{ testAction.actions_desc }}</td>
             <td>{{ testAction.result }}</td>
-            <td><a href="{{ route('action-update-page', { id: testAction.id, test_case_id: testCase.id }) }}">Edit</a></td>
-            <td><a href="{{ route('action-remove', { id: testAction.id, test_case_id: testCase.id }) }}">Remove</a></td>
+            <td>
+              <a href="{{ route('action-update-page', { id: testAction.id, test_case_id: testCase.id }) }}">
+                <i class="fas fa-edit"></i>
+              </a>
+            </td>
+            <td>
+              <a href="{{ route('action-remove', { id: testAction.id, test_case_id: testCase.id }) }}">
+                <i class="fas fa-trash-alt"></i>
+              </a>
+            </td>
           </tr>
           @endeach
           @else

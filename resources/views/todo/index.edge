@@ -37,7 +37,9 @@
           <div class="card">
             <div class="card-header">
               <div class="card-header-title">
-                <a href="{{ route('todo-update-page', { id: todo.id }) }}">Title: {{ todo.title }}</a>
+                <a href="{{ route('todo-update-page', { id: todo.id }) }}">
+                  Title: {{ todo.title }} <i class="fas fa-edit"></i>
+              </a>
               </div>
               <a href="{{ route('todo-remove', { id: todo.id }) }}" class="card-header-icon">
                 <span class="icon">

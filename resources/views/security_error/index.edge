@@ -55,10 +55,14 @@
               <td>{{ secData.score }}</td>
               @if(auth.user.role_id != 3)
               <td>
-                <a href="{{ route('security-error-update-page', { id: secData.id }) }}">Edit</a>
+                <a href="{{ route('security-error-update-page', { id: secData.id }) }}">
+                  <i class="fas fa-edit"></i>
+                </a>
               </td>
               <td>
-                <a href="{{ route('security-error-remove', { id: secData.id }) }}">Remove</a>
+                <a href="{{ route('security-error-remove', { id: secData.id }) }}">
+                  <i class="fas fa-trash-alt"></i>
+                </a>
               </td>
               @else
               <td></td>

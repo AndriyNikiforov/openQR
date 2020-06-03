@@ -105,10 +105,14 @@
                 <td></td>
               @else
                 <td>
-                  <a href="{{ route('test-case-edit-page', { id: testCase.test_case_id }) }}">Edit</a>
+                  <a href="{{ route('test-case-edit-page', { id: testCase.test_case_id }) }}">
+                    <i class="fas fa-edit"></i>
+                  </a>
                 </td>
                 <td>
-                  <a href="{{ route('test-case-remove', { id: testCase.test_case_id }) }}">Remove</a>
+                  <a href="{{ route('test-case-remove', { id: testCase.test_case_id }) }}">
+                    <i class="fas fa-trash-alt"></i>
+                  </a>
                 </td>
               @endif
             </tr>
