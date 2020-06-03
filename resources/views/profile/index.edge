@@ -72,7 +72,13 @@
         </div>
         @endeach
         @else
-          <h3>Not found</h3>
+        <div class="card">
+          <div class="card-header">
+            <div class="card-header-title">
+              <h3>Not found</h3>
+            </div>
+          </div>
+        </div>
         @endif
         <br />
         <div class="field is-grouped is-grouped-multiline">
@@ -100,6 +106,14 @@
                   {{ news.text }}
                 </p>
               </div>
+            </div>
+          </div>
+        </div>
+        @else
+        <div class="card">
+          <div class="card-header">
+            <div class="card-header-title">
+              <h3>Not found</h3>
             </div>
           </div>
         </div>
