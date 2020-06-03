@@ -25,7 +25,7 @@ class StatusSeeder {
           type: 'is-danger'
         },
         {
-          name: 'in_progress',
+          name: 'in progress',
           type: 'is-warning'
         },
         {
