@@ -13,7 +13,6 @@ class ProfileService {
       .from('users')
       .where('users.id', id)
       .leftJoin('roles', 'users.role_id', 'roles.id')
-      .leftJoin('test_cases', 'users.id', 'test_cases.user_id')
       .first();
 
     const lastProjects = await Database
@@ -23,6 +22,7 @@ class ProfileService {
        'project_members.project_id'
       )
       .where('project_members.user_id', id)
+      .where('projects.deleted', '!=', 'y')
       .from('project_members')
       .leftJoin('projects', 'project_members.project_id', 'projects.id')
       .orderBy('projects.updated_at', 'desc')
