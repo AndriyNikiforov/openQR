@@ -65,7 +65,11 @@
               <td></td>
               @endif
               <td>
-                <a href="{{ route('security-error-detail-page', { id: secData.id }) }}">Detail</a>
+                <a href="{{ route('security-error-detail-page', { id: secData.id }) }}">
+                  <span class="icon has-text-info">
+                    <i class="fas fa-info-circle"></i>
+                  </span>
+                </a>
               </td>
             </tr>
           @endeach

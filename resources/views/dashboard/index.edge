@@ -20,6 +20,8 @@
         <a href="{{ route('project-create-page') }}" style="width: 100%" class="button is-link">Create</a>
       </div>
       @endif
+    </nav>
+    <nav class="panel">
       <p class="panel-heading">
         Search
       </p>
@@ -64,7 +66,13 @@
             <td>{{ project.name }}</td>
             <td>{{ project.email }}</td>
             <td>{{ project.description }}</td>
-            <td><a href="{{ route('project', { id: project.id }) }}">Detail</a></td>
+            <td>
+              <a href="{{ route('project', { id: project.id }) }}">
+                <span class="icon has-text-info">
+                  <i class="fas fa-info-circle"></i>
+                </span>
+              </a>
+            </td>
           </tr>
           @endeach
           @else
