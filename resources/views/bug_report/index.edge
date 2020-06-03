@@ -61,10 +61,14 @@
             </td>
             @if(auth.user.role_id != 3)
             <td>
-              <a href="{{ route('bug-report-update-page', { id: bugReport.id }) }}">Edit</a>
+              <a href="{{ route('bug-report-update-page', { id: bugReport.id }) }}">
+                <i class="fas fa-edit"></i>
+              </a>
             </td>
             <td>
-              <a href="{{ route('bug-report-remove', { id: bugReport.id }) }}">Remove</a>
+              <a href="{{ route('bug-report-remove', { id: bugReport.id }) }}">
+                <i class="fas fa-trash-alt"></i>
+              </a>
             </td>
             @else
             <td>
