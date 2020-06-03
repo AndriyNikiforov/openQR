@@ -92,4 +92,38 @@ $(document).ready(() => {
       console.error( 'There was a problem initializing the editor.', error );
     });
   }
+
+  if($('#countSuccess').text()) {
+    const countSuccess = $('#countSuccess').text();
+    const countFailed = $('#countFailed').text();
+    const countFuture = $('#countFuture').text();
+    const countInProgress = $('#countInProgress').text();
+
+    const ctx = $('#chart-pie');
+    const chart = new Chart(ctx, {
+      type: 'pie',
+      data: {
+        datasets: [
+          {
+            data: [countSuccess, countFailed, countFuture, countInProgress],
+            backgroundColor: [
+              "rgb(255, 99, 132)",
+              "rgb(54, 162, 235)",
+              "rgb(255, 205, 86)",
+              "rgb(113, 120, 200)"
+            ]
+          }
+        ],
+        labels: [
+          'Count Success',
+          'Count Failed',
+          'Count Future',
+          'Count In progress'
+        ],
+      },
+      options: {
+        responsive: false
+      }
+    });
+  }
 });
