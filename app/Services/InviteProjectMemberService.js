@@ -51,8 +51,8 @@ class InviteProjectMemberService {
     }
 
     return {
-      projects: data,
-      users: result
+      users: result,
+      projects: data
     };
   }
 }

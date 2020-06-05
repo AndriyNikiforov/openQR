@@ -64,7 +64,8 @@ class BugReportService {
       )
       .whereIn('id', data)
       .from('projects');
-    const bugReportData = await BugReport.find(id);
+    const bugReportData = await BugReport
+      .find(id);
 
     return {
       projects: projectsData,
