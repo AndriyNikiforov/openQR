@@ -21,6 +21,14 @@ class ProjectMemberController {
     return view.render('project_member.detail_create', viewData);
   }
 
+  async addToProject({ params, view }) {
+    const { id } = params;
+    const viewData = await ProjectMemberService
+      .addToProjectData(id);
+
+    return view.render('project_member.detail_create', viewData);
+  }
+
   async createPage({ view }) {
     const viewData = await ProjectMemberService
       .createPageData();

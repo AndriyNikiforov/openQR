@@ -160,11 +160,14 @@ Route.group(() => {
   Route.get('/:id?', 'ProjectMemberController.index')
     .as('project-members');
 
-  Route.get('page/create', 'ProjectMemberController.createPage')
+  Route.get('page/add/:id?', 'ProjectMemberController.addToProject')
     .as('project-members-create-page');
 
   Route.get('page/create/fast/:id?/:mailId?', 'ProjectMemberController.addMember')
-    .as('project-members-fast-create-page')
+    .as('project-members-fast-create-page');
+
+  Route.get('page/global/create/', 'ProjectMemberController.createPage')
+    .as('project-members-add-page');
 
   Route.post('store', 'ProjectMemberController.create')
     .validator(['ProjectMemberAdd'])
