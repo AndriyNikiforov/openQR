@@ -2,6 +2,7 @@
 
 const Project = use('App/Models/Project');
 const Database = use('Database');
+const InviteMail = use('App/Models/InviteMail');
 
 class ProjectMemberService {
   async list(id) {
@@ -48,7 +49,7 @@ class ProjectMemberService {
     };
   }
 
-  async addMemberData(id) {
+  async addMemberData(id, mailId) {
     const projectData = await Database
       .select('*')
       .from('projects')
@@ -63,6 +64,10 @@ class ProjectMemberService {
       )
       .from('users')
       .leftJoin('roles', 'users.role_id', 'roles.id');
+
+    const inviteMail = await InviteMail
+      .find(mailId);
+    await inviteMail.delete();
 
     return {
       users: usersData,

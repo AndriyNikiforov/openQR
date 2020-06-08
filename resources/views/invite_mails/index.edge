@@ -41,7 +41,7 @@
                           <b>Project:</b>
                         </div>
                         <div class="card-footer-item">
-                          <a href="{{ route('project-members-fast-create-page', { id: mail.project_id }) }}">
+                          <a href="{{ route('project-members-fast-create-page', { id: mail.project_id, mailId: mail.inv_mails_id }) }}">
                             Add member to {{ mail.title }} project
                           </a>
                         </div>
