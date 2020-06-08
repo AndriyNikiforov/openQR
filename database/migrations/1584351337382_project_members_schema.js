@@ -10,6 +10,11 @@ class ProjectMembersSchema extends Schema {
       table.integer('user_id')
       table.integer('project_id')
       table.timestamps()
+
+      table.foreign('project_id')
+        .references('id')
+        .inTable('projects')
+        .onDelete('CASCADE');
     })
   }
 
