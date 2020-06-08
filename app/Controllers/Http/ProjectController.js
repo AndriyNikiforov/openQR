@@ -84,6 +84,15 @@ class ProjectController {
 
     return response.route('dashboard');
   }
+
+  async fullDelete({ params, response }) {
+    const { id } = params;
+    const project = await Project.find(id);
+
+    await project.delete();
+
+    return response.route('dashboard');
+  }
 }
 
 module.exports = ProjectController

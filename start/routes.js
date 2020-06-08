@@ -109,6 +109,10 @@ Route.group(() => {
   Route.get('delete/:id?', 'ProjectController.delete')
     .middleware(['pm'])
     .as('project-delete');
+
+  Route.get('remove/:id?', 'ProjectController.fullDelete')
+    .middleware(['pm'])
+    .as('project-remove-full');
 }).prefix('project');
 
 Route.group(() => {
