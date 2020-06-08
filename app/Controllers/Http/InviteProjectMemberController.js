@@ -13,9 +13,11 @@ class InviteProjectMemberController {
     return view.render('invite_mails.index', viewData);
   }
 
-  async mailForm({ view }) {
+  async mailForm({ view, auth }) {
+    const id = auth.user.id;
     const viewData = await InviteProjectMemberService
-      .mailFormData();
+      .mailFormData(id);
+
     return view.render('invite_mails.form', viewData);
   }
 

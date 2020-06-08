@@ -1,5 +1,6 @@
 'use strict'
 
+const Database = use('Database');
 const ProjectMember = use('App/Models/ProjectMember');
 const ProjectMemberService = use('App/Services/ProjectMemberService');
 
@@ -13,9 +14,9 @@ class ProjectMemberController {
   }
 
   async addMember({ params, view }) {
-    const { id } = params;
+    const { id, mailId } = params;
     const viewData = await ProjectMemberService
-      .addMemberData(id);
+      .addMemberData(id, mailId);
 
     return view.render('project_member.detail_create', viewData);
   }
