@@ -12,6 +12,11 @@ class ActionSchema extends Schema {
       table.text('actions_desc');
       table.text('result');
       table.timestamps();
+
+      table.foreign('test_case_id')
+        .references('id')
+        .inTable('test_cases')
+        .onDelete('CASCADE');
     })
   }
 

@@ -73,6 +73,15 @@
                 </span>
               </a>
             </td>
+            @if(project.deleted === 'y')
+            <td>
+              <a href="{{ route('project-remove-full', { id: project.id }) }}">
+                <span class="icon has-text-info">
+                  <i class="fas fa-trash-alt"></i>
+                </span>
+              </a>
+            </td>
+            @endif
           </tr>
           @endeach
           @else

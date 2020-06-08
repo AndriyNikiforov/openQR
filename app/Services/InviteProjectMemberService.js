@@ -35,6 +35,7 @@ class InviteProjectMemberService {
     )
     .from('project_members')
     .where('project_members.user_id', '!=', userId)
+    .where('users.role_id', '!=', '1')
     .leftJoin('projects', 'projects.id', 'project_members.project_id')
     .leftJoin('users', 'users.id', 'projects.user_id')
     .distinct('users.id');
