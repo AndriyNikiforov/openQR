@@ -19,9 +19,9 @@
             {{ csrfField() }}
             <div class="field">
               <div class="control">
-                <label class="label">Projects list</label>
+              <label class="label">Projects list</label>
                 <div class="select is-primary">
-                  <select>
+                  <select name="project_id">
                     @each(project in projects)
                     <option value="{{ project.id }}">
                       {{ project.title }}
@@ -32,11 +32,12 @@
                 </div>
               </div>
             </div>
+            <br/>
             <div class="filed">
               <div class="control">
                 <label class="label">Users list</label>
                 <div class="select is-primary">
-                  <select>
+                  <select name="user_id">
                     @each(user in users)
                       <option value="{{ user.id }}">
                         Name: {{ user.full_name }} || {{ user.title }}

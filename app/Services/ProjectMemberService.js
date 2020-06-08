@@ -33,7 +33,13 @@ class ProjectMemberService {
   }
 
   async createPageData() {
-    const projectsData = await Project.all();
+    const projectsData = await Database
+      .select(
+        'id',
+        'title'
+      )
+      .from('projects')
+      .where('deleted', '!=', 'y');
     const usersData = await Database
       .select(
         'users.id',
@@ -56,6 +62,34 @@ class ProjectMemberService {
       .where('projects.id', id)
       .first();
 
+    const inviteMail = await InviteMail
+      .find(mailId);
+
+    const usersData = await Database
+      .select(
+        'users.id',
+        'users.full_name',
+        'roles.title',
+      )
+      .from('users')
+      .where('users.email', inviteMail.email)
+      .leftJoin('roles', 'users.role_id', 'roles.id');
+
+    await inviteMail.delete();
+
+    return {
+      users: usersData,
+      project: projectData
+    };
+  }
+
+  async addToProjectData(id) {
+    const projectData = await Database
+      .select('*')
+      .from('projects')
+      .where('projects.id', id)
+      .first();
+
     const usersData = await Database
       .select(
         'users.id',
@@ -64,10 +98,6 @@ class ProjectMemberService {
       )
       .from('users')
       .leftJoin('roles', 'users.role_id', 'roles.id');
-
-    const inviteMail = await InviteMail
-      .find(mailId);
-    await inviteMail.delete();
 
     return {
       users: usersData,
