@@ -96,7 +96,7 @@ Route.group(() => {
     .as('project-edit');
 
   Route.post('search', 'ProjectController.search')
-    .as('test-case-search')
+    .as('test-case-search');
 
   Route.post('store', 'ProjectController.store')
     .validator(['ProjectStore'])
@@ -116,6 +116,9 @@ Route.group(() => {
 }).prefix('project');
 
 Route.group(() => {
+  Route.get('/all/:id?', 'TestCaseController.getAllTestCases')
+    .as('test-cases-all');
+
   Route.get('/:id?', 'TestCaseController.index')
     .as('test-case');
 

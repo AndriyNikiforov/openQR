@@ -40,6 +40,46 @@ class TestCaseService {
     };
   }
 
+  async getAllTestCasesData(id) {
+    let testCasesActionsData = await Database
+      .select(
+        'test_cases.id',
+        'actions.result',
+        'actions.step_number',
+        'actions.actions_desc',
+      )
+      .from('test_cases')
+      .where('test_cases.project_id', id)
+      .innerJoin('actions', 'test_cases.id', 'actions.test_case_id')
+      .orderBy('actions.step_number', 'test_cases.id');
+
+    let testCasesData = await Database
+      .select(
+        'test_cases.id',
+        'test_cases.title',
+        'test_cases.description',
+      )
+      .from('test_cases')
+      .where('test_cases.project_id', id);
+
+    testCasesActionsData = testCasesActionsData.reduce((r, a) => {
+      r[a.id] = [...r[a.id] || [], a];
+      return r;
+    }, {});
+
+    testCasesData = testCasesData.map(item => {
+      return Object.keys(testCasesActionsData).map(index => {
+        if(item.id == index) {
+          return { ...item, actions: testCasesActionsData[index] };
+        }
+      }).filter(Boolean);
+    });
+
+    return {
+      testCasesData: testCasesData,
+    };
+  }
+
   async createPageData(id) {
     const projectData = await Database
       .select('title', 'id')

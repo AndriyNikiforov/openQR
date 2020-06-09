@@ -48,6 +48,14 @@ class TestCaseController {
     return view.render('test_case.edit', viewData);
   }
 
+  async getAllTestCases({ params, view }) {
+    const { id } = params;
+    const viewData = await TestCaseService
+      .getAllTestCasesData(id);
+
+    return view.render('test_case.all', viewData);
+  }
+
   async store({ request, response }) {
     const testCaseData = request.only([
       'title',
