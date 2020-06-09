@@ -76,6 +76,7 @@ class TestCaseService {
     });
 
     return {
+      project_id: id,
       testCasesData: testCasesData,
     };
   }
