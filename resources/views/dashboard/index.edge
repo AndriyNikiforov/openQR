@@ -81,6 +81,7 @@
             @if(project.deleted === 'y')
             <td>
               <a href="{{ route('project-remove-full', { id: project.id }) }}">
+                <span class="tag is-black">Full delete</span>
                 <span class="icon has-text-info">
                   <i class="fas fa-fire"></i>
                 </span>
@@ -88,6 +89,7 @@
             </td>
             <td>
               <a href="{{ route('project-change-status', { id: project.id }) }}">
+                <span class="tag is-black">Recovery</span>
                 <span class="icon has-text-info">
                   <i class="fas fa-wrench"></i>
                 </span>
