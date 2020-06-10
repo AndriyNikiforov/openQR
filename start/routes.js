@@ -72,6 +72,9 @@ Route.group(() => {
   Route.get('/:page?', 'DashboardController.index')
     .as('dashboard');
 
+  Route.get('/projects/old/:page?', 'DashboardController.oldProjects')
+    .as('old-projects');
+
   Route.post('/project/search', 'DashboardController.search')
     .as('project-search');
 })
@@ -96,7 +99,7 @@ Route.group(() => {
     .as('project-edit');
 
   Route.post('search', 'ProjectController.search')
-    .as('test-case-search')
+    .as('test-case-search');
 
   Route.post('store', 'ProjectController.store')
     .validator(['ProjectStore'])
@@ -109,20 +112,20 @@ Route.group(() => {
   Route.get('delete/:id?', 'ProjectController.delete')
     .middleware(['pm'])
     .as('project-delete');
+
+  Route.get('remove/:id?', 'ProjectController.fullDelete')
+    .middleware(['pm'])
+    .as('project-remove-full');
+
+  Route.get('change/status/:id?', 'ProjectController.changeStatus')
+    .middleware(['pm'])
+    .as('project-change-status');
 }).prefix('project');
 
 Route.group(() => {
-  Route.post('/add', 'ProjectMemberApiController.add')
-    .validator(['ProjectMemberAdd'])
-    .as('project-member-create');
+  Route.get('/all/:id?', 'TestCaseController.getAllTestCases')
+    .as('test-cases-all');
 
-  Route.get('/remove/:id?', 'ProjectMemberApiController.remove')
-    .as('project-member-remove')
-})
-  .middleware(['pm'])
-  .prefix('/project/member');
-
-Route.group(() => {
   Route.get('/:id?', 'TestCaseController.index')
     .as('test-case');
 
@@ -171,11 +174,14 @@ Route.group(() => {
   Route.get('/:id?', 'ProjectMemberController.index')
     .as('project-members');
 
-  Route.get('page/create', 'ProjectMemberController.createPage')
+  Route.get('page/add/:id?', 'ProjectMemberController.addToProject')
     .as('project-members-create-page');
 
-  Route.get('page/create/fast/:id?', 'ProjectMemberController.addMember')
-    .as('project-members-fast-create-page')
+  Route.get('page/create/fast/:id?/:mailId?', 'ProjectMemberController.addMember')
+    .as('project-members-fast-create-page');
+
+  Route.get('page/global/create/', 'ProjectMemberController.createPage')
+    .as('project-members-add-page');
 
   Route.post('store', 'ProjectMemberController.create')
     .validator(['ProjectMemberAdd'])

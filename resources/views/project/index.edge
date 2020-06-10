@@ -26,6 +26,14 @@
             </div>
           </a>
         </li>
+        <li>
+          <a href="{{ route('test-cases-all', { id: project.id }) }}">
+            <div class="tags has-addons">
+              <span class="tag is-dark">Test cases</span>
+              <span class="tag is-link">All</span>
+            </div>
+          </a>
+        </li>
       </ul>
     </nav>
     @if(project.deleted === 'y')

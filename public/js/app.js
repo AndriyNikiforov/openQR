@@ -62378,6 +62378,17 @@ $(document).ready(function () {
       }
     }).from(elementHTML).save();
   });
+  $('#to-all-cases-pdf').click(function (e) {
+    e.preventDefault();
+    var titlePDF = 'All_cases';
+    var elementHTML = document.getElementById('content');
+    htmlToPdf().set({
+      filename: titlePDF,
+      html2canvas: {
+        scale: 4
+      }
+    }).from(elementHTML).save();
+  });
 
   if ($('#editor').length != 0) {
     ClassicEditor.create(document.querySelector('#editor')).then(function (editor) {

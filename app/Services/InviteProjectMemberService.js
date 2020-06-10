@@ -25,7 +25,7 @@ class InviteProjectMemberService {
     return { mails: mailsData };
   }
 
-  async mailFormData() {
+  async mailFormData(userId) {
     const data = await Database
     .select(
       'users.id as user_id',
@@ -33,10 +33,13 @@ class InviteProjectMemberService {
       'projects.id as project_id',
       'projects.title as project_name'
     )
-    .from('users')
-    .where('users.role_id', 3)
-    .distinct('users.id')
-    .leftJoin('projects', 'projects.user_id', 'users.id');
+    .from('project_members')
+    .where('project_members.user_id', '!=', userId)
+    .where('users.role_id', '!=', '1')
+    .leftJoin('projects', 'projects.id', 'project_members.project_id')
+    .leftJoin('users', 'users.id', 'projects.user_id')
+    .distinct('users.id');
+
     const users = new Map();
     const result = [];
 
