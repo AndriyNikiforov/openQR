@@ -86,6 +86,13 @@
                 </span>
               </a>
             </td>
+            <td>
+              <a href="{{ route('project-change-status', { id: project.id }) }}">
+                <span class="icon has-text-info">
+                  <i class="fas fa-wrench"></i>
+                </span>
+              </a>
+            </td>
             @endif
           </tr>
           @endeach

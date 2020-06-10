@@ -94,6 +94,16 @@ class ProjectController {
 
     return response.route('dashboard');
   }
+
+  async changeStatus({ params, response }) {
+    const { id } = params;
+    const project = await Project.find(id);
+
+    project.deleted = 'n';
+    await project.save();
+
+    return response.route('dashboard');
+  }
 }
 
 module.exports = ProjectController
