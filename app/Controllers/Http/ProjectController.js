@@ -8,13 +8,10 @@ class ProjectController {
   async index({ params, view }) {
     let { id, page } = params;
     page = page || 1;
-    const viewData = await ProjectService.list(id, page);
+    const viewData = await ProjectService
+      .list(id, page);
 
     return view.render('project.index', viewData);
-  }
-
-  async createPage({ view }) {
-    return view.render('project.create');
   }
 
   async search({ request, view }) {
@@ -26,6 +23,10 @@ class ProjectController {
       .searchData(data.id, data.query);
 
     return view.render('project.search', viewData);
+  }
+
+  async createPage({ view }) {
+    return view.render('project.create');
   }
 
   async editPage({ params, view }) {

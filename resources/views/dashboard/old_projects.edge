@@ -8,37 +8,8 @@
   <div class="column is-9">
     <nav class="breadcrumb" aria-label="breadcrumbs">
       <ul>
-        <li><a href="#">Projects</a></li>
-        <li>
-          <a href="{{ route('old-projects') }}">
-            Old projects
-          </a>
-        </li>
+        <li><a href="#">Old projects</a></li>
       </ul>
-    </nav>
-    <nav class="panel">
-      @if(auth.user.role_id == 3)
-      <p class="panel-heading">
-        Actions
-      </p>
-      <div class="panel-block">
-        <a href="{{ route('project-create-page') }}" style="width: 100%" class="button is-link">Create</a>
-      </div>
-      @endif
-    </nav>
-    <nav class="panel">
-      <p class="panel-heading">
-        Search
-      </p>
-      <form action="{{ route('project-search') }}" method="POST">
-        <div class="panel-block">
-          {{ csrfField() }}
-          <input placeholder="Search query" class="input" type="text" name="query" style="width: 100%" value="">
-        </div>
-        <div class="panel-block">
-          <button class="button is-link" style="width: 100%" type="submit">Search</button>
-        </div>
-      </form>
     </nav>
     <div style="overflow-x:auto">
       <table class="table is-fullwidth">
@@ -65,7 +36,7 @@
         <tbody>
           @if(projects.data.length != 0)
           @each(project in projects.data)
-          <tr class="{{ (project.deleted === 'y') ? 'disabled-element' : '' }}">
+          <tr>
             <th>{{ project.id }}</th>
             <td><a href="{{ route('project', { id: project.id }) }}">{{ project.title }}</a></td>
             <td>{{ project.name }}</td>

@@ -72,6 +72,9 @@ Route.group(() => {
   Route.get('/:page?', 'DashboardController.index')
     .as('dashboard');
 
+  Route.get('/projects/old/:page?', 'DashboardController.oldProjects')
+    .as('old-projects');
+
   Route.post('/project/search', 'DashboardController.search')
     .as('project-search');
 })
