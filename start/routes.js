@@ -72,6 +72,9 @@ Route.group(() => {
   Route.get('/:page?', 'DashboardController.index')
     .as('dashboard');
 
+  Route.get('/projects/old/:page?', 'DashboardController.oldProjects')
+    .as('old-projects');
+
   Route.post('/project/search', 'DashboardController.search')
     .as('project-search');
 })
@@ -96,7 +99,7 @@ Route.group(() => {
     .as('project-edit');
 
   Route.post('search', 'ProjectController.search')
-    .as('test-case-search')
+    .as('test-case-search');
 
   Route.post('store', 'ProjectController.store')
     .validator(['ProjectStore'])
@@ -113,9 +116,16 @@ Route.group(() => {
   Route.get('remove/:id?', 'ProjectController.fullDelete')
     .middleware(['pm'])
     .as('project-remove-full');
+
+  Route.get('change/status/:id?', 'ProjectController.changeStatus')
+    .middleware(['pm'])
+    .as('project-change-status');
 }).prefix('project');
 
 Route.group(() => {
+  Route.get('/all/:id?', 'TestCaseController.getAllTestCases')
+    .as('test-cases-all');
+
   Route.get('/:id?', 'TestCaseController.index')
     .as('test-case');
 

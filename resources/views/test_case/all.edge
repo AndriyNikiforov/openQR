@@ -1,0 +1,67 @@
+@layout('layouts.admin')
+
+@section('content')
+<div class="columns">
+  <div class="column is-2">
+    @include('layouts.components.admin_menu')
+  </div>
+  <div class="column is-9">
+    <nav class="breadcrumb" aria-label="breadcrumbs">
+      <ul>
+        <li><a href="{{ route('project', { id: project_id }) }}">Back to project</a></li>
+      </ul>
+    </nav>
+    <nav class="panel">
+      <p class="panel-heading">
+        Actions
+      </p>
+      <div class="panel-block">
+        <button class="button is-success" id="to-all-cases-pdf" style="width:100%">To pdf</button>
+      </div>
+    </nav>
+    <div id="content" class="columns is-multiline">
+      @if(testCasesData != null)
+      @each(testCases in testCasesData)
+      @each(testCase in testCases)
+      <div class="column is-full">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-header-title">
+              {{ testCase.title }}
+            </div>
+            <div class="card-header-title">
+              Description: {{ testCase.description }}
+            </div>
+          </div>
+          <div style="padding-left:20rem; padding-right:20rem" class="card-content">
+            <table class="table is-fullwidth">
+              <thead>
+                <th>Step</th>
+                <th>Action description</th>
+                <th>Action result</th>
+              </thead>
+              <tbody>
+                @each(item in testCase.actions)
+                <tr>
+                  <th>{{ item.step_number }}</th>
+                  <td>{{ item.actions_desc || 'Empty' }}</td>
+                  <td>{{ item.result || 'Empty' }}</td>
+                </tr>
+                @endeach
+              </tbody>
+              <tfoot>
+                <th>Step</th>
+                <th>Action description</th>
+                <th>Action result</th>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+      </div>
+      <br/>
+      @endeach
+      @endeach
+      @endif
+    </div>
+  </div>
+  @endsection
