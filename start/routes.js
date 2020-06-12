@@ -331,6 +331,8 @@ Route.group(() => {
 }).prefix('security-error');
 
 Route.group(() => {
-  Route.get('project/:id', 'StatisticController.projectStat')
-    .as('stat-project')
+  Route.get('project/:id?', 'StatisticController.projectStat')
+    .as('stat-project');
+  Route.get('project/user/:id?', 'StatisticController.userStat')
+    .as('stat-project-user')
 }).prefix('statistic');
