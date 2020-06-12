@@ -37,16 +37,16 @@
                     <h3>All: {{ countAll || 0 }}</h3>
                   </p>
                   <p class="title is-6">
-                    <h3>Success: <span id="countSuccess">{{ countSuccess }}</span> %</h3>
+                    <h3>Success: <span id="countSuccess">{{ countSuccess || 0 }}</span> %</h3>
                   </p>
                   <p class="title is-6">
-                    <h3>Failed: <span id="countFailed">{{ countFailed }}</span> %</h3>
+                    <h3>Failed: <span id="countFailed">{{ countFailed || 0 }}</span> %</h3>
                   </p>
                   <p class="title is-6">
-                    <h3>Future: <span id="countFuture">{{ countFuture }}</span> %</h3>
+                    <h3>Future: <span id="countFuture">{{ countFuture || 0 }}</span> %</h3>
                   </p>
                   <p class="title is-6">
-                    <h3>In progress: <span id="countInProgress">{{ countInProgress }}</span> %</h3>
+                    <h3>In progress: <span id="countInProgress">{{ countInProgress || 0 }}</span> %</h3>
                   </p>
                 </div>
               </div>
