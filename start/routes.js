@@ -283,9 +283,11 @@ Route.group(() => {
     .as('project-news');
 
   Route.get('/page/create/:project_id?', 'ProjectNewsController.createPage')
+    .middleware(['pm'])
     .as('project-news-create-page');
 
   Route.get('/page/update/:id?', 'ProjectNewsController.updatePage')
+    .middleware(['pm'])
     .as('project-news-update-page');
 
   Route.post('/store', 'ProjectNewsController.store')
@@ -297,6 +299,7 @@ Route.group(() => {
     .as('project-news-update');
 
   Route.get('/remove/new/:id?', 'ProjectNewsController.remove')
+    .middleware(['pm'])
     .as('project-news-remove');
 }).prefix('project-news')
 
