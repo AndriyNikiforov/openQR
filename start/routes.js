@@ -339,3 +339,16 @@ Route.group(() => {
   Route.get('project/user/:id?', 'StatisticController.userStat')
     .as('stat-project-user')
 }).prefix('statistic');
+
+Route.group(() => {
+  Route.get('list/:page?', 'BoardController.index')
+    .as('boards');
+  Route.get('detail/:id?', 'BoardController.detail')
+    .as('board-detail-page');
+  Route.get('page/create', 'BoardController.createPage')
+    .as('board-create-page');
+  Route.get('page/update/:id?', 'BoardController.updatePage')
+    .as('board-update-page');
+  Route.post('search/:query?', 'BoardController.search')
+    .as('board-search');
+}).prefix('board');

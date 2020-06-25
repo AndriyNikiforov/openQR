@@ -1,0 +1,173 @@
+@layout('layouts.admin')
+
+@section('content')
+<div class="columns">
+  <div class="column is-2">
+    @include('layouts.components.admin_menu')
+  </div>
+  <div class="column is-9">
+    <nav class="breadcrumb" aria-label="breadcrumbs">
+      <ul>
+        <li><a href="#">Project: {{ project.title }}</a></li>
+        <li><a href="#">Created at: {{ project.created_at }}</a></li>
+        <li>
+          <a href="{{ route('project-news', { id: project.id }) }}">
+            <div class="tags has-addons">
+              <span class="tag is-dark">Project</span>
+              <span class="tag is-info">news</span>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a href="{{ route('stat-project', { id: project.id }) }}">
+            <div class="tags has-addons">
+              <span class="tag is-dark"> Project</span>
+              <span class="tag is-success">statistic</span>
+            </div>
+          </a>
+        </li>
+        @if(auth.user.role_id == 1)
+        <li>
+          <a href="{{ route('stat-project-user', { id: project.id }) }}">
+            <div class="tags has-addons">
+              <span class="tag is-dark"> User</span>
+              <span class="tag is-success">statistic</span>
+            </div>
+          </a>
+        </li>
+        @endif
+        <li>
+          <a href="{{ route('test-cases-all', { id: project.id }) }}">
+            <div class="tags has-addons">
+              <span class="tag is-dark">Test cases</span>
+              <span class="tag is-link">All</span>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </nav>
+    @if(project.deleted === 'y')
+    <nav></nav>
+    @else
+    <nav class="panel">
+      <p class="panel-heading">
+        Actions
+      </p>
+      <form action="#" method="POST">
+        <div class="panel-block">
+          {{ csrfField() }}
+          <input placeholder="Search query" class="input" type="text" name="query" style="width: 100%" value="">
+        </div>
+        <div class="panel-block">
+          <button class="button is-link" style="width: 100%" type="submit">Search</button>
+        </div>
+      </form>
+      @if(auth.user.role_id == 3)
+      <div class="panel-block">
+        <a href="{{ route('board-create-page') }}" style="width: 50%"
+          class="button is-link">Project board create</a>
+      </div>
+      @endif
+    </nav>
+    @endif
+    <div style="overflow-x:auto" class="columns is-multiline">
+      <table class="table is-fullwidth">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Title</th>
+            <th>Qa name</th>
+            <th>Edit</th>
+            <th>Remove</th>
+          </tr>
+        </thead>
+        <tfoot>
+          <tr>
+            <th>#</th>
+            <th>Title</th>
+            <th>Qa name</th>
+            <th>Edit</th>
+            <th>Remove</th>
+          </tr>
+        </tfoot>
+        <tbody>
+          @if(testCases.data.length != 0)
+          @each(testCase in testCases.data)
+            <tr class="{{ (testCase.test_case_deleted === 'y') ? 'disabled-element' : '' }}">
+              <th>{{ testCase.test_case_id }}</th>
+              <td>
+                <a href="{{ route('test-case', { id: testCase.test_case_id }) }}">
+                  {{ testCase.test_case_name }}</a>
+              </td>
+              <td>
+                <a href="#"><b>{{ testCase.full_name }}</b></a>
+              </td>
+              @if(testCase.test_case_deleted === 'y')
+                <td></td>
+                <td></td>
+              @else
+                <td>
+                  <a href="{{ route('test-case-edit-page', { id: testCase.test_case_id }) }}">
+                    <i class="fas fa-edit"></i>
+                  </a>
+                </td>
+                <td>
+                  <a href="{{ route('test-case-remove', { id: testCase.test_case_id }) }}">
+                    <i class="fas fa-trash-alt"></i>
+                  </a>
+                </td>
+              @endif
+            </tr>
+          @endeach
+          @else
+          <tr>
+            <td>Empty</td>
+          </tr>
+          @endif
+        </tbody>
+      </table>
+  </div>
+  <nav class="pagination is-centered" role="navigation" aria-label="pagination">
+    <ul class="pagination-list">
+      <li>
+        <a href="{{ route('boards', { page: 1 }) }}" class="pagination-link">
+          First page
+        </a>
+      </li>
+      <li>
+        <span class="pagination-ellipsis">&hellip;</span>
+      </li>
+      <li>
+        @if(boardData.page - 1 > 0)
+        <a href="{{ route('boards', { page: boardData.page - 1 }) }}" class="pagination-link">
+          {{ boardData.page - 1 }}
+        </a>
+        @else
+        <a></a>
+        @endif
+      </li>
+      <li>
+        <a href="{{ route('boards', { page: boardData.page }) }}" class="pagination-link is-current">
+          {{ boardData.page }}
+        </a>
+      </li>
+      <li>
+        @if((boardData.page + 1) <= boardData.lastPage)
+        <a
+          href="{{ route('boards', { page: boardData.page + 1 }) }}" class="pagination-link">
+          {{ boardData.page + 1 }}
+        </a>
+        @endif
+      </li>
+      <li>
+        <span class="pagination-ellipsis">&hellip;</span>
+      </li>
+      <li>
+        <a href="{{ route('boards', { page: boardData.lastPage }) }}" class="pagination-link">
+          Last page
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>
+@endsection

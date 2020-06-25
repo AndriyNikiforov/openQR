@@ -9,13 +9,17 @@ class BoardController {
     page = page || 1;
     const data = await Database
       .select(
-        'boards.title'
+        'boards.id',
+        'boards.title',
+        'boards.deleted_at',
+        'projects.id as pt_id',
+        'projects.title as pt_title'
       )
       .from('boards')
       .leftJoin('projects', 'boards.project_id', 'projects.id')
       .paginate(page, 10);
 
-    return view.render('', {
+    return view.render('boards.index', {
       boardData: data
     });
   }
@@ -25,7 +29,7 @@ class BoardController {
     const data = await Board
       .find(id);
 
-    return view.render('', {
+    return view.render('boards.detail', {
       boardData: data,
       projectData: data.projects()
     });
@@ -38,7 +42,7 @@ class BoardController {
         'projects.title'
       ).from('projects');
 
-    return view.render('', {
+    return view.render('boars.create', {
       projectData: data
     });
   }
@@ -60,6 +64,25 @@ class BoardController {
     });
   }
 
+  async search({ params, view }) {
+    const { query } = params;
+    const data = await Database
+      .select(
+        'boards.id',
+        'boards.title',
+        'boards.deleted_at',
+        'projects.id as pt_id',
+        'projects.title as pt_title'
+      )
+      .from('boards')
+      .where('boards.title', 'LIKE', `%${query}%`)
+      .leftJoin('projects', 'boards.project_id', 'projects.id');
+
+    return view.render('boards.search', {
+      results: data
+    });
+  }
+
   async create({ request, response }) {
     const data = request.only([
       'title',
@@ -70,7 +93,9 @@ class BoardController {
     board.fill(data);
     await board.save();
 
-    return response.route('', { id: board.id });
+    return response.route('board-detail-page', {
+      id: board.id
+    });
   }
 
   async update({ request, response }) {
@@ -85,7 +110,9 @@ class BoardController {
     board.merge(data);
     await board.save();
 
-    return response.route('', { id: data.id });
+    return response.route('board-detail-page', {
+      id: data.id
+    });
   }
 
   async remove({ params, response }) {
@@ -95,7 +122,7 @@ class BoardController {
     board.merge({ deleted_at: 'y' });
     await board.save();
 
-    return response.route('');
+    return response.route('boards');
   }
 
   async fullRemove({ params, response }) {
@@ -104,7 +131,7 @@ class BoardController {
 
     await board.delete();
 
-    return response.route('');
+    return response.route('boards');
   }
 }
 
