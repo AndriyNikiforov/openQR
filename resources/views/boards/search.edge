@@ -1,0 +1,74 @@
+@layout('layouts.admin')
+
+@section('content')
+<div class="columns">
+  <div class="column is-2">
+    @include('layouts.components.admin_menu')
+  </div>
+  <div class="column is-9">
+    <nav class="panel">
+      <p class="panel-heading">
+        Search resault
+      </p>
+    </nav>
+    <div class="columns is-multiline">
+      <table class="table is-fullwidth">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Title</th>
+            <th>Project</th>
+            <th>Edit</th>
+            <th>Remove</th>
+          </tr>
+        </thead>
+        <tfoot>
+          <tr>
+            <th>#</th>
+            <th>Title</th>
+            <th>Project</th>
+            <th>Edit</th>
+            <th>Remove</th>
+          </tr>
+        </tfoot>
+        <tbody>
+          @each(board in boardData)
+            <tr class="{{ (board.deleted_at === 'y') ? 'disabled-element' : '' }}">
+              <th>{{ board.test_case_id }}</th>
+              <td>
+                <a href="{{ route('board-detail-page', { id: board.id }) }}">
+                  {{ board.title }}</a>
+              </td>
+              <td>
+                <a href="{{ route('project', { id: board.pt_id }) }}">
+                  {{ board.pt_title }}
+                </a>
+              </td>
+              @if(board.deleted_at === 'y')
+                <td></td>
+                <td></td>
+              @else
+                <td>
+                  <a href="{{ route('board-update-page', { id: board.id }) }}">
+                    <i class="fas fa-edit"></i>
+                  </a>
+                </td>
+                <td>
+                  <a href="{{ route('board-remove', { id: board.id }) }}">
+                    <i class="fas fa-trash-alt"></i>
+                  </a>
+                </td>
+              @endif
+            </tr>
+          @endeach
+          @else
+          <tr>
+            <td>Empty</td>
+          </tr>
+          @endif
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+@endsection

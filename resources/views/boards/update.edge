@@ -1,0 +1,52 @@
+@layout('layouts.admin')
+
+@section('content')
+<div class="columns">
+  <div class="column is-2">
+    @include('layouts.components.admin_menu')
+  </div>
+  <div class="column is-9">
+    <nav class="breadcrumb" aria-label="breadcrumbs">
+      <ul>
+        <li><a href="#">Boards</a></li>
+        <li><a href="#">Create board</a></li>
+      </ul>
+    </nav>
+    <div class="section">
+      <div class="container">
+        <div class="column is-5 is-offset-3">
+          <form method="POST" action="{{ route('board-create') }}">
+            {{ csrfField() }}
+            <div class="field">
+              <label class="label">Title</label>
+              <div class="control">
+                <input class="input" name="title" value="{{ board.title }}" type="text">
+                {{ elIf('<p class="help is-danger">$self</p>', getErrorFor('title'), hasErrorFor('title')) }}
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Projects</label>
+              <div class="select">
+                <select name="status_id">
+                  @each(project in projectData)
+                    @if(project.id == board.project_id)
+                      <option selected value="{{ project.id }}">{{ project.title }}</option>
+                    @endif
+                    <option value="{{ project.id }}">{{ project.title }}</option>
+                  @endeach
+                </select>
+              </div>
+            </div>
+            <br>
+            <div class="field is-grouped">
+              <div class="control">
+                <button type="submit" class="button is-link">Update</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+@endsection

@@ -58,7 +58,7 @@ class BoardController {
       )
       .from('projects');
 
-    return view.render('', {
+    return view.render('boards.update', {
       board: boardData,
       projectsData: projectsData
     });
@@ -79,7 +79,7 @@ class BoardController {
       .leftJoin('projects', 'boards.project_id', 'projects.id');
 
     return view.render('boards.search', {
-      results: data
+      boardData: data
     });
   }
 

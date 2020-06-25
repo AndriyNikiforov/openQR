@@ -8,41 +8,8 @@
   <div class="column is-9">
     <nav class="breadcrumb" aria-label="breadcrumbs">
       <ul>
-        <li><a href="#">Project: {{ project.title }}</a></li>
-        <li><a href="#">Created at: {{ project.created_at }}</a></li>
         <li>
-          <a href="{{ route('project-news', { id: project.id }) }}">
-            <div class="tags has-addons">
-              <span class="tag is-dark">Project</span>
-              <span class="tag is-info">news</span>
-            </div>
-          </a>
-        </li>
-        <li>
-          <a href="{{ route('stat-project', { id: project.id }) }}">
-            <div class="tags has-addons">
-              <span class="tag is-dark"> Project</span>
-              <span class="tag is-success">statistic</span>
-            </div>
-          </a>
-        </li>
-        @if(auth.user.role_id == 1)
-        <li>
-          <a href="{{ route('stat-project-user', { id: project.id }) }}">
-            <div class="tags has-addons">
-              <span class="tag is-dark"> User</span>
-              <span class="tag is-success">statistic</span>
-            </div>
-          </a>
-        </li>
-        @endif
-        <li>
-          <a href="{{ route('test-cases-all', { id: project.id }) }}">
-            <div class="tags has-addons">
-              <span class="tag is-dark">Test cases</span>
-              <span class="tag is-link">All</span>
-            </div>
-          </a>
+          <a href="#">Boards</a>
         </li>
       </ul>
     </nav>
@@ -53,7 +20,7 @@
       <p class="panel-heading">
         Actions
       </p>
-      <form action="#" method="POST">
+      <form action="{{ route('board-search') }}" method="POST">
         <div class="panel-block">
           {{ csrfField() }}
           <input placeholder="Search query" class="input" type="text" name="query" style="width: 100%" value="">
@@ -76,7 +43,7 @@
           <tr>
             <th>#</th>
             <th>Title</th>
-            <th>Qa name</th>
+            <th>Project</th>
             <th>Edit</th>
             <th>Remove</th>
           </tr>
@@ -85,34 +52,36 @@
           <tr>
             <th>#</th>
             <th>Title</th>
-            <th>Qa name</th>
+            <th>Project</th>
             <th>Edit</th>
             <th>Remove</th>
           </tr>
         </tfoot>
         <tbody>
-          @if(testCases.data.length != 0)
-          @each(testCase in testCases.data)
-            <tr class="{{ (testCase.test_case_deleted === 'y') ? 'disabled-element' : '' }}">
-              <th>{{ testCase.test_case_id }}</th>
+          @if(boardData.data.length != 0)
+          @each(board in boardData.data)
+            <tr class="{{ (board.deleted_at === 'y') ? 'disabled-element' : '' }}">
+              <th>{{ board.test_case_id }}</th>
               <td>
-                <a href="{{ route('test-case', { id: testCase.test_case_id }) }}">
-                  {{ testCase.test_case_name }}</a>
+                <a href="{{ route('board-detail-page', { id: board.id }) }}">
+                  {{ board.title }}</a>
               </td>
               <td>
-                <a href="#"><b>{{ testCase.full_name }}</b></a>
+                <a href="{{ route('project', { id: board.pt_id }) }}">
+                  {{ board.pt_title }}
+                </a>
               </td>
-              @if(testCase.test_case_deleted === 'y')
+              @if(board.deleted_at === 'y')
                 <td></td>
                 <td></td>
               @else
                 <td>
-                  <a href="{{ route('test-case-edit-page', { id: testCase.test_case_id }) }}">
+                  <a href="{{ route('board-update-page', { id: board.id }) }}">
                     <i class="fas fa-edit"></i>
                   </a>
                 </td>
                 <td>
-                  <a href="{{ route('test-case-remove', { id: testCase.test_case_id }) }}">
+                  <a href="{{ route('board-remove', { id: board.id }) }}">
                     <i class="fas fa-trash-alt"></i>
                   </a>
                 </td>
