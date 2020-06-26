@@ -80,20 +80,24 @@
             </td>
             @if(project.deleted === 'y')
             <td>
+              @if(auth.user.role_id == 3)
               <a href="{{ route('project-remove-full', { id: project.id }) }}">
                 <span class="tag is-black">Full delete</span>
                 <span class="icon has-text-info">
                   <i class="fas fa-fire"></i>
                 </span>
               </a>
+              @endif
             </td>
             <td>
+              @if(auth.user.role_id == 3)
               <a href="{{ route('project-change-status', { id: project.id }) }}">
                 <span class="tag is-black">Recovery</span>
                 <span class="icon has-text-info">
                   <i class="fas fa-wrench"></i>
                 </span>
               </a>
+              @endif
             </td>
             @endif
           </tr>
