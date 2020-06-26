@@ -9,14 +9,15 @@
     <nav class="breadcrumb" aria-label="breadcrumbs">
       <ul>
         <li><a href="#">Boards</a></li>
-        <li><a href="#">Create board</a></li>
+        <li><a href="#">Update board</a></li>
       </ul>
     </nav>
     <div class="section">
       <div class="container">
         <div class="column is-5 is-offset-3">
-          <form method="POST" action="{{ route('board-updatw') }}">
+          <form method="POST" action="{{ route('board-update') }}">
             {{ csrfField() }}
+            <input type="hidden" name="id" value="{{ board.id }}" />
             <div class="field">
               <label class="label">Title</label>
               <div class="control">
@@ -27,14 +28,16 @@
             <div class="field">
               <label class="label">Projects</label>
               <div class="select">
-                <select name="status_id">
-                  @each(project in projectData)
+                <select name="project_id">
+                  @each(project in projectsData)
                     @if(project.id == board.project_id)
                       <option selected value="{{ project.id }}">{{ project.title }}</option>
+                    @else
+                      <option value="{{ project.id }}">{{ project.title }}</option>
                     @endif
-                    <option value="{{ project.id }}">{{ project.title }}</option>
                   @endeach
                 </select>
+                {{ elIf('<p class="help is-danger">$self</p>', getErrorFor('project_id'), hasErrorFor('project_id')) }}
               </div>
             </div>
             <br>

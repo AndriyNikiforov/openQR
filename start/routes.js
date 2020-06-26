@@ -345,13 +345,12 @@ Route.group(() => {
   Route.get('list/:page?', 'BoardController.index')
     .as('boards');
 
-  Route.get('detail/:id?', 'BoardController.detail')
-    .as('board-detail-page');
-
   Route.get('page/create', 'BoardController.createPage')
+    .middleware(['pm'])
     .as('board-create-page');
 
   Route.get('page/update/:id?', 'BoardController.updatePage')
+    .middleware(['pm'])
     .as('board-update-page');
 
   Route.post('search/:query?', 'BoardController.search')
@@ -365,9 +364,11 @@ Route.group(() => {
     .validator(['BoardUpdate'])
     .as('board-update');
 
-  Route.get('/remove/:id?', 'BorderController.remove')
+  Route.get('/remove/:id?', 'BoardController.remove')
+    .middleware(['pm'])
     .as('board-remove');
 
-  Route.get('/remove/full/:id?', 'BorderController.fullRemove')
-    .as('board-full-remove');
+  Route.get('/remove/full/:id?', 'BoardController.fullRemove')
+    .middleware(['pm'])
+    .as('board-remove-full');
 }).prefix('board');

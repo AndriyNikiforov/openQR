@@ -25,20 +25,14 @@
               </div>
             </div>
             <div class="field">
-              <label class="label">Description</label>
-              <div class="control">
-                <textarea name="description" class="textarea">{{ old('description', '') }}</textarea>
-                {{ elIf('<p class="help is-danger">$self</p>', getErrorFor('description'), hasErrorFor('description')) }}
-              </div>
-            </div>
-            <div class="field">
-              <label class="label">Status</label>
+              <label class="label">Projects</label>
               <div class="select">
-                <select name="status_id">
+                <select name="project_id">
                   @each(project in projectData)
                     <option value="{{ project.id }}">{{ project.title }}</option>
                   @endeach
                 </select>
+                {{ elIf('<p class="help is-danger">$self</p>', getErrorFor('project_id'), hasErrorFor('project_id')) }}
               </div>
             </div>
             <br>

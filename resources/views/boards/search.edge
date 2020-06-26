@@ -32,12 +32,12 @@
           </tr>
         </tfoot>
         <tbody>
+          @if(boardData.length != 0)
           @each(board in boardData)
             <tr class="{{ (board.deleted_at === 'y') ? 'disabled-element' : '' }}">
-              <th>{{ board.test_case_id }}</th>
+              <th>{{ board.id }}</th>
               <td>
-                <a href="{{ route('board-detail-page', { id: board.id }) }}">
-                  {{ board.title }}</a>
+                {{ board.title }}
               </td>
               <td>
                 <a href="{{ route('project', { id: board.pt_id }) }}">
@@ -46,7 +46,16 @@
               </td>
               @if(board.deleted_at === 'y')
                 <td></td>
-                <td></td>
+                <td>
+                  @if(auth.user.role_id == 3)
+                  <a href="{{ route('board-remove-full', { id: board.id }) }}">
+                    <span class="tag is-black">Full delete</span>
+                    <span class="icon has-text-info">
+                      <i class="fas fa-fire"></i>
+                    </span>
+                  </a>
+                  @endif
+                </td>
               @else
                 <td>
                   <a href="{{ route('board-update-page', { id: board.id }) }}">

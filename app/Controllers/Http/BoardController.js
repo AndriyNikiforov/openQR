@@ -24,25 +24,14 @@ class BoardController {
     });
   }
 
-  async detail({ params, view }) {
-    const { id } = params;
-    const data = await Board
-      .find(id);
-
-    return view.render('boards.detail', {
-      boardData: data,
-      projectData: data.projects()
-    });
-  }
-
-  async createPage({ view }) {
-    const data = Database
+  async createPage({ view, response }) {
+    const data = await Database
       .select(
         'projects.id',
         'projects.title'
       ).from('projects');
 
-    return view.render('boars.create', {
+    return view.render('boards.create', {
       projectData: data
     });
   }
@@ -64,9 +53,9 @@ class BoardController {
     });
   }
 
-  async search({ params, view }) {
-    const { query } = params;
-    const data = await Database
+  async search({ request, view }) {
+    const data = request.only(['query']);
+    const boardData = await Database
       .select(
         'boards.id',
         'boards.title',
@@ -75,11 +64,11 @@ class BoardController {
         'projects.title as pt_title'
       )
       .from('boards')
-      .where('boards.title', 'LIKE', `%${query}%`)
+      .where('boards.title', 'LIKE', `%${data.query}%`)
       .leftJoin('projects', 'boards.project_id', 'projects.id');
 
     return view.render('boards.search', {
-      boardData: data
+      boardData: boardData
     });
   }
 
@@ -93,9 +82,7 @@ class BoardController {
     board.fill(data);
     await board.save();
 
-    return response.route('board-detail-page', {
-      id: board.id
-    });
+    return response.route('boards');
   }
 
   async update({ request, response }) {
@@ -110,9 +97,7 @@ class BoardController {
     board.merge(data);
     await board.save();
 
-    return response.route('board-detail-page', {
-      id: data.id
-    });
+    return response.route('boards');
   }
 
   async remove({ params, response }) {
