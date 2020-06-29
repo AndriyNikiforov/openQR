@@ -7,7 +7,8 @@ class BoardColumnRowCreate {
       description: 'required|string',
       time_estimated: 'required|string',
       time_tracked: 'string',
-      board_column_id: 'required|integer'
+      board_column_id: 'required|integer',
+      board_id: 'required|integer'
     }
   }
 

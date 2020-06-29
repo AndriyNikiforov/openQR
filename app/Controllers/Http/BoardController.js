@@ -24,7 +24,7 @@ class BoardController {
     });
   }
 
-  async createPage({ view, response }) {
+  async createPage({ view }) {
     const data = await Database
       .select(
         'projects.id',

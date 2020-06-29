@@ -372,3 +372,23 @@ Route.group(() => {
     .middleware(['pm'])
     .as('board-remove-full');
 }).prefix('board');
+
+Route.group(() => {
+  Route.get('/page/create', 'BoardColumnController.createPage')
+    .middleware(['pm'])
+    .as('board-column-create-page');
+
+  Route.get('/page/update/:id?', 'BoardColumnController.updatePage')
+    .middleware(['pm'])
+    .as('board-column-update-page');
+
+  Route.post('/create', 'BoardColumnController.create')
+    .as('board-column-create');
+
+  Route.post('/update', 'BoardColumnController.update')
+    .as('board-column-update');
+
+  Route.get('/remove/:id?', 'BoardColumnController.remove')
+    .middleware(['pm'])
+    .as('board-column-remove');
+}).prefix('board-column');
