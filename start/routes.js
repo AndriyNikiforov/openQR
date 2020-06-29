@@ -383,9 +383,11 @@ Route.group(() => {
     .as('board-column-update-page');
 
   Route.post('/create', 'BoardColumnController.create')
+    .validator(['BoardColumnCreate'])
     .as('board-column-create');
 
   Route.post('/update', 'BoardColumnController.update')
+    .validator(['BoardColumnUpdate'])
     .as('board-column-update');
 
   Route.get('/remove/:id?', 'BoardColumnController.remove')
