@@ -3,11 +3,13 @@
 class BoardColumnRowUpdate {
   get rules () {
     return {
+      id: 'required|integer',
       title: 'required|string',
       description: 'required|string',
       time_estimated: 'required|string',
       time_tracked: 'required|string',
-      board_column_id: 'required|integer'
+      board_column_id: 'required|integer',
+      board_id: 'required|integer'
     }
   }
 
