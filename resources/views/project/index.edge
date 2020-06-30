@@ -26,6 +26,16 @@
             </div>
           </a>
         </li>
+        @if(auth.user.role_id == 1)
+        <li>
+          <a href="{{ route('stat-project-user', { id: project.id }) }}">
+            <div class="tags has-addons">
+              <span class="tag is-dark"> User</span>
+              <span class="tag is-success">statistic</span>
+            </div>
+          </a>
+        </li>
+        @endif
         <li>
           <a href="{{ route('test-cases-all', { id: project.id }) }}">
             <div class="tags has-addons">

@@ -283,9 +283,11 @@ Route.group(() => {
     .as('project-news');
 
   Route.get('/page/create/:project_id?', 'ProjectNewsController.createPage')
+    .middleware(['pm'])
     .as('project-news-create-page');
 
   Route.get('/page/update/:id?', 'ProjectNewsController.updatePage')
+    .middleware(['pm'])
     .as('project-news-update-page');
 
   Route.post('/store', 'ProjectNewsController.store')
@@ -297,6 +299,7 @@ Route.group(() => {
     .as('project-news-update');
 
   Route.get('/remove/new/:id?', 'ProjectNewsController.remove')
+    .middleware(['pm'])
     .as('project-news-remove');
 }).prefix('project-news')
 
@@ -331,6 +334,63 @@ Route.group(() => {
 }).prefix('security-error');
 
 Route.group(() => {
-  Route.get('project/:id', 'StatisticController.projectStat')
-    .as('stat-project')
+  Route.get('project/:id?', 'StatisticController.projectStat')
+    .as('stat-project');
+
+  Route.get('project/user/:id?', 'StatisticController.userStat')
+    .as('stat-project-user')
 }).prefix('statistic');
+
+Route.group(() => {
+  Route.get('list/:page?', 'BoardController.index')
+    .as('boards');
+
+  Route.get('page/create', 'BoardController.createPage')
+    .middleware(['pm'])
+    .as('board-create-page');
+
+  Route.get('page/update/:id?', 'BoardController.updatePage')
+    .middleware(['pm'])
+    .as('board-update-page');
+
+  Route.post('search/:query?', 'BoardController.search')
+    .as('board-search');
+
+  Route.post('create', 'BoardController.create')
+    .validator(['BoardCreate'])
+    .as('board-create');
+
+  Route.post('update', 'BoardController.update')
+    .validator(['BoardUpdate'])
+    .as('board-update');
+
+  Route.get('/remove/:id?', 'BoardController.remove')
+    .middleware(['pm'])
+    .as('board-remove');
+
+  Route.get('/remove/full/:id?', 'BoardController.fullRemove')
+    .middleware(['pm'])
+    .as('board-remove-full');
+}).prefix('board');
+
+Route.group(() => {
+  Route.get('/page/create', 'BoardColumnController.createPage')
+    .middleware(['pm'])
+    .as('board-column-create-page');
+
+  Route.get('/page/update/:id?', 'BoardColumnController.updatePage')
+    .middleware(['pm'])
+    .as('board-column-update-page');
+
+  Route.post('/create', 'BoardColumnController.create')
+    .validator(['BoardColumnCreate'])
+    .as('board-column-create');
+
+  Route.post('/update', 'BoardColumnController.update')
+    .validator(['BoardColumnUpdate'])
+    .as('board-column-update');
+
+  Route.get('/remove/:id?', 'BoardColumnController.remove')
+    .middleware(['pm'])
+    .as('board-column-remove');
+}).prefix('board-column');

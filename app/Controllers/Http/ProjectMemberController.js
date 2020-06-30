@@ -1,6 +1,5 @@
 'use strict'
 
-const Database = use('Database');
 const ProjectMember = use('App/Models/ProjectMember');
 const ProjectMemberService = use('App/Services/ProjectMemberService');
 

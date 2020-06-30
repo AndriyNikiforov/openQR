@@ -19,7 +19,23 @@ Packaging css and js
 ```npm
   npm run build
 ```
-
+.env file
+```
+HOST=0.0.0.0
+PORT=8080
+NODE_ENV=development
+APP_URL=http://${HOST}:${PORT}
+CACHE_VIEWS=false
+APP_KEY=w8HZi5GvyGdrHN6AFYyvwUNW3oCSKLMz
+DB_CONNECTION=pg
+DB_HOST=postgres
+DB_PORT=5432
+DB_USER=root
+DB_PASSWORD=root
+DB_DATABASE=openbox
+SESSION_DRIVER=cookie
+HASH_DRIVER=bcrypt
+```
 
 Run the following command to run docker
 

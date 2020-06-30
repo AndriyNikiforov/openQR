@@ -1,0 +1,59 @@
+@layout('layouts.admin')
+
+@section('content')
+<div class="columns">
+  <div class="column is-2">
+    @include('layouts.components.admin_menu')
+  </div>
+  <div class="column is-9">
+    <nav class="breadcrumb" aria-label="breadcrumbs">
+      <ul>
+        <li><a href="{{ route('project', { id: projectId }) }}">Back to project</a></li>
+        <li><a href="#">Statics user</a></li>
+      </ul>
+    </nav>
+    <nav class="panel is-centered">
+      <p class="panel-heading">
+        Actions
+      </p>
+      <div class="panel-block">
+        <button style="width:100%" id="to-stat-pdf" class="button is-dark">To pdf</button>
+      </div>
+    </nav>
+    <div class="columns is-centered">
+       <canvas style="width:100%" id="chart-pie">
+    </canvas>
+        <div id="stat-content" class="column is-3">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-header-title">
+                Statistic information
+              </div>
+            </div>
+            <div class="card-content">
+              <div class="media">
+                <div class="media-content">
+                  <p class="title is-6">
+                    <h3>All: {{ countAll || 0 }}</h3>
+                  </p>
+                  <p class="title is-6">
+                    <h3>Success: <span id="countSuccess">{{ countSuccess || 0 }}</span> %</h3>
+                  </p>
+                  <p class="title is-6">
+                    <h3>Failed: <span id="countFailed">{{ countFailed || 0 }}</span> %</h3>
+                  </p>
+                  <p class="title is-6">
+                    <h3>Future: <span id="countFuture">{{ countFuture || 0 }}</span> %</h3>
+                  </p>
+                  <p class="title is-6">
+                    <h3>In progress: <span id="countInProgress">{{ countInProgress || 0 }}</span> %</h3>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
+@endsection

@@ -9,7 +9,8 @@ class BoardSchema extends Schema {
       table.increments();
       table.string('title');
       table.integer('project_id');
-      table.string('deleted_at');
+      table.string('deleted_at')
+        .defaultTo('n');
       table.timestamps();
     })
   }
