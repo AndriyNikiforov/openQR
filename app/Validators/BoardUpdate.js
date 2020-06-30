@@ -15,7 +15,8 @@ class BoardUpdate {
 
   get messages () {
     return {
-      'title.required': 'You must provide a title'
+      'title.required': 'You must provide a title',
+      'project_id.required': 'You mus provide a project'
     };
   }
 

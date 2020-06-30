@@ -8,6 +8,7 @@
         <a href="#">Projects</a>
         <ul class="menu-list">
           <li><a href="{{ route('dashboard') }}">Projects list</a></li>
+          <li><a href="{{ route('boards') }}">Boards</a></li>
           @if(auth.user.role_id == 3)
             <li><a href="{{ route('invite-list') }}">Invite mails</a></li>
             <li><a href="{{ route('project-members-add-page') }}">Add member to project</a></li>
