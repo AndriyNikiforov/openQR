@@ -7,15 +7,14 @@ class TestCaseSchema extends Schema {
   up () {
     this.create('test_cases', (table) => {
       table.increments().unsigned();
-      table.string('title');
-      table.integer('project_id');
-      table.integer('status_id').nullable();
+      table.integer('user_id').unsigned();
+      table.string('title', 50);
+      table.text('description');
+      table.text('files');
+      table.integer('status_id').unsigned().nullable();
+      table.string('deleted', 1).defaultTo('n');
+      table.integer('project_id').unsigned();
       table.timestamps();
-
-      table.foreign('project_id')
-        .references('id')
-        .inTable('projects')
-        .onDelete('CASCADE');
     });
   }
 
