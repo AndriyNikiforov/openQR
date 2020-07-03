@@ -6,9 +6,9 @@ const Schema = use('Schema')
 class BoardColumnSchema extends Schema {
   up () {
     this.create('board_columns', (table) => {
-      table.increments();
-      table.string('title');
-      table.integer('board_id');
+      table.increments().unsigned();
+      table.string('title', 50);
+      table.integer('board_id').unsigned();
       table.timestamps();
     })
   }

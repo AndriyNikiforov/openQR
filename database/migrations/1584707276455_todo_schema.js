@@ -6,12 +6,12 @@ const Schema = use('Schema')
 class TodoSchema extends Schema {
   up () {
     this.create('todos', (table) => {
-      table.increments();
-      table.integer('user_id');
-      table.string('title');
+      table.increments().unsigned();
+      table.integer('user_id').unsigned();
+      table.string('title', 50);
       table.text('text');
       table.timestamps();
-      table.string('deleted_at').defaultTo('n');
+      table.string('deleted_at', 1).defaultTo('n');
     });
   }
 

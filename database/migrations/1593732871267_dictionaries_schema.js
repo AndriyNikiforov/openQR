@@ -3,20 +3,19 @@
 /** @type {import('@adonisjs/lucid/src/Schema')} */
 const Schema = use('Schema')
 
-class BoardSchema extends Schema {
+class DictionariesSchema extends Schema {
   up () {
-    this.create('boards', (table) => {
+    this.create('dictionaries', (table) => {
       table.increments().unsigned();
       table.string('title', 50);
-      table.integer('project_id').unsigned();
+      table.json('words');
       table.timestamps();
-      table.integer('deleted_at');
     })
   }
 
   down () {
-    this.drop('boards');
+    this.drop('dictionaries')
   }
 }
 
-module.exports = BoardSchema
+module.exports = DictionariesSchema
