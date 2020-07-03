@@ -3,22 +3,22 @@
 /** @type {import('@adonisjs/lucid/src/Schema')} */
 const Schema = use('Schema')
 
-class SecurityErrorSchema extends Schema {
+class ProjectNewsSchema extends Schema {
   up () {
-    this.create('security_errors', (table) => {
+    this.create('project_news', (table) => {
       table.increments().unsigned();
       table.string('title', 50);
       table.text('text');
-      table.text('files');
-      table.decimal('score');
       table.integer('user_id').unsigned();
+      table.integer('project_id').unsigned();
       table.timestamps();
+      table.date('deleted_at');
     })
   }
 
   down () {
-    this.drop('security_errors');
+    this.drop('project_news')
   }
 }
 
-module.exports = SecurityErrorSchema
+module.exports = ProjectNewsSchema

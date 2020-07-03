@@ -6,9 +6,10 @@ const Schema = use('Schema')
 class StatusSchema extends Schema {
   up () {
     this.create('statuses', (table) => {
-      table.increments();
-      table.string('name');
-      table.string('type');
+      table.increments().unsigned();
+      table.string('name', 50);
+      table.string('type', 50);
+      table.string('color', 50);
       table.timestamps();
     })
   }

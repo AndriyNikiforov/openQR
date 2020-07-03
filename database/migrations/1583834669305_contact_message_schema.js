@@ -6,10 +6,10 @@ const Schema = use('Schema')
 class ContactMessageSchema extends Schema {
   up () {
     this.create('contact_messages', (table) => {
-      table.increments()
-      table.string('email').notNullable()
-      table.string('message').notNullable()
-      table.timestamps()
+      table.increments().unsigned();
+      table.string('email', 50).notNullable();
+      table.string('message', 255).notNullable();
+      table.timestamps();
     })
   }
 
