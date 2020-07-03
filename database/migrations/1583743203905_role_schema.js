@@ -6,11 +6,12 @@ const Schema = use('Schema')
 class RoleSchema extends Schema {
   up () {
     this.create('roles', (table) => {
-      table.increments()
-      table.string('title')
-      table.string('slug')
-      table.timestamps()
-      table.timestamp('deleted_at', 0).nullable()
+      table.increments();
+      table.string('title');
+      table.string('slug');
+      table.json('permissions').nullable();
+      table.timestamps();
+      table.timestamp('deleted_at', 0).nullable();
     })
   }
 
