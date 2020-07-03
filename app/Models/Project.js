@@ -24,6 +24,10 @@ class Project extends Model {
   async projectComments() {
     return this.belongsTo('App/Models/ProjectComment');
   }
+
+  async events() {
+    return this.belongsTo('App/Models/Event');
+  }
 }
 
 module.exports = Project

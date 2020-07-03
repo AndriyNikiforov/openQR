@@ -9,7 +9,7 @@ class AuthController {
     return view.render('auth.signin');
   }
 
-  async signUpPage({ view, response }) {
+  async signUpPage({ view }) {
     const rolesData = await Database.table('roles')
       .select('*')
       .whereIn('slug', ['qa', 'pm']);
@@ -45,17 +45,21 @@ class AuthController {
       'email', 'password'
     ]);
 
-    const user = await User.findBy('email', data.email);
+    const user = await User
+      .findBy('email', data.email);
 
     if (!user) {
       return response.route('signUpPage')
     }
 
-    const valid = await Hash.verify(data.password, user.password);
+    const valid = await Hash.
+      verify(data.password, user.password);
 
     if (!valid) {
-      session.withErrors([{ password: data.password, message: 'Wrong password' }])
-        .flashAll();
+      session.withErrors([{
+        password: data.password,
+        message: 'Wrong password'
+      }]).flashAll();
 
       return response.redirect('back');
     }
@@ -72,18 +76,23 @@ class AuthController {
       'secret_word'
     ]);
 
-    data.password = await Hash.make(data.password);
-    const checkUser = await Database.table('users')
+    data.password = await Hash
+      .make(data.password);
+    const checkUser = await Database
+      .table('users')
       .where('email', data.email)
       .first();
 
     if (checkUser === null) {
-      session.flash({ notification: 'Not found your account' });
+      session.flash({
+        notification: 'Not found your account'
+      });
 
       return response.redirect('back');
     }
 
-    const user = await User.find(checkUser.id);
+    const user = await User
+      .find(checkUser.id);
     await auth.login(user);
 
     return response.route('dashboard');
