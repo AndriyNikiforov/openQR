@@ -394,3 +394,28 @@ Route.group(() => {
     .middleware(['pm'])
     .as('board-column-remove');
 }).prefix('board-column');
+
+Route.group(() => {
+  Route.get('/:id?', 'EventController.index')
+    .as('events');
+
+  Route.get('/page/create', 'EventController.createPage')
+    .middleware(['pm'])
+    .as('events-create-page');
+
+  Route.get('page/update/:id?', 'EventController.updatePage')
+    .middleware(['pm'])
+    .as('events-update-page');
+
+  Route.post('/store', 'EventController.store')
+    .validator(['EventCreate'])
+    .as('events-store');
+
+  Route.post('/update', 'EventController.update')
+    .validator(['EventUpdate'])
+    .as('events-update');
+
+  Route.get('/remove/:id?', 'EventController.remove')
+    .as('events-remove');
+}).prefix('events');
+
